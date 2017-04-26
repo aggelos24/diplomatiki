@@ -7,19 +7,19 @@
 	<meta charset="utf-8" />
 	<title> Ειδοποιήσεις </title>
 	<script>
-		function logout() {																														//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {											//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function not_display_notification(id) {																									//με το πάτημα του κουμπιού να μην εμφανίζεται η ειδοποίηση
+		function not_display_notification(id) {									//με το πάτημα του κουμπιού να μην εμφανίζεται η ειδοποίηση
 			location.href = "not_display_notification.php?id="+id;
 		}
 		
-		function accept_friend_request(id) {																									//με το πάτημα του κουμπιού αποδοχή αιτήματος φιλίας
+		function accept_friend_request(id) {									//με το πάτημα του κουμπιού αποδοχή αιτήματος φιλίας
 			location.href = "accept_friend_request.php?id="+id;
 		}
 		
-		function reject_friend_request(id) {																									//με το πάτημα του κουμπιού απόρριψη αιτήματος φιλίας
+		function reject_friend_request(id) {									//με το πάτημα του κουμπιού απόρριψη αιτήματος φιλίας
 			location.href = "reject_friend_request.php?id="+id;
 		}
 	</script>
@@ -37,26 +37,27 @@
 	<div class="main">
 		Λίστα ειδοποιήσεων <span class="red_letters"> (οι καινούργιες ειδοποιήσεις έχουν πιο σκούρο φόντο)</span>:
 <?php
-include "if_not_logged_l.php";																													//έλεγχος αν έχει συνδεθεί μαθητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 																				//απόπειρα σύνδεσης στη βάση
-if (!$link) {																																	//αν αποτυχία
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";															//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
+include "if_not_logged_l.php";												//έλεγχος αν έχει συνδεθεί μαθητής
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 							//απόπειρα σύνδεσης στη βάση
+if (!$link) {														//αν αποτυχία
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";				//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT * FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND display=1 ORDER BY id DESC");		//ανάκτηση δεδομένων από τον πίνακα notification		
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																						//για κάθε ενημέρωση που πρέπει να προβληθεί
-	if ($row["seen"]) {																															//αν την έχει δει ο χρήστης
+$result = $link->query ("SELECT * FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND display=1 ORDER BY id DESC");
+															//ανάκτηση δεδομένων από τον πίνακα notification		
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {								//για κάθε ενημέρωση που πρέπει να προβληθεί
+	if ($row["seen"]) {												//αν την έχει δει ο χρήστης
 		echo "<div class='seen_notification'>".$row["text"];
 	}
-	else {																																		//αν δεν την έχει δει ο χρήστης
+	else {														//αν δεν την έχει δει ο χρήστης
 		echo "<div class='not_seen_notification'>".$row["text"];
 	}
 echo "<br>"."<button onclick='not_display_notification(".$row["id"].")'> Αγνόησε αυτή την ειδοποίηση </button>"."</div>";
-$link->query ("UPDATE notification SET seen=1 WHERE id=".$row["id"]);																			//ενημέρωση του πίνακα notification ότι ο χρήστης είδε τις ενημερώσεις
+$link->query ("UPDATE notification SET seen=1 WHERE id=".$row["id"]);							//ενημέρωση του πίνακα notification ότι ο χρήστης είδε τις ενημερώσεις
 }
 $result->free();
-$link->close();																																	//κλείσιμο σύνδεσης με βάση
+$link->close();														//κλείσιμο σύνδεσης με βάση
 ?>
 	</div>
 </body>
