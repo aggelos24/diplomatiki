@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<title> Μηνύματα </title>
 	<script>
-		function logout() {																				//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {										//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
@@ -24,26 +24,26 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_l.php";																			//έλεγχος αν έχει συνδεθεί μαθητής
-if ((isset($_GET["id"]))) {																				//αν υπάρχει η μεταβλητή GET
-	$id = $_GET["id"];																					//ανάθεσή της σε μεταβλητή
+include "if_not_logged_l.php";											//έλεγχος αν έχει συνδεθεί μαθητής
+if ((isset($_GET["id"]))) {											//αν υπάρχει η μεταβλητή GET
+	$id = $_GET["id"];											//ανάθεσή της σε μεταβλητή
 }
-else {																									//αν όχι
-echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'sent_message.php'; </script>";				//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα sent_message.php
+else {														//αν όχι
+echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'sent_message.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα sent_message.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 										//απόπειρα σύνδεσης στη βάση
-if (!$link) {																							//αν αποτυχία
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 						//απόπειρα σύνδεσης στη βάση
+if (!$link) {													//αν αποτυχία
     echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'sent_message.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα sent_message.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT * FROM message WHERE id=".$id);											//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
+$result = $link->query ("SELECT * FROM message WHERE id=".$id);							//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if ($row["to_user"] == "aggelos24") {																	//αν ο παραλήπτης είναι ο καθηγητής
+if ($row["to_user"] == "aggelos24") {										//αν ο παραλήπτης είναι ο καθηγητής
 	$row["to_user"] = "Καθηγητής";
 }
 $result->free();
-$link->close();																							//κλείσιμο σύνδεσης με βάση
+$link->close();													//κλείσιμο σύνδεσης με βάση
 ?>
 		<b> Στο χρήστη: </b> <?php echo $row["to_user"]; ?> <br>
 		<b> Θέμα: </b> <?php echo $row["subject"]; ?> <br>
