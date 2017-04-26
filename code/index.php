@@ -1,12 +1,12 @@
 <?php
-session_start();												//δημιουργία συνεδρίας
-if (isset($_SESSION["session_lusername"])) {					//αν έχει συνδεθεί κάποιος μαθητής
-	header("Location: learner/lhome.php");						//ανακατεύθυνση σε lhome.php
+session_start();							//Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± ΟƒΟ…Ξ½ΞµΞ΄ΟΞ―Ξ±Ο‚
+if (isset($_SESSION["session_lusername"])) {				//Ξ±Ξ½ Ξ­Ο‡ΞµΞΉ ΟƒΟ…Ξ½Ξ΄ΞµΞΈΞµΞ― ΞΊΞ¬Ο€ΞΏΞΉΞΏΟ‚ ΞΌΞ±ΞΈΞ·Ο„Ξ®Ο‚
+	header("Location: learner/lhome.php");				//Ξ±Ξ½Ξ±ΞΊΞ±Ο„ΞµΟΞΈΟ…Ξ½ΟƒΞ· ΟƒΞµ lhome.php
 }
-else if (isset($_SESSION["session_pusername"])) {				//αν έχει συνδεθεί ο καθηγητής
-	header("Location: professor/phome.php");					//ανακατεύθυνση σε phome.php
+else if (isset($_SESSION["session_pusername"])) {			//Ξ±Ξ½ Ξ­Ο‡ΞµΞΉ ΟƒΟ…Ξ½Ξ΄ΞµΞΈΞµΞ― ΞΏ ΞΊΞ±ΞΈΞ·Ξ³Ξ·Ο„Ξ®Ο‚
+	header("Location: professor/phome.php");			//Ξ±Ξ½Ξ±ΞΊΞ±Ο„ΞµΟΞΈΟ…Ξ½ΟƒΞ· ΟƒΞµ phome.php
 }
-else {															//αν δεν έχει συνδεθεί κανένας
-	header("Location: login_register_form.php" );				//ανακατεύθυνση σε login_register_form.php	
+else {									//Ξ±Ξ½ Ξ΄ΞµΞ½ Ξ­Ο‡ΞµΞΉ ΟƒΟ…Ξ½Ξ΄ΞµΞΈΞµΞ― ΞΊΞ±Ξ½Ξ­Ξ½Ξ±Ο‚
+	header("Location: login_register_form.php" );			//Ξ±Ξ½Ξ±ΞΊΞ±Ο„ΞµΟΞΈΟ…Ξ½ΟƒΞ· ΟƒΞµ login_register_form.php	
 }
 ?>
