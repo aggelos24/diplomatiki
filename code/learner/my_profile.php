@@ -7,20 +7,20 @@
 	<meta charset="utf-8" />
 	<title> Το προφίλ μου </title>
 	<script>
-		function logout() {																			//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {										//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
 </head>
 <body>
 <?php
-include "if_not_logged_l.php";																		//έλεγχος αν έχει συνδεθεί μαθητής
-if (isset($_SESSION["session_lphoto"])) {															//αν ο χρήστης έχει ανεβάσει φωτογραφία
-	$path = $_SESSION["session_lphoto"];															//εμφάνιση της φωτογραφίας του
+include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
+if (isset($_SESSION["session_lphoto"])) {								//αν ο χρήστης έχει ανεβάσει φωτογραφία
+	$path = $_SESSION["session_lphoto"];								//εμφάνιση της φωτογραφίας του
 	$style = "profile_photo";
 }
-else {																								//αν όχι
-	$path = "photos/profile.png";																	//θα εμφανίσει την default εικόνα
+else {													//αν όχι
+	$path = "photos/profile.png";									//θα εμφανίσει την default εικόνα
 	$style = "default_profile_photo";
 }	
 ?>
