@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<title> Βρες Φίλους </title>
 	<script>
-		function logout() {																							//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {												//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
