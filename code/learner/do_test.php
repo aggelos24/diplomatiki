@@ -67,7 +67,7 @@
 <?php
 include "if_not_logged_l.php";																//έλεγχος αν έχει συνδεθεί μαθητής
 if (isset($_GET["id"])) {																//αν υπάρχει η μεταβλητή GET
-	$id = $_GET["id"];																//ανάθεση σε μεταβλητή
+	$id = $_GET["id"];																//ανάθεση της σε μεταβλητή
 }
 else {																			//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
