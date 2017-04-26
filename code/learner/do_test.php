@@ -28,7 +28,7 @@
 				return false;
 			}
 		}
-	
+		
 		function validate_answer_10() {														//με το πάτημα του κουμπιού έλεγχος απαντήσεων
 			var question_1 = document.getElementsByName("question_1");									//ανάθεση τιμών φόρμας σε μεταβλητές
 			var question_2 = document.getElementsByName("question_2");
@@ -81,7 +81,7 @@ $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT * FROM test WHERE id=".$id);												//ανάκτηση στοιχείων τεστ από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if (empty(($row)) or ($row["user"] != $_SESSION["session_lusername"]) or ($row["status"] != "pending")) {						//αν δεν υπάρχει τεστ με το συγκεκριμένο id, ή υπάρχει αλλά δεν είναι για τον συνδεδεμένο χρήστη ή δεν εκκρεμεί												
+if (empty(($row)) or ($row["user"] != $_SESSION["session_lusername"]) or ($row["status"] != "pending")) {						//αν δεν υπάρχει τεστ με το συγκεκριμένο id, ή υπάρχει αλλά δεν είναι για τον συνδεδεμένο χρήστη ή δεν εκκρεμεί
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
 }
 if ($row["section_number"] != NULL) {															//αν το τεστ είναι σε κάποια συγκεκριμένη ενότητα
