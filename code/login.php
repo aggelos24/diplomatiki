@@ -3,7 +3,7 @@
 session_start();																							//δημιουργία συνεδρίας
 $link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 											//απόπειρα σύνδεσης στη βάση
 if (!$link) {																								//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'login_register_form.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα login_register_form.php
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'login_register_form.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα login_register_form.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
@@ -22,7 +22,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {													//για 
 			$_SESSION["session_lemail"] = $row["email"];
 			$_SESSION["session_ldescription"] = $row["description"];
 			$_SESSION["session_llevel"] = $row["level"];
-			$link->query ("UPDATE user SET last_login=NOW() WHERE username='".$_POST["username"]."'");		//ανανέωση της ημερομηνίας τελευταίας εισόδου του χρήστη
+			$link->query ("UPDATE user SET last_login=NOW() WHERE username='".$_POST["username"]."'");	//ανανέωση της ημερομηνίας τελευταίας εισόδου του χρήστη
 			$result->free();
 			$link->close();																					//κλείσιμο σύνδεσης με βάση
 			header("Location: learner/lhome.php");															//ανακατεύθυνση στο lhome.php
