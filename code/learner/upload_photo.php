@@ -1,36 +1,37 @@
 <meta charset="utf-8" />
 <?php
-session_start();																											//δημιουργία συνεδρίας
+session_start();													//δημιουργία συνεδρίας
 $ok = 1;
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 															//απόπειρα σύνδεσης στη βάση
-if (!$link) {																												//αν αποτυχία
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 							//απόπειρα σύνδεσης στη βάση
+if (!$link) {														//αν αποτυχία
 	$ok = 0;
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";										//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";				//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$file_type = pathinfo(basename($_FILES["photo"]["name"]), PATHINFO_EXTENSION);												//εύρεση επέκτασης αρχείου
-$target_file = "photos/".$_SESSION["session_lusername"].".".$file_type;														//ορισμός διεύθυνσης προορισμού του αρχείου
-$check = getimagesize($_FILES["photo"]["tmp_name"]);																		//προσπάθησε να βρεις το μέγεθος της εικόνας
-if($check == false) {																										//αν αποτυχία, σημαίνει πως δεν είναι εικόνα το αρχείο
+$file_type = pathinfo(basename($_FILES["photo"]["name"]), PATHINFO_EXTENSION);						//εύρεση επέκτασης αρχείου
+$target_file = "photos/".$_SESSION["session_lusername"].".".$file_type;							//ορισμός διεύθυνσης προορισμού του αρχείου
+$check = getimagesize($_FILES["photo"]["tmp_name"]);									//απόπειρα εύρεσης μεγέθους εικόνας
+if($check == false) {													//αν αποτυχία, σημαίνει πως δεν είναι εικόνα το αρχείο
 	$ok = 0;
-	$link->close();																											//κλείσιμο σύνδεσης με βάση
-	echo "<script> alert('Το αρχείο που ανέβασες δεν είναι εικόνα.'); location.href = 'lhome.php'; </script>";				//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
+	$link->close();													//κλείσιμο σύνδεσης με βάση
+	echo "<script> alert('Το αρχείο που ανέβασες δεν είναι εικόνα.'); location.href = 'lhome.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 }
 if ($ok) {
-	if (isset($_SESSION["session_lphoto"])) {																				//αν υπάρχει φωτογραφία
-		unlink($_SESSION["session_lphoto"]);																				//διαγραφή υπάρχουσας εικόνας
+	if (isset($_SESSION["session_lphoto"])) {									//αν υπάρχει φωτογραφία
+		unlink($_SESSION["session_lphoto"]);									//διαγραφή υπάρχουσας εικόνας
 	}
-	if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {													//απόπειρα μετακίνησης εικόνας στην διεύθυνση προορισμού
+	if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {						//απόπειρα μετακίνησης εικόνας στην διεύθυνση προορισμού
 		chmod($target_file, 0777);
-		$_SESSION["session_lphoto"]=$target_file;																			//αν επιτυχία, ενημέρωση της μεταβλητής συνεδρίας
-		$link->query ("UPDATE user SET photo='".$target_file."' WHERE username='".$_SESSION["session_lusername"]."'");		//ενημέρωση του πίνακα user
-		$link->close();																										//κλείσιμο σύνδεσης με βάση
-		echo "<script> alert('Η εικόνα ανέβηκε.'); location.href = 'lhome.php'; </script>";									//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
+		$_SESSION["session_lphoto"]=$target_file;								//αν επιτυχία, ενημέρωση της μεταβλητής συνεδρίας
+		$link->query ("UPDATE user SET photo='".$target_file."' WHERE username='".$_SESSION["session_lusername"]."'");
+															//ενημέρωση του πίνακα user
+		$link->close();												//κλείσιμο σύνδεσης με βάση
+		echo "<script> alert('Η εικόνα ανέβηκε.'); location.href = 'lhome.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 	}
-	else {																													//αν αποτυχία
-		$link->close();																										//κλείσιμο σύνδεσης με βάση
-		echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";									//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
+	else {														//αν αποτυχία
+		$link->close();												//κλείσιμο σύνδεσης με βάση
+		echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 	}
 }
 ?>
