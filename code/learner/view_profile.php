@@ -6,25 +6,25 @@
 	<link rel="shortcut icon" href="../logo.png" />
 	<meta charset="utf-8" />
 	<script>
-		function send_friend_request(username) {																			//με το πάτημα του κουμπιού αποστολή αιτήματος φιλίας
+		function send_friend_request(username) {						//με το πάτημα του κουμπιού αποστολή αιτήματος φιλίας
 			location.href = "send_friend_request.php?username="+username;
 		}
 	
-		function logout() {																									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
 </head>
 <body>
 <?php
-include "if_not_logged_l.php";																								//έλεγχος αν έχει συνδεθεί μαθητής
-if ((isset($_GET["username"])) and (isset($_GET["friend"]))) {																//αν υπάρχουν οι μεταβλητές GET
-	$username = $_GET["username"];																							//ανάθεση σε μεταβλητές
+include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
+if ((isset($_GET["username"])) and (isset($_GET["friend"]))) {						//αν υπάρχουν οι μεταβλητές GET
+	$username = $_GET["username"];									//ανάθεση σε μεταβλητές
 	$friend = $_GET["friend"];
 	echo "<title>Προφίλ ".$username,"</title>";
 }
-else {																								//αν όχι
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'find_friend.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα find_friend.php
+else {													//αν όχι
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'find_friend.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα find_friend.php
 }
 if (isset($_GET["id"])) {
 	$go_to = "project.php?id=".$_GET["id"];
@@ -32,26 +32,26 @@ if (isset($_GET["id"])) {
 else {
 	$go_to = "lhome.php";
 }
-$link = mysqli_connect("localhost","root","","diplomatiki"); 										//απόπειρα σύνδεσης στη βάση
-if (!$link) {																						//αν αποτυχία
+$link = mysqli_connect("localhost","root","","diplomatiki"); 						//απόπειρα σύνδεσης στη βάση
+if (!$link) {												//αν αποτυχία
     echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'find_friend.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα find_friend.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT * FROM user WHERE username='".$username."'");						//ανάκτηση στοιχείων χρήστη
+$result = $link->query ("SELECT * FROM user WHERE username='".$username."'");				//ανάκτηση στοιχείων χρήστη
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if (empty($row)) {																					//αν δεν υπάρχει ο χρήστης
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'find_friend.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα find_friend.php	
+if (empty($row)) {											//αν δεν υπάρχει ο χρήστης
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'find_friend.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα find_friend.php
 	$result->free();
-	$link->close();																					//κλείσιμο σύνδεσης με βάση
+	$link->close();											//κλείσιμο σύνδεσης με βάση
 }
-else {																								//αλλιώς
-	if (isset($row["photo"])) {																		//αν ο χρήστης έχει ανεβάσει φωτογραφία
-		$path = $row["photo"];																		//θα εμφανίσει την φωτογραφία του
+else {													//αλλιώς
+	if (isset($row["photo"])) {									//αν ο χρήστης έχει ανεβάσει φωτογραφία
+		$path = $row["photo"];									//εμφάνιση φωτογραφία του
 		$style = "profile_photo";
 	}
-	else {																							//αν όχι
-		$path = "photos/profile.png";																//θα εμφανίσει την default εικόνα
+	else {												//αν όχι
+		$path = "photos/profile.png";								//εμφάνιση default εικόνας
 		$style = "default_profile_photo";
 	}
 }
@@ -73,7 +73,7 @@ else {																								//αλλιώς
 <?php
 echo $username;
 $result2 = $link->query ("SELECT * FROM friend_request WHERE from_user='".$_SESSION["session_lusername"]."' AND to_user='".$username."'");
-																									//ανάκτηση στοιχείων χρήστη
+													//ανάκτηση στοιχείων χρήστη
 $i = 1;
 while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
 	if ($row2["status"] == "pending") {
@@ -94,7 +94,7 @@ if ($friend){
 }
 $result2->free();
 $result->free();
-$link->close();																						//κλείσιμο σύνδεσης με βάση
+$link->close();												//κλείσιμο σύνδεσης με βάση
 ?>
 			</div>
 		</div> <br>
