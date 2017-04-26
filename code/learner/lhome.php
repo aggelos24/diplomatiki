@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<title> Κεντρική Σελίδα </title>
 	<script>
-		function show_notification_message() {																										//συνάρτηση εμφάνισης αριθμού αδιάβαστων ειδοποιήσεων και μηνυμάτων
+		function show_notification_message() {										//συνάρτηση εμφάνισης αριθμού αδιάβαστων ειδοποιήσεων και μηνυμάτων
 			var xmlhttp;
 			xmlhttp=new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
@@ -19,36 +19,36 @@
 			xmlhttp.send();
 		}
 		
-		function delete_photo() {																													//με το πάτημα του κουμπιού διαγραφή φωτογραφίας
+		function delete_photo() {											//με το πάτημα του κουμπιού διαγραφή φωτογραφίας
 			location.href = "delete_photo.php";
 		}
 		
-		function upload_photo() {																						//με το πάτημα του κουμπιού εμφάνιση φόρμας φωτογραφίας
+		function upload_photo() {											//με το πάτημα του κουμπιού εμφάνιση φόρμας φωτογραφίας
 			document.getElementById("bupload_photo").style.display = "none";
 			document.getElementById("upload_photo").style.display = "inline";
 		}
 		
-		function insert_description() {																					//με το πάτημα του κουμπιού εμφάνιση φόρμας περιγραφής
+		function insert_description() {											//με το πάτημα του κουμπιού εμφάνιση φόρμας περιγραφής
 			document.getElementById("binsert_description").style.display = "none";
 			document.getElementById("insert_description").style.display = "inline";
-			if (window.innerWidth < 1100){																				//προσαρμογή αριθμού στηλών ανάλογα με το μέγεθος οθόνης
+			if (window.innerWidth < 1100){										//προσαρμογή αριθμού στηλών ανάλογα με το μέγεθος οθόνης
 				document.getElementById("description").setAttribute("cols", "40");
 			}
 		}
 		
-		function logout() {																								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {												//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function send_message_to_professor() {																			//με το πάτημα του κουμπιού αποστολή μηνύματος στον καθηγητή
+		function send_message_to_professor() {										//με το πάτημα του κουμπιού αποστολή μηνύματος στον καθηγητή
 			document.getElementById("bsend_message_to_professor").style.display = "none";
 			document.getElementById("send_message_to_professor").style.display = "inline";
-			if (window.innerWidth < 1100){																				//προσαρμογή αριθμού στηλών ανάλογα με μέγεθος οθόνης
+			if (window.innerWidth < 1100){										//προσαρμογή αριθμού στηλών ανάλογα με μέγεθος οθόνης
 				document.getElementById("message_text").setAttribute("cols", "40");
 			}	
 		}
 		show_notification_message();
-		setInterval("show_notification_message()", 1000);																//κάθε 1 δευτερόλεπτο έλεγχος αν υπάρχουν νέες ειδοποιήσεις και μηνύματα
+		setInterval("show_notification_message()", 1000);								//κάθε 1 δευτερόλεπτο έλεγχος αν υπάρχουν νέες ειδοποιήσεις και μηνύματα
 	</script>
 </head>
 <body>																									
@@ -63,16 +63,16 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_l.php";																							//έλεγχος αν έχει συνδεθεί μαθητής
+include "if_not_logged_l.php";													//έλεγχος αν έχει συνδεθεί μαθητής
 ?>
 		Καλώς όρισες χρήστη <?php echo $_SESSION["session_lusername"]; ?> <span id="show_notification_message"> </span> <br> <br>
 		Το email σου είναι <?php echo $_SESSION["session_lemail"]; ?> <span class="red_letters">(θα φαίνεται μόνο στους φίλους σου)</span> <br>
 <?php
-if (!(isset($_SESSION["session_lphoto"]))) {																			//αν δεν έχει καταχωρήσει ακόμα κάποια φωτογραφία
-	echo "Δεν έχεις ανεβάσει φωτογραφία προφίλ ακόμα <br>";																//εμφάνιση κατάλληλου μηνύματος
+if (!(isset($_SESSION["session_lphoto"]))) {											//αν δεν έχει καταχωρήσει ακόμα κάποια φωτογραφία
+	echo "Δεν έχεις ανεβάσει φωτογραφία προφίλ ακόμα <br>";									//εμφάνιση κατάλληλου μηνύματος
 }
-if (!(isset($_SESSION["session_ldescription"]))) {																		//αν δεν έχει καταχωρήσει ακόμα κάποια περιγραφή 
-	echo "Δεν έχεις γράψει κάποια περιγραφή για τον εαυτό σου<br><br>";													//εμφάνιση κατάλληλου μηνύματος
+if (!(isset($_SESSION["session_ldescription"]))) {										//αν δεν έχει καταχωρήσει ακόμα κάποια περιγραφή 
+	echo "Δεν έχεις γράψει κάποια περιγραφή για τον εαυτό σου<br><br>";							//εμφάνιση κατάλληλου μηνύματος
 }
 ?>
 		Αν θες να ανεβάσεις νέα φωτογραφία προφίλ <span class="red_letters">(αν έχεις ήδη θα αντικατασταθεί)</span> ή να διαγράψεις την υπάρχουσα: <button onclick="upload_photo()" id="bupload_photo"> Πάτησε εδώ </button> <br>
