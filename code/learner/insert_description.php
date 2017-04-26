@@ -7,7 +7,7 @@ if (!$link) {																		//αν αποτυχία
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-if (empty($_POST["description_text"])){															//αν το πεδίο της φόρμας κενό																											
+if (empty($_POST["description_text"])){															//αν το πεδίο της φόρμας κενό
 	$_SESSION["session_ldescription"] = NULL;													//ενημέρωση μεταβλητής συνεδρίας
 	$link->query ("UPDATE user SET description=NULL WHERE username='".$_SESSION["session_lusername"]."'");						//ενημέρωση του πίνακα description
 }
