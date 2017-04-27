@@ -1,9 +1,9 @@
 <meta charset="utf-8" />
 <?php
-if (isset($_GET["id"])) {																			//αν υπάρχει η μεταβλητή GET
-	$id = $_GET["id"];																				//ανάθεσή της σε μεταβλητή
+if (isset($_GET["id"])) {										//αν υπάρχει η μεταβλητή GET
+	$id = $_GET["id"];										//ανάθεσή της σε μεταβλητή
 }
-else {																								//αν δεν υπάρχει
+else {													//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'test.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα test.php
 }
 $link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 					//απόπειρα σύνδεσης στη βάση
