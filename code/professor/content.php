@@ -7,25 +7,25 @@
 	<meta charset="utf-8" />
 	<title> Διδακτικό περιεχόμενο </title>
 	<script>
-		function logout() {																						//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function section() {																					//με το πάτημα του κουμπιού εμφάνιση φόρμας
+		function section() {									//με το πάτημα του κουμπιού εμφάνιση φόρμας
 			document.getElementById("bsection").style.display = "none";
 			document.getElementById("section").style.display = "inline";
 		}
 		
-		function chapter() {																					//με το πάτημα του κουμπιού εμφάνιση φόρμας
+		function chapter() {									//με το πάτημα του κουμπιού εμφάνιση φόρμας
 			document.getElementById("bchapter").style.display = "none";
 			document.getElementById("chapter").style.display = "inline";
 		}
 		
-		function insert_chapter_form() {																		//με το πάτημα του κουμπιού εμφάνιση φόρμας εισαγωγής κεφαλαίου
+		function insert_chapter_form() {							//με το πάτημα του κουμπιού εμφάνιση φόρμας εισαγωγής κεφαλαίου
 			location.href = "insert_chapter_form.php";
 		}
 		
-		function material() {																					//με το πάτημα του κουμπιού μετάβαση στη σελίδα material.php
+		function material() {									//με το πάτημα του κουμπιού μετάβαση στη σελίδα material.php
 			location.href = "material.php";
 		}
 	</script>
@@ -42,25 +42,25 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_p.php";																					//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 												//απόπειρα σύνδεσης στη βάση
-if (!$link) {																									//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";							//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
+include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 					//απόπειρα σύνδεσης στη βάση
+if (!$link) {												//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT * FROM section");																//ανάκτηση ενοτήτων από τον πίνακα section
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {														//για κάθε ενότητα
-	echo "<b>".$row["number"].". ".$row["title"]."</b> <br>";											 		//εμφάνιση τίτλου ενότητας
-	$result2 = $link->query ("SELECT * FROM chapter WHERE section_number=".$row["number"]);						//ανάκτηση κεφαλαίων για την δεδομένη ενότητα από τον πίνακα chapter
-	while ($row2 = $result2->fetch_array()) {																	//για κάθε κεφάλαιο
+$result = $link->query ("SELECT * FROM section");							//ανάκτηση ενοτήτων από τον πίνακα section
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε ενότητα
+	echo "<b>".$row["number"].". ".$row["title"]."</b> <br>";			 		//εμφάνιση τίτλου ενότητας
+	$result2 = $link->query ("SELECT * FROM chapter WHERE section_number=".$row["number"]);		//ανάκτηση κεφαλαίων για την δεδομένη ενότητα από τον πίνακα chapter
+	while ($row2 = $result2->fetch_array()) {							//για κάθε κεφάλαιο
 		echo $row2["section_number"].".".$row2["number"]." <a href='show_chapter.php?section=".$row2["section_number"]."&chapter=".$row2["number"]."'>".$row2["title"]."</a> <br>";
-																												//εμφάνιση τίτλου κεφαλαίου με σύνδεσμο για το κεφάλαιο
+													//εμφάνιση τίτλου κεφαλαίου με σύνδεσμο για το κεφάλαιο
 	}
 	$result2->free();
 }
 $result->free();
-$link->close();																									//κλείσιμο σύνδεσης με βάση
+$link->close();												//κλείσιμο σύνδεσης με βάση
 ?>
 		<br> <span class="red_letters"> Για επεξεργασία κεφαλαίων πάτησε στον σύνδεσμο με το όνομα του κεφαλαίου από πάνω </span> <br>
 		Για προσθήκη, μετονομασία, ή διαγραφή ενότητας <button onclick="section()" id="bsection"> Πάτησε εδώ </button> <br>
