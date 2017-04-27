@@ -9,7 +9,7 @@ $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT username FROM user where username='".$_POST["user"]."'");				//έλεγχος αν το όνομα χρήστη υπάρχει στη βάση
 if (empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {									//αν δεν υπάρχει
 	$result->free();
-	$link->close();													//κλείσιμο σύνδεσης με βάση																																					
+	$link->close();													//κλείσιμο σύνδεσης με βάση
 	echo "<script> alert('Δεν υπάρχει μαθητής με αυτό το Όνομα Χρήστη.'); location.href = 'insert_test_form.php'; </script>";
 															//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα insert_test_form.php
 }
