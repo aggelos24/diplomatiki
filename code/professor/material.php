@@ -7,11 +7,11 @@
 	<meta charset="utf-8" />
 	<title> Διδακτικό υλικό </title>
 	<script>
-		function logout() {																					//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function delete_material_file(path) {																//με το πάτημα του κουμπιού διαγραφή αρχείου
+		function delete_material_file(path) {							//με το πάτημα του κουμπιού διαγραφή αρχείου
 			location.href = "delete_material_file.php?path="+path;
 		}
 	</script>
@@ -34,21 +34,21 @@
 		</form> <br> <br>
 		Λίστα ανεβασμένων αρχείων <br>
 <?php
-include "if_not_logged_p.php";																				//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 											//απόπειρα σύνδεσης στη βάση
-if (!$link) {																								//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";					//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 					//απόπειρα σύνδεσης στη βάση
+if (!$link) {												//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT * FROM material");															//ανάκτηση πληροφοριών αρχείου από τον πίνακα material
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {													//για κάθε αρχείο
-	echo $row["path"]." \"".$row["description"]."\"<br>";													//εμφάνιση πληροφοριών αρχείου και κουμπί για διαγραφή
+$result = $link->query ("SELECT * FROM material");							//ανάκτηση πληροφοριών αρχείου από τον πίνακα material
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε αρχείο
+	echo $row["path"]." \"".$row["description"]."\"<br>";						//εμφάνιση πληροφοριών αρχείου και κουμπί για διαγραφή
 	echo "<button onclick='delete_material_file(\"".$row["path"]."\")'> Διαγραφή </button>";
 	echo "<br> <br>";
 }
 $result->free();
-$link->close();																								//κλείσιμο σύνδεσης με βάση
+$link->close();												//κλείσιμο σύνδεσης με βάση
 ?>
 		<a href="content.php"> Επιστροφή </a>
 	</div>
