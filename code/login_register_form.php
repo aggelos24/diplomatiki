@@ -36,16 +36,16 @@
 			<button type="submit"> Εγγραφή </button>
 		</form> <br>
 <?php
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 											//σύνδεση στη βάση
-if (!$link) {																								//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); </script>";													//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
+if (!$link) {											//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); </script>";					//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT email FROM user WHERE professor=1");										//ανάκτηση email του εκπαιδευτικού
+$result = $link->query ("SELECT email FROM user WHERE professor=1");				//ανάκτηση email του εκπαιδευτικού
 $row = $result->fetch_array();
 $result->free();
-$link->close();																								//κλείσιμο σύνδεσης με βάση
+$link->close();											//κλείσιμο σύνδεσης με βάση
 ?>
 Για τυχόν προβλήματα ή απορίες για την λειτουργία της ιστοσελίδας επικοινωνήστε στο <a href="mailto:<?php echo $row["email"]; ?>" target="_top"> <?php echo $row["email"]; ?> </a>
 </body>
