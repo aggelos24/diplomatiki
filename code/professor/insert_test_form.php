@@ -7,11 +7,11 @@
 	<meta charset="utf-8" />
 	<title> Τεστ </title>
 	<script>
-		function logout() {																				//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function show_hint(str) {																		//με το πάτημα του κουμπιού στο πεδίο για το όνομα χρήστη
+		function show_hint(str) {							//με το πάτημα του κουμπιού στο πεδίο για το όνομα χρήστη
 			if (str.length==0) { 
 				document.getElementById("hint").innerHTML="";
 				return;
@@ -22,14 +22,14 @@
 					document.getElementById("hint").innerHTML=xmlhttp.responseText;
 				}
 			}
-			xmlhttp.open("GET","get_hint.php?input="+str,true);											//προβολή υπόδειξης
+			xmlhttp.open("GET","get_hint.php?input="+str,true);			//προβολή υπόδειξης
 			xmlhttp.send();
 		}
 	</script>
 </head>
 <body>
 <?php
-include "if_not_logged_p.php";																			//έλεγχος αν έχει συνδεθεί ο καθηγητής
+include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 ?>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
