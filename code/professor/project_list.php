@@ -7,19 +7,19 @@
 	<meta charset="utf-8" />
 	<title> Εργασίες </title>
 	<script>
-		function logout() {																														//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function show_project(id) {																												//με το πάτημα του κουμπιού εμφάνιση εργασίας
+		function show_project(id) {							//με το πάτημα του κουμπιού εμφάνιση εργασίας
 			location.href = "project.php?id="+id;
 		}
 		
-		function delete_project(id) {																											//με το πάτημα του κουμπιού διαγραφή εργασίας
+		function delete_project(id) {							//με το πάτημα του κουμπιού διαγραφή εργασίας
 			location.href = "delete_project.php?id="+id;
 		}
 		
-		function grade_project(id) {																											//με το πάτημα του κουμπιού εμφάνιση φόρμας διαγραφής εργασίας
+		function grade_project(id) {							//με το πάτημα του κουμπιού εμφάνιση φόρμας διαγραφής εργασίας
 			document.getElementById(id).style.display = "inline";
 		}
 	</script>
@@ -38,28 +38,29 @@
 		<a href="group_project.php"> Δημιουργία εργασίας </a> | Προβολή λίστας εργασιών <br> <br>
 		<span class="red_letters"> Τυχόν διαγραφή μιας εργασίας θα διαγράψει τον φάκελο της εργασίας και όλα τα έγγραφα που περιέχει </span> <br> <br>
 <?php
-include "if_not_logged_p.php";																													//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 																				//απόπειρα σύνδεσης στη βάση
-if (!$link) {																																	//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";														//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
+if (!$link) {											//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
 $id_array = array();
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT id FROM project");																								//ανάκτηση id εργασιών από τον πίνακα project
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																						//για κάθε εργασία
-	array_push($id_array, $row["id"]);																											//ανάθεση id σε πίνακα
+$result = $link->query ("SELECT id FROM project");						//ανάκτηση id εργασιών από τον πίνακα project
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εργασία
+	array_push($id_array, $row["id"]);							//ανάθεση id σε πίνακα
 }
 for ($i = 0; $i < count($id_array); $i++) {
-	$result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id_array[$i]);			//ανάκτηση στοιχείων εργασιών από πίνακα project και group
-	$row_num = mysqli_num_rows($result);																										//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
-	for ($j = 0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $j++) {																		//για κάθε μέλος ομάδας
-		if ($j == 0) {																															//εμφάνιση πληροφοριών εργασίας και φορμών για διαγραφή και βαθμολόγησή της
+	$result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id_array[$i]);
+												//ανάκτηση στοιχείων εργασιών από πίνακα project και group
+	$row_num = mysqli_num_rows($result);							//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
+	for ($j = 0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $j++) {			//για κάθε μέλος ομάδας
+		if ($j == 0) {									//εμφάνιση πληροφοριών εργασίας και φορμών για διαγραφή και βαθμολόγησή της
 			echo "<b>".$row["title"]."</b> <br>";
 			echo $row["description"]."<br>";
 			echo "Διορία: ".date("d-m-Y", strtotime($row["deadline"])).", ";
-			if ($row["grade"] != NULL) {																										//αν η εργασία έχει βαθμό
-				echo "Βαθμος: ".$row["grade"].", ";																								//εμφάνιση βαθμού
+			if ($row["grade"] != NULL) {						//αν η εργασία έχει βαθμό
+				echo "Βαθμος: ".$row["grade"].", ";				//εμφάνιση βαθμού
 			}
 			echo "Μέλη Ομάδας: ".$row["user"].", ";
 		}
@@ -78,7 +79,7 @@ for ($i = 0; $i < count($id_array); $i++) {
 	}
 }
 $result->free();
-$link->close();																																	//κλείσιμο σύνδεσης με βάση
+$link->close();											//κλείσιμο σύνδεσης με βάση
 ?>
 	</div>
 </body>
