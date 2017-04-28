@@ -6,7 +6,7 @@
 	<link rel="shortcut icon" href="../logo.png" />
 	<meta charset="utf-8" />
 	<script>
-		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
@@ -24,27 +24,27 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
-if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {						//αν υπάρχουν οι μεταβλητές GET
-	$chapter = $_GET["chapter"];									//ανάθεση σε μεταβλητές
+include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
+if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {					//αν υπάρχουν οι μεταβλητές GET
+	$chapter = $_GET["chapter"];								//ανάθεση σε μεταβλητές
 	$section = $_GET["section"];
 }
-else {													//αν όχι
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
+else {												//αν όχι
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 					//απόπειρα σύνδεσης στη βάση
-if (!$link) {												//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
+if (!$link) {											//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if (!empty($row)) {											//αν υπάρχει
-	echo "<title>".$row["title"]."</title>";							//εμφάνιση του κεφαλαίου
+if (!empty($row)) {										//αν υπάρχει
+	echo "<title>".$row["title"]."</title>";						//εμφάνιση του κεφαλαίου
 	echo $row["section_number"].".".$row["number"]." ".$row["title"];
 	echo "<hr> <br>";
-	$text = "<p class='text'>".$row["text"]."</p>";							//προσθήκη html tags για να φαίνεται όπως πρέπει στην σελίδα
+	$text = "<p class='text'>".$row["text"]."</p>";						//προσθήκη html tags για να φαίνεται όπως πρέπει στην σελίδα
 	$text = str_replace("\n", "\n</p> <p class='text'>", $text);
 	if (($row["image"] == NULL) and ($row["youtube"] == NULL)) {
 		echo $text;
@@ -65,12 +65,12 @@ if (!empty($row)) {											//αν υπάρχει
 		}
 	}
 	$result->free();
-	$link->close();											//κλείσιμο σύνδεσης με βάση
+	$link->close();										//κλείσιμο σύνδεσης με βάση
 }
-else {													//αν δεν υπάρχει
+else {												//αν δεν υπάρχει
 	$result->free();
-	$link->close();											//κλείσιμο σύνδεσης με βάση
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+	$link->close();										//κλείσιμο σύνδεσης με βάση
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
 ?>
 		<br> <br> <a href="history.php"> Επιστροφή </a>
