@@ -7,21 +7,21 @@
 	<meta charset="utf-8" />
 	<title> Τεστ </title>
 	<script>
-		function logout() {																										//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function show_question_and_answer() {																			//με το πάτημα του κουμπιού εμφάνιση ερωτημάτων και απαντήσεων
+		function show_question_and_answer() {						//με το πάτημα του κουμπιού εμφάνιση ερωτημάτων και απαντήσεων
 			section_number = document.getElementById("section_number").value;
-			if (section_number.length != 0) {																			//αν το πεδίο section_number της φόρμας δεν είναι κενό
-				location.href = "test.php?section="+section_number;														//εμφάνιση των ερωτημάτων και απαντήσεων της συγκεκριμένης ενότητας
+			if (section_number.length != 0) {					//αν το πεδίο section_number της φόρμας δεν είναι κενό
+				location.href = "test.php?section="+section_number;		//εμφάνιση των ερωτημάτων και απαντήσεων της συγκεκριμένης ενότητας
 			}
-			else {																										//αν το πεδίο section_number της φόρμας είναι κενό
-				alert("Ξέχασες να βάλεις αριθμό.");																		//εμφάνιση κατάλληλου μηνύματος
+			else {									//αν το πεδίο section_number της φόρμας είναι κενό
+				alert("Ξέχασες να βάλεις αριθμό.");				//εμφάνιση κατάλληλου μηνύματος
 			}
 		}
 		
-		function delete_question_answer(id) {																			//με το πάτημα του κουμπιού διαγραφή ερωτήματος
+		function delete_question_answer(id) {						//με το πάτημα του κουμπιού διαγραφή ερωτήματος
 			location.href = "delete_question_answer.php?id="+id;
 		}
 	</script>
@@ -54,26 +54,27 @@
 		Προβολή ερωτημάτων και απαντήσεων από ενότητα <input type="text" id="section_number" autofocus /> <button onclick="show_question_and_answer()"> Εμφάνιση </button>
 		<br> <br>
 <?php
-include "if_not_logged_p.php";																							//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki");														//απόπειρα σύνδεσης στη βάση
-if (!$link) {																											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki");				//απόπειρα σύνδεσης στη βάση
+if (!$link) {											//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-if ((isset($_GET["section"]))) {																						//αν υπάρχει η μεταβλητή GET																											
-	$section = $_GET["section"];																						//ανάθεσή της σε μεταβλητή
-	$result = $link->query ("SELECT * FROM section WHERE number=".$section);											//έλεγχος αν υπάρχει ενότητα με αυτόν τον αριθμό στον πίνακα section
-	if ($result->fetch_array() != "") {																					//αν υπάρχει
-		$result = $link->query ("SELECT * FROM question_and_answer WHERE section_number=".$section);					//ανάκτηση ερωτημάτων και απαντήσεων από τον πίνακα question_and_answer
-		while ($row = $result->fetch_array()) {																			//για κάθε ερώτημα
-			if ($row["difficult"] == 1) {																				//αν το ερώτημα είναι δύσκολο
+if ((isset($_GET["section"]))) {								//αν υπάρχει η μεταβλητή GET
+	$section = $_GET["section"];								//ανάθεσή της σε μεταβλητή
+	$result = $link->query ("SELECT * FROM section WHERE number=".$section);		//έλεγχος αν υπάρχει ενότητα με αυτόν τον αριθμό στον πίνακα section
+	if ($result->fetch_array() != "") {							//αν υπάρχει
+		$result = $link->query ("SELECT * FROM question_and_answer WHERE section_number=".$section);
+												//ανάκτηση ερωτημάτων και απαντήσεων από τον πίνακα question_and_answer
+		while ($row = $result->fetch_array()) {						//για κάθε ερώτημα
+			if ($row["difficult"] == 1) {						//αν το ερώτημα είναι δύσκολο
 				echo "<span class='red_letters'> Δύσκολη Ερώτηση: </span>";
 			}
 			else {
-				echo "<span class='red_letters'> Εύκολη Ερώτηση: </span>";												//αν το ερώτημα είναι εύκολο
+				echo "<span class='red_letters'> Εύκολη Ερώτηση: </span>";	//αν το ερώτημα είναι εύκολο
 			}
-			echo $row["question_text"]."<br>";																			//εμφάνιση ερωτημάτος και απαντήσεων
+			echo $row["question_text"]."<br>";					//εμφάνιση ερωτημάτος και απαντήσεων
 			echo "Σωστή: ".$row["correct_answer"]."<br>";
 			echo "Λάθος: ".$row["wrong_answer_1"]."<br>";
 			echo "Λάθος: ".$row["wrong_answer_2"]."<br>";
@@ -84,7 +85,7 @@ if ((isset($_GET["section"]))) {																						//αν υπάρχει η �
 	}
 	$result->free();
 }
-$link->close();																											//κλείσιμο σύνδεσης με βάση
+$link->close();											//κλείσιμο σύνδεσης με βάση
 ?>
 	</div>
 </body>
