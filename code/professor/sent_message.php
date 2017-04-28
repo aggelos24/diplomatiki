@@ -45,7 +45,7 @@ if (isset($_GET["pagenum"])) {									//αν υπάρχει η μεταβλητ
 	$pagenum = $_GET["pagenum"];								//ανάθεσή της σε μεταβλητή
 }
 else{												//αλλιώς
-	$pagenum = 1;										//θέσε τη μεταβλητή, 1
+	$pagenum = 1;										//θέσε τη μεταβλητή σε 1
 }
 $limit = ($pagenum - 1) * 10;
 $result = $link->query ("SELECT * FROM message WHERE from_user='aggelos24' ORDER BY id DESC LIMIT ".$limit.",10");
