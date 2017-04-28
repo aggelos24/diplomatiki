@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title> Μάθημα Ιστορίας Δ' Δημοτικού </title>
 	<script>
-		function validate_pass() {																		//με το πάτημα του κουμπιού έλεγχος αν ο κωδικός πρόσβασης είναι ίδιος και στα 2 πεδία
+		function validate_pass() {						//με το πάτημα του κουμπιού έλεγχος αν ο κωδικός πρόσβασης είναι ίδιος και στα 2 πεδία
 			var pass = document.forms["register"]["password"].value;
 			var repass = document.forms["register"]["retype"].value;
 			if (!(pass === repass)) {
