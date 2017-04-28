@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<title> Επεξεργασία Κεφαλαίου </title>
 	<script>
-		function logout() {										//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
@@ -24,35 +24,36 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_p.php";											//έλεγχος αν έχει συνδεθεί ο καθηγητής
-if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {							//αν υπάρχουν οι μεταβλητές GET
-	$chapter = $_GET["chapter"];										//ανάθεσή σε μεταβλητές
+include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
+if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {						//αν υπάρχουν οι μεταβλητές GET
+	$chapter = $_GET["chapter"];									//ανάθεσή σε μεταβλητές
 	$section = $_GET["section"];
 }
-else {														//αν όχι
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+else {													//αν όχι
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
 echo "<a href='show_chapter.php?section=".$section."&chapter=".$chapter."'> Προβολή </a> | Επεξεργασία <br> <br>";
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki");						//απόπειρα σύνδεσης στη βάση
-if (!$link) {													//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki");					//απόπειρα σύνδεσης στη βάση
+if (!$link) {												//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
 $i = 0;
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);	//ανάκτηση στοιχείων κεφαλαίου από τον πίνακα chapter
+$result = $link->query ("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
+													//ανάκτηση στοιχείων κεφαλαίου από τον πίνακα chapter
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if (empty($row)) {												//αν δεν υπάρχει το κεφάλαιο
+if (empty($row)) {											//αν δεν υπάρχει το κεφάλαιο
 	$result->free();
-	$link->close();												//κλείσιμο σύνδεσης με βάση
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+	$link->close();											//κλείσιμο σύνδεσης με βάση
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
 else {
 	$title = $row["title"];
 	$text = $row["text"];
 	$image = $row["image"];
 	if ($row["youtube"] != NULL) {
-	$youtube = str_replace('"', "'", $row["youtube"]);							//για την σωστή εμφάνιση του κώδικα html
+	$youtube = str_replace('"', "'", $row["youtube"]);						//για την σωστή εμφάνιση του κώδικα html
 	}
 	else {
 		$youtube = "";
@@ -64,9 +65,9 @@ else {
 			Αριθμός Κεφαλαίου <input type="number" name="chapter_number" value="<?php echo $chapter; ?>" readonly /> <br>
 			Τίτλος Κεφαλαίου <input type="text" name="title" value="<?php echo $title; ?>" required /> <br>
 <?php
-$result = $link->query ("SELECT path FROM material");								//ανάκτηση διεύθυνσης αρχείων από τον πίνακα material 
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε αρχείο
-	if ($i == 0) {												//εμφάνισή του αρχείου ως επιλογή
+$result = $link->query ("SELECT path FROM material");							//ανάκτηση διεύθυνσης αρχείων από τον πίνακα material 
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε αρχείο
+	if ($i == 0) {											//εμφάνισή του αρχείου ως επιλογή
 		echo "Εικόνα που θα προβάλλεται στο κεφάλαιο <select name='image'>";
 		if ($image == NULL) {
 			echo "<option value=''></option>";
