@@ -7,11 +7,11 @@
 	<meta charset="utf-8" />
 	<title> Σελίδα Εργασίας </title>
 	<script>
-		function logout() {																															//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {										//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function show_change_description() {																										//με το πάτημα του κουμπιού εμφάνιση περιγραφής τελευταίας αλλαγής
+		function show_change_description() {								//με το πάτημα του κουμπιού εμφάνιση περιγραφής τελευταίας αλλαγής
 			document.getElementById("change_description").style.display = "inline";
 			document.getElementById("bchange_description").style.display = "none";
 		}
