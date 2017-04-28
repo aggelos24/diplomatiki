@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<title> Λίστα μαθητών </title>
 	<script>
-		function logout() {																								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {						//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
@@ -24,20 +24,20 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_p.php";																							//έλεγχος αν έχει συνδεθεί ο καθηγητής
-if ((isset($_GET["sort"]))) {																							//αν υπάρχει η μεταβλητή GET
-	$sort = $_GET["sort"];																								//ανάθεσή της σε μεταβλητή
+include "if_not_logged_p.php";							//έλεγχος αν έχει συνδεθεί ο καθηγητής
+if ((isset($_GET["sort"]))) {							//αν υπάρχει η μεταβλητή GET
+	$sort = $_GET["sort"];							//ανάθεσή της σε μεταβλητή
 }
 else {
 	$sort = "";
 }
-if ($sort == "level") {																									//αν η ταξινόμηση είναι με βάση το επίπεδο μαθητή
-	echo "Ταξινόμηση <a href='show_learner_list.php'> Κατά Όνομα Χρήστη </a> ή κατά επίπεδο μαθητή ή <a href='show_learner_list.php?sort=date'> Κατά ημερομηνία τελευταίας σύνδεσης </a>";  
+if ($sort == "level") {								//αν η ταξινόμηση είναι με βάση το επίπεδο μαθητή
+	echo "Ταξινόμηση <a href='show_learner_list.php'> Κατά Όνομα Χρήστη </a> ή κατά επίπεδο μαθητή ή <a href='show_learner_list.php?sort=date'> Κατά ημερομηνία τελευταίας σύνδεσης </a>";
 }
-else if ($sort == "date") {																								//αν η ταξινόμηση είναι με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη
+else if ($sort == "date") {							//αν η ταξινόμηση είναι με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη
 	echo "Ταξινόμηση <a href='show_learner_list.php'> Κατά Όνομα Χρήστη </a> ή <a href='show_learner_list.php?sort=level'> Κατά επίπεδο μαθητή </a> ή κατά ημερομηνία τελευταίας σύνδεσης";
 }
-else {																													//αν δεν έχει οριστεί τύπος ταξινόμησης
+else {										//αν δεν έχει οριστεί τύπος ταξινόμησης
 	echo "Ταξινόμηση κατά Όνομα Χρήστη ή <a href='show_learner_list.php?sort=level'> Κατά επίπεδο μαθητή </a> ή <a href='show_learner_list.php?sort=date'> Κατά ημερομηνία τελευταίας σύνδεσης </a>";
 }
 ?>
@@ -48,28 +48,30 @@ else {																													//αν δεν έχει οριστεί τύπ�
 			<div class="list"> <b> Τελευταία Είσοδος </b> </div>
 		</div>
 <?php
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 														//απόπειρα σύνδεσης στη βάση
-if (!$link) {																											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";									//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 		//απόπειρα σύνδεσης στη βάση
+if (!$link) {									//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";
+										//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-if ($sort == "level") {																									//αν η ταξινόμηση είναι με βάση το επίπεδο
+if ($sort == "level") {								//αν η ταξινόμηση είναι με βάση το επίπεδο
 	$result = $link->query ("SELECT * FROM user WHERE professor=0 ORDER BY level");										//ανάκτηση στοιχείων μαθητών ταξινομημένα με βάση το επίπεδο από τον πίνακα user
 }
-else if ($sort == "date") {																								//αν η ταξινόμηση είναι με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη
-	$result = $link->query ("SELECT * FROM user WHERE professor=0 ORDER BY last_login DESC");							//ανάκτηση στοιχείων μαθητών ταξινομημένα με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη από τον πίνακα user
+else if ($sort == "date") {							//αν η ταξινόμηση είναι με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη
+	$result = $link->query ("SELECT * FROM user WHERE professor=0 ORDER BY last_login DESC");
+										//ανάκτηση στοιχείων μαθητών ταξινομημένα με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη από τον πίνακα user
 }
-else {																													//αν δεν έχει οριστεί τύπος ταξινόμησης
-	$result = $link->query ("SELECT * FROM user WHERE professor=0");													//ανάκτηση στοιχείων μαθητών από τον πίνακα user
+else {										//αν δεν έχει οριστεί τύπος ταξινόμησης
+	$result = $link->query ("SELECT * FROM user WHERE professor=0");	//ανάκτηση στοιχείων μαθητών από τον πίνακα user
 }
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																//για κάθε μαθητή
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {			//για κάθε μαθητή
 	echo "<div class='list_container'>";
 	echo "<div class='list'>".$row["username"]."</div>"."<div class='list'> ".$row["email"]."</div>"."<div class='list'>".$row["level"]."</div>"."<div class='list'>".$row["last_login"]."</div>";
-	echo "</div>";																										//εμφάνιση στοιχείων χρήστη
+	echo "</div>";								//εμφάνιση στοιχείων χρήστη
 }
 $result->free();
-$link->close();																											//κλείσιμο σύνδεσης με βάση
+$link->close();									//κλείσιμο σύνδεσης με βάση
 ?>
 	</div>
 </body>
