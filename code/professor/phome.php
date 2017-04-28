@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<title> Κεντρική Σελίδα </title>
 	<script>
-		function show_hint(str) {																					//με το πάτημα του κουμπιού στο πεδίο για το όνομα χρήστη
+		function show_hint(str) {				//με το πάτημα του κουμπιού στο πεδίο για το όνομα χρήστη
 			if (str.length == 0) {
 				document.getElementById("hint").innerHTML="";
 				return;
@@ -22,7 +22,7 @@
 			xmlhttp.send();
 		}
 		
-		function show_message_live() {																				//συνάρτηση εμφάνισης αριθμού αδιάβαστων μηνυμάτων
+		function show_message_live() {				//συνάρτηση εμφάνισης αριθμού αδιάβαστων μηνυμάτων
 			var xmlhttp;
 			xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
@@ -34,27 +34,27 @@
 			xmlhttp.send();
 		}
 		
-		function logout() {																							//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {					//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function show_learner_list() {																				//με το πάτημα του κουμπιού εμφάνιση λίστας χρηστών
+		function show_learner_list() {				//με το πάτημα του κουμπιού εμφάνιση λίστας χρηστών
 			location.href = "show_learner_list.php";
 		}
 		
-		function send_message() {																					//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
+		function send_message() {				//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
 			document.getElementById("bsend_message").style.display = "none";
 			document.getElementById("send_message").style.display = "inline";
 		}
 		
 		show_message_live();
-		setInterval("show_message_live()", 4000);																	//κάθε 1 δευτερόλεπτο έλεγχος αν υπάρχουν νέα μηνύματα
+		setInterval("show_message_live()", 4000);		//κάθε 1 δευτερόλεπτο έλεγχος αν υπάρχουν νέα μηνύματα
 	</script>
 </head>
 <body>
 <?php
-include "if_not_logged_p.php";																						//έλεγχος αν έχει συνδεθεί ο καθηγητής
-?>																									
+include "if_not_logged_p.php";						//έλεγχος αν έχει συνδεθεί ο καθηγητής
+?>
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
 	<div class="menu">
