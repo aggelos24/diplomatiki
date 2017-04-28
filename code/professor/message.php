@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<title> Μηνύματα </title>
 	<script>
-		function logout() {											//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
@@ -30,49 +30,51 @@
 			<div class="message_header"> Ημερομηνία που στάλθηκε </div>
 		</div>
 <?php
-include "if_not_logged_p.php";												//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 							//απόπειρα σύνδεσης στη βάση
-if (!$link) {														//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";					//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
+include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
+if (!$link) {											//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT count(*) AS inbox FROM message WHERE to_user='aggelos24' GROUP BY to_user");		//ανάκτηση αριθμού εισερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
+$result = $link->query ("SELECT count(*) AS inbox FROM message WHERE to_user='aggelos24' GROUP BY to_user");
+												//ανάκτηση αριθμού εισερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $count = $row["inbox"];
-if (isset($_GET["pagenum"])) {												//αν υπάρχει η μεταβλητή GET
-	$pagenum = $_GET["pagenum"];											//ανάθεσή της σε μεταβλητή
+if (isset($_GET["pagenum"])) {									//αν υπάρχει η μεταβλητή GET
+	$pagenum = $_GET["pagenum"];								//ανάθεσή της σε μεταβλητή
 }
-else{															//αλλιώς
-	$pagenum = 1;													//θέσε τη μεταβλητή, 1
+else{												//αλλιώς
+	$pagenum = 1;										//θέσε τη μεταβλητή, 1
 }
 $limit = ($pagenum - 1) * 10;
-$result = $link->query ("SELECT * FROM message WHERE to_user='aggelos24' ORDER BY id DESC LIMIT ".$limit.",10");	//ανάκτηση 10 το πολύ εισερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {								//για κάθε εισερχόμενο μήνυμα
-	if ($row["seen"] == 0) {											//αν δεν έχει διαβαστεί
+$result = $link->query ("SELECT * FROM message WHERE to_user='aggelos24' ORDER BY id DESC LIMIT ".$limit.",10");
+												//ανάκτηση 10 το πολύ εισερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εισερχόμενο μήνυμα
+	if ($row["seen"] == 0) {								//αν δεν έχει διαβαστεί
 		echo "<a href='show_message.php?id=".$row["id"]."' class='link_to_page'> <div class='not_seen_message_box'>".
 		"<div class='message_info'>".$row["from_user"]."</div>"."<div class='message_info'>".$row["subject"]."</div>"."<div class='message_info'>".date("H:i:s | d-m-Y", strtotime($row["date"]))."</div>";
-															//εμφάνιση πληροφοριών μηνύματος
+												//εμφάνιση πληροφοριών μηνύματος
 		echo "</div> </a>";
 	}
-	else {														//αν έχει διαβαστεί
+	else {											//αν έχει διαβαστεί
 		echo "<a href='show_message.php?id=".$row["id"]."' class='link_to_page'> <div class='message_box'>".
 		"<div class='message_info'>".$row["from_user"]."</div>"."<div class='message_info'>".$row["subject"]."</div>"."<div class='message_info'>".date("H:i:s | d-m-Y", strtotime($row["date"]))."</div>";
-															//εμφάνιση πληροφοριών μηνύματος
+												//εμφάνιση πληροφοριών μηνύματος
 		echo "</div> </a>";
 	}
 }
-if ($pagenum < ceil($count/10)) {											//αν δεν είμαστε στην τελευταία σελίδα
+if ($pagenum < ceil($count/10)) {								//αν δεν είμαστε στην τελευταία σελίδα
 	$pagenum++;
-	echo "<a href='message.php?pagenum=".$pagenum."'> Επόμενη Σελίδα </a>";						//δημιουργία συνδέσμου για να δει τα επόμενα
+	echo "<a href='message.php?pagenum=".$pagenum."'> Επόμενη Σελίδα </a>";			//δημιουργία συνδέσμου για να δει τα επόμενα
 	$pagenum--;
 }
-if ($pagenum > 1) {													//αν δεν είμαστε στην πρώτη σελίδα
+if ($pagenum > 1) {										//αν δεν είμαστε στην πρώτη σελίδα
 	$pagenum--;
-	echo "<a href='message.php?pagenum=".$pagenum."'> Προηγούμενη Σελίδα </a>";					//δημιουργία συνδέσμου για να δει τα προηγούμενα
+	echo "<a href='message.php?pagenum=".$pagenum."'> Προηγούμενη Σελίδα </a>";		//δημιουργία συνδέσμου για να δει τα προηγούμενα
 }
 $result->free();
-$link->close();														//κλείσιμο σύνδεσης με βάση
+$link->close();											//κλείσιμο σύνδεσης με βάση
 ?>
 	</div>
 </body>
