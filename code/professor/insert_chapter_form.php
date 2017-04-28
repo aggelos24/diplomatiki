@@ -7,17 +7,17 @@
 	<meta charset="utf-8" />
 	<title> Εισαγωγή Κεφαλαίου </title>
 	<script>
-		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 	</script>
 </head>
 <body>
 <?php
-include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 					//απόπειρα σύνδεσης στη βάση
-if (!$link) {												//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
+include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
+if (!$link) {											//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 }
 $i = 0;
 $link->query ("SET CHARACTER SET utf8");
@@ -38,9 +38,9 @@ $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 			Αριθμός Κεφαλαίου <input type="number" name="chapter_number" required /> <br>
 			Τίτλος Κεφαλαίου <input type="text" name="title" required /> <br>
 <?php
-$result = $link->query ("SELECT path FROM material");							//ανάκτηση διεύθυνσης αρχείου από τον πίνακα material
-while ($row = $result->fetch_array()) {									//για κάθε αρχείο
-	if ($i == 0) {											//εμφάνιση αρχείων ως επιλογών
+$result = $link->query ("SELECT path FROM material");						//ανάκτηση διεύθυνσης αρχείου από τον πίνακα material
+while ($row = $result->fetch_array()) {								//για κάθε αρχείο
+	if ($i == 0) {										//εμφάνιση αρχείων ως επιλογών
 		echo "Εικόνα που θα προβάλλεται στο κεφάλαιο <select name='image'>";
 		echo "<option value=''></option>";
 	}
