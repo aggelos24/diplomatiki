@@ -7,11 +7,11 @@
 	<meta charset="utf-8" />
 	<title> Σελίδα Εργασίας </title>
 	<script>
-		function logout() {																												//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {										//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function show_changelog() {																										//με το πάτημα του κουμπιού εμφάνιση περιγραφών αλλαγών
+		function show_changelog() {									//με το πάτημα του κουμπιού εμφάνιση περιγραφών αλλαγών
 			document.getElementById("changelog").style.display = "inline";
 			document.getElementById("bchangelog").style.display = "none";
 		}
@@ -29,26 +29,27 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_p.php";																											//έλεγχος αν έχει συνδεθεί ο καθηγητής
-if (isset($_GET["id"])) {																												//αν υπάρχει η μεταβλητή GET
-	$id = $_GET["id"];																													//ανάθεσή της σε μεταβλητή
+include "if_not_logged_p.php";											//έλεγχος αν έχει συνδεθεί ο καθηγητής
+if (isset($_GET["id"])) {											//αν υπάρχει η μεταβλητή GET
+	$id = $_GET["id"];											//ανάθεσή της σε μεταβλητή
 }
-else {																																	//αν δεν υπάρχει
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project_list.php'; </script>";											//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project_list.php
+else {														//αν δεν υπάρχει
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project_list.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project_list.php
 }
-if (isset($_GET["fail"])) {																												//αν ο σύνδεσμος δεν είναι έγκυρος
-	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";													//εμφάνιση κατάλληλου μηνύματος
+if (isset($_GET["fail"])) {											//αν ο σύνδεσμος δεν είναι έγκυρος
+	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";			//εμφάνιση κατάλληλου μηνύματος
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 																		//απόπειρα σύνδεσης στη βάση
-if (!$link) {																															//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project_list.php'; </script>";											//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project_list.php
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki");						//απόπειρα σύνδεσης στη βάση
+if (!$link) {													//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project_list.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project_list.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);				//ανάκτηση στοιχείων εργασιών από τον πίνακα project και groups
-$row_num = mysqli_num_rows($result);																									//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
-for ($i=0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {																	//για κάθε μέλος ομάδας
-	if ($i == 0) {																														//εμφάνιση πληροφοριών εργασίας και φορμών για διαγραφή και βαθμολόγησή της
+$result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
+														//ανάκτηση στοιχείων εργασιών από τον πίνακα project και groups
+$row_num = mysqli_num_rows($result);										//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
+for ($i=0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {						//για κάθε μέλος ομάδας
+	if ($i == 0) {												//εμφάνιση πληροφοριών εργασίας και φορμών για διαγραφή και βαθμολόγησή της
 		echo "<p class='center'> <b> Τίτλος: </b> ".$row["title"].", Διορία μέχρι ".date("d-m-Y", strtotime($row["deadline"]))."</p> <br>";
 		echo "Εκφώνηση:<br>";
 		echo $row["description"]."<br>";
@@ -56,10 +57,10 @@ for ($i=0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {												
 	}
 	else if ($i == $row_num-1) {
 		echo $row["user"]."<br>";
-		if ($row["document"]) {																											//αν κάποιος έχει ανέβασει την εργασία
+		if ($row["document"]) {										//αν κάποιος έχει ανέβασει την εργασία
 			echo "<a href='../projects/project_".$id."/project.doc' target='_blank'> Αρχείο εργασίας </a>";
 		}
-		else {																															//αν κανένας δεν έχει ανεβάσει ακόμα την εργασία
+		else {												//αν κανένας δεν έχει ανεβάσει ακόμα την εργασία
 			echo "Δεν έχει ανέβει ακόμα κάποια εργασία";
 		}
 	}
@@ -71,8 +72,8 @@ for ($i=0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {												
 		<br> <button id="bchangelog" onclick="show_changelog()"> Εμφάνιση Ιστορικού Αλλαγών της Εργασίας </button>
 		<div id="changelog" class="not_displayed">
 <?php
-$result = $link->query ("SELECT * FROM project_change WHERE project_id=".$id." ORDER BY date DESC");									//ανάκτηση στοιχείων αλλαγών από τον πίνακα project_change
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																				//για κάθε αλλαγή
+$result = $link->query ("SELECT * FROM project_change WHERE project_id=".$id." ORDER BY date DESC");		//ανάκτηση στοιχείων αλλαγών από τον πίνακα project_change
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε αλλαγή
 	echo "Χρήστης: ".$row["user"].", Ημερομηνία: ".date("d-m-Y", strtotime($row["date"]))."<br>Περιγραφή αλλαγής: ".$row["change_description"]."<br>";
 }
 ?>
@@ -85,9 +86,9 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																				//
 		</form> <br>
 		<div class="source_container">
 <?php
-$result = $link->query ("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");												//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																				//για κάθε σύνδεσμο
-	if ($row["user"] == "aggelos24") {																									//εμφάνιση στοιχείων αρχείου
+$result = $link->query ("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");			//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε σύνδεσμο
+	if ($row["user"] == "aggelos24") {									//εμφάνιση στοιχείων αρχείου
 		echo "Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: Καθηγητής"."<br>";
 	}
 	else {
@@ -104,9 +105,9 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																				//
 		</form>
 		<div class="source_container">
 <?php
-$result = $link->query ("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");											//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																				//για κάθε αρχείο
-	if ($row["user"] == "aggelos24") {																									//εμφάνιση στοιχείων αρχείου
+$result = $link->query ("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");			//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε αρχείο
+	if ($row["user"] == "aggelos24") {									//εμφάνιση στοιχείων αρχείου
 		echo "Αρχείο: <a href='".$row["path"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: Καθηγητής"."<br>";
 	}
 	else {
@@ -123,9 +124,9 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																				//
 		</form>
 		<div class="group_chat">
 <?php
-$result = $link->query ("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");								//ανάκτηση μηνυμάτων από τον πίνακα group_chat
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																				//για κάθε μήνυμα
-	if ($row["user"] == "aggelos24") {																									//εμφάνιση στοιχείων μηνύματος
+$result = $link->query ("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");	//ανάκτηση μηνυμάτων από τον πίνακα group_chat
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε μήνυμα
+	if ($row["user"] == "aggelos24") {									//εμφάνιση στοιχείων μηνύματος
 		echo "<b> Καθηγητής </b>: ".str_replace("\n", "\n<br>", $row["text"])."<br>";
 	}
 	else {
@@ -133,7 +134,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {																				//
 	}
 }
 $result->free();
-$link->close();																															//κλείσιμο σύνδεσης με βάση
+$link->close();													//κλείσιμο σύνδεσης με βάση
 ?>
 		</div>
 	</div>
