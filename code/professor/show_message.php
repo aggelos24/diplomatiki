@@ -7,11 +7,11 @@
 	<meta charset="utf-8" />
 	<title> Μηνύματα </title>
 	<script>
-		function logout() {																							//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {					//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			window.location = "logout.php";
 		}
 		
-		function reply_message() {																					//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
+		function reply_message() {				//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
 			document.getElementById("breply_message").style.display = "none";
 			document.getElementById("reply_message").style.display = "inline";
 		}
@@ -29,20 +29,22 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_p.php";																						//έλεγχος αν έχει συνδεθεί ο καθηγητής
-if ((isset($_GET["id"]))) {																							//αν υπάρχει η μεταβλητή GET
-	$id = $_GET["id"];																								//ανάθεσή της σε μεταβλητή
+include "if_not_logged_p.php";						//έλεγχος αν έχει συνδεθεί ο καθηγητής
+if ((isset($_GET["id"]))) {						//αν υπάρχει η μεταβλητή GET
+	$id = $_GET["id"];						//ανάθεσή της σε μεταβλητή
 }
-else {																												//αν όχι
-echo "<script> alert('Κάτι πήγε στραβά.'); window.location = 'message.php'; </script>";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
+else {									//αν όχι
+echo "<script> alert('Κάτι πήγε στραβά.'); window.location = 'message.php'; </script>";
+									//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 													//απόπειρα σύνδεσης στη βάση
-if (!$link) {																										//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); window.location = 'message.php'; </script>";							//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
+$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 	//απόπειρα σύνδεσης στη βάση
+if (!$link) {								//αν αποτυχία
+    echo "<script> alert('Κάτι πήγε στραβά.'); window.location = 'message.php'; </script>";
+									//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result = $link->query ("SELECT * FROM message WHERE id=".$id);														//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
+$result = $link->query ("SELECT * FROM message WHERE id=".$id);		//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 ?>
 		<b> Από το μαθητή: </b> <?php echo $row["from_user"]; ?> <br>
@@ -63,9 +65,9 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		<a href="message.php"> Επιστροφή στα Εισερχόμενα Μηνύματα </a>
 		</div>
 <?php
-$link->query ("UPDATE message SET seen=1 WHERE id=".$id);															//ενημέρωση του πίνακα message ότι ο χρήστης διάβασε το μήνυμα
+$link->query ("UPDATE message SET seen=1 WHERE id=".$id);		//ενημέρωση του πίνακα message ότι ο χρήστης διάβασε το μήνυμα
 $result->free();
-$link->close();																										//κλείσιμο σύνδεσης με βάση
+$link->close();								//κλείσιμο σύνδεσης με βάση
 ?>
 </body>
 </html>
