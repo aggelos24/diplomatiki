@@ -12,7 +12,6 @@
 	</script>
 </head>
 <body>
-																								
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
 	<div class="menu">
