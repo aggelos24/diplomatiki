@@ -58,8 +58,8 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 				<button type="submit"> Αποστολή </button>
 			</form>
 		</div> <br>
-		Εισερχόμενα Μηνύματα <span class="red_letters"> (τα αδιάβαστα μηνύματα έχουν πιο σκούρο φόντο)</span> | <a href="sent_message.php"> Εξερχόμενα Μηνύματα </a>
-		<div> <br>
+		Εισερχόμενα Μηνύματα <span class="red_letters"> (τα αδιάβαστα μηνύματα έχουν πιο σκούρο φόντο)</span> 	| <a href="sent_message.php"> Εξερχόμενα Μηνύματα </a> <br> <br>
+		<div class="container">
 			<div class="message_header"> Από τον χρήστη </div>
 			<div class="message_header"> Θέμα </div>
 			<div class="message_header"> Ημερομηνία που στάλθηκε </div>
