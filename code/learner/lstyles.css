@@ -30,7 +30,7 @@ span.menul {
 	border: 1px solid #000000;
 	padding: 0% 3%;
 	background-color: #ff6666;
-	transition: padding 1s;
+	transition: padding 0.5s;
 }
 span.menul:hover {
 	cursor: pointer;
@@ -42,18 +42,22 @@ div.main {
 	margin-left: 10%;
 	margin-right: 10%;
 }
+div.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+}
 div.message_header {
-	display: inline-block;
 	width: 30%;
+	margin-left: 1%;
 }
 div.message_box {
 	padding: 1%;
-	margin-bottom: 1%;
 	cursor: pointer;
 }
 div.not_seen_message_box {
 	padding: 1%;
-	margin-bottom: 1%;
 	background-color: #ffffcc;
 	cursor: pointer;
 }
@@ -62,7 +66,6 @@ div.not_seen_message_box:hover {
 }
 div.message_info {
 	width: 30%;
-	display: inline-block;
 }
 img.default_profile_photo {
 	width: 20%;
@@ -70,16 +73,14 @@ img.default_profile_photo {
 	border-radius: 10px;
 }
 img.profile_photo {
-	display: inline-block;
 	width: 25%;
 	padding: 1%;
 	border: 1px solid #000000;
 	border-radius: 10px;
 }
 div.profile_details {
-	display: inline-block;
 	width: 50%;
-	margin-left: 10%;
+	margin-right: 12%;
 }
 img.user_profile_photo {
 	width: 100%;
@@ -101,22 +102,14 @@ div.not_seen_notification {
 	background-color: #ffffcc;
 }
 div.view_users {
-	display: inline-block;
-	width: 20%;
+	width: 22%;
 	margin-bottom: 5%;
-	padding: 0;
-	margin-left: 3%;
 }
 div.chapter_image_left {
-	display: inline-block;
-	margin-right: 5%;
-	margin-left: 0%;
-	margin-bottom: 1%;
 	width: 25%;
 }
 div.chapter_text {
-	display: inline-block;
-	width: 60%;
+	width: 70%;
 }
 div.source_container {
 	width: 100%;
