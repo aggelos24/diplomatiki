@@ -56,8 +56,8 @@ if (!empty($row)) {										//αν υπάρχει
 		$result = $link->query ("SELECT * FROM chapter INNER JOIN material ON chapter.image=material.path WHERE section_number=".$section." AND number=".$chapter);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		$output = "<div class='container'> <div class='chapter_image_left'> <img src='".$row["image"]."' class='chapter_image'>".
-					"<p class='center'>".$row["description"]."</p> </div> <div class='chapter_text'>".
-					$text."</div> </div> <br>";
+				"<p class='center'>".$row["description"]."</p> </div> <div class='chapter_text'>".
+				$text."</div> </div> <br>";
 		echo $output;
 		if ($row["youtube"] != NULL) {
 			echo $row["youtube"]."<br>";
