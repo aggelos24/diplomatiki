@@ -51,9 +51,9 @@ $limit = ($pagenum - 1) * 10;
 $result = $link->query ("SELECT * FROM message WHERE from_user='aggelos24' ORDER BY id DESC LIMIT ".$limit.",10");
 												//ανάκτηση 10 το πολύ εξερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εξερχόμενο μήνυμα
-	echo "<a href='show_sent_message.php?id=".$row["id"]."' class='link_to_page'> <div class='message_box'>";
+	echo "<a href='show_sent_message.php?id=".$row["id"]."' class='link_to_page'> <div class='message_box'> <div class='container'>";
 	echo "<div class='message_info'>".$row["to_user"]."</div>"."<div class='message_info'> ".$row["subject"]."</div>"."<div class='message_info'>".date("H:i:s | d-m-Y", strtotime($row["date"]))."</div>";
-	echo "</div> </a>";
+	echo "</div> </div> </a>";								//εμφάνιση πληροφοριών μηνύματος
 }
 if ($pagenum < ceil($count/10)) {								//αν δεν είμαστε στην τελευταία σελίδα
 	$pagenum++;
