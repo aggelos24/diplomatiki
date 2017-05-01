@@ -23,8 +23,8 @@
 		<span class="menup"> <a href="test.php" class="link_to_page"> Τεστ </a> </span>
 	</div>
 	<div class="main">
-		<a href="message.php"> Εισερχόμενα Μηνύματα </a> | Εξερχόμενα Μηνύματα
-		<div> <br>
+		<a href="message.php"> Εισερχόμενα Μηνύματα </a> | Εξερχόμενα Μηνύματα <br> <br>
+		<div class="container">
 			<div class="message_header"> Στον χρήστη </div>
 			<div class="message_header"> Θέμα </div>
 			<div class="message_header"> Ημερομηνία που στάλθηκε </div>
