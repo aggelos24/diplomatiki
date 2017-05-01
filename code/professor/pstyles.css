@@ -21,6 +21,12 @@ div.menu {
 	margin-right: 10%;
 	margin-left: 10%;
 }
+div.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+}
 span.active {
 	padding: 0% 4%;
 	background-color: #FFFFFF;
@@ -53,8 +59,8 @@ div.group_chat {
 	border: 1px solid #000000;
 }
 div.message_header {
-	display: inline-block;
 	width: 30%;
+	margin-left: 1%;
 }
 div.message_box {
 	padding: 1%;
@@ -71,16 +77,15 @@ div.not_seen_message_box:hover {
 	background-color: #ffffff;
 }
 div.list_container {
+	display: flex;
 	border-bottom: 1px solid #000000;
 }
 div.list {
-	display: inline-block;
 	text-align: center;
 	padding: 1%;
 	width: 24%;
 }
 div.message_info {
-	display: inline-block;
 	width: 30%;
 }
 span.red_letters {
@@ -90,15 +95,10 @@ span.red_letters {
 	display: none;
 }
 div.chapter_image_left {
-	display: inline-block;
-	margin-right: 5%;
-	margin-left: 0%;
-	margin-bottom: 1%;
 	width: 25%;
 }
 div.chapter_text {
-	display: inline-block;
-	width: 60%;
+	width: 70%;
 }
 img.chapter_image {
 	width: 100%;
