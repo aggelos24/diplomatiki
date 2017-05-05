@@ -7,38 +7,38 @@
 	<meta charset="utf-8" />
 	<title> Λίστα μαθητών </title>
 	<script>
-		function logout() {						//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
-        
-        function sort(SortBy) {
-            if (SortBy == "name") {
-                document.getElementById("name").style.display = "inline";
-                document.getElementById("level").style.display = "none";
-                document.getElementById("date").style.display = "none";
-            }
-            else if (SortBy == "level") {
-                document.getElementById("name").style.display = "none";
-                document.getElementById("level").style.display = "inline";
-                document.getElementById("date").style.display = "none";
-            }
-            else {
-                document.getElementById("name").style.display = "none";
-                document.getElementById("level").style.display = "none";
-                document.getElementById("date").style.display = "inline";
-            }
+		
+		function sort(SortBy) {									//συνάρτηση για την εμφάνιση της λίστας μαθητών
+			if (SortBy == "name") {								//αν ταξινόμηση κατά όνομα χρήστη
+				document.getElementById("name").style.display = "inline";
+				document.getElementById("level").style.display = "none";
+				document.getElementById("date").style.display = "none";
+			}
+			else if (SortBy == "level") {							//αν ταξινόμηση κατά επίπεδο μαθητή
+				document.getElementById("name").style.display = "none";
+				document.getElementById("level").style.display = "inline";
+				document.getElementById("date").style.display = "none";
+			}
+			else {										//αν ταξινόμηση κατά ημερομηνία τελευταίας σύνδεσης
+				document.getElementById("name").style.display = "none";
+				document.getElementById("level").style.display = "none";
+				document.getElementById("date").style.display = "inline";
+			}
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        var obj= JSON.parse(this.responseText);
-                        var count = Object.keys(obj).length;
-                        var text = "";
-                        for (var i = 0; i < count; i++) {
-                            text+="<div class='list_container'>";
-                            text+="<div class='list'>"+obj[i].username+"</div>"+"<div class='list'> "+obj[i].email+"</div>"+"<div class='list'>"+obj[i].level+"</div>"+"<div class='list'>"+obj[i].last_login+"</div>";
-                            text+="</div>";
-                        }
-                        document.getElementById("sorted").innerHTML = text;
+					var obj= JSON.parse(this.responseText);				//κάνε parse την απάντηση, η οποία είναι σε JSON κωδικοποίηση, από τη σελίδα get_learner_list.php
+					var count = Object.keys(obj).length;
+					var text = "";
+					for (var i = 0; i < count; i++) {
+						text+="<div class='list_container'>";
+						text+="<div class='list'>"+obj[i].username+"</div>"+"<div class='list'> "+obj[i].email+"</div>"+"<div class='list'>"+obj[i].level+"</div>"+"<div class='list'>"+obj[i].last_login+"</div>";
+						text+="</div>";
+					}
+					document.getElementById("sorted").innerHTML = text;		//προβολή δεδομένων
 				}
 			}
 			xmlhttp.open("GET","get_learner_list.php?sort="+SortBy, true);
@@ -58,21 +58,21 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_p.php";							//έλεγχος αν έχει συνδεθεί ο καθηγητής
+include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
 ?>
-        <div id="name"> Ταξινόμηση κατά Όνομα Χρήστη ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
-        <div id="level"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά Επίπεδο μαθητή ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
-        <div id="date"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά Ημερομηνία τελευταίας σύνδεσης </div>
+		<div id="name"> Ταξινόμηση κατά Όνομα Χρήστη ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
+		<div id="level"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά Επίπεδο μαθητή ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
+		<div id="date"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά Ημερομηνία τελευταίας σύνδεσης </div>
 		<div class="list_container"> <br>
 			<div class="list"> <b> Όνομα Χρήστη </b> </div>
 			<div class="list"> <b> Email </b> </div>
 			<div class="list"> <b> Επίπεδο (1-6) </b> </div>
 			<div class="list"> <b> Τελευταία Είσοδος </b> </div>
 		</div>
-            <div id="sorted"></div>
+		<div id="sorted"></div>
 	</div>
-    <script>
-        sort("name");
-    </script>
+	<script>
+		sort("name");
+	</script>
 </body>
 </html>
