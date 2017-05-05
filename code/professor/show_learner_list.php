@@ -10,6 +10,40 @@
 		function logout() {						//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
+        
+        function sort(SortBy) {
+            if (SortBy == "name") {
+                document.getElementById("name").style.display = "inline";
+                document.getElementById("level").style.display = "none";
+                document.getElementById("date").style.display = "none";
+            }
+            else if (SortBy == "level") {
+                document.getElementById("name").style.display = "none";
+                document.getElementById("level").style.display = "inline";
+                document.getElementById("date").style.display = "none";
+            }
+            else {
+                document.getElementById("name").style.display = "none";
+                document.getElementById("level").style.display = "none";
+                document.getElementById("date").style.display = "inline";
+            }
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var obj= JSON.parse(this.responseText);
+                        var count = Object.keys(obj).length;
+                        var text = "";
+                        for (var i = 0; i < count; i++) {
+                            text+="<div class='list_container'>";
+                            text+="<div class='list'>"+obj[i].username+"</div>"+"<div class='list'> "+obj[i].email+"</div>"+"<div class='list'>"+obj[i].level+"</div>"+"<div class='list'>"+obj[i].last_login+"</div>";
+                            text+="</div>";
+                        }
+                        document.getElementById("sorted").innerHTML = text;
+				}
+			}
+			xmlhttp.open("GET","get_learner_list.php?sort="+SortBy, true);
+			xmlhttp.send();
+		}
 	</script>
 </head>
 <body>
@@ -25,54 +59,20 @@
 	<div class="main">
 <?php
 include "if_not_logged_p.php";							//έλεγχος αν έχει συνδεθεί ο καθηγητής
-if ((isset($_GET["sort"]))) {							//αν υπάρχει η μεταβλητή GET
-	$sort = $_GET["sort"];							//ανάθεσή της σε μεταβλητή
-}
-else {
-	$sort = "";
-}
-if ($sort == "level") {								//αν η ταξινόμηση είναι με βάση το επίπεδο μαθητή
-	echo "Ταξινόμηση <a href='show_learner_list.php'> Κατά Όνομα Χρήστη </a> ή κατά επίπεδο μαθητή ή <a href='show_learner_list.php?sort=date'> Κατά ημερομηνία τελευταίας σύνδεσης </a>";
-}
-else if ($sort == "date") {							//αν η ταξινόμηση είναι με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη
-	echo "Ταξινόμηση <a href='show_learner_list.php'> Κατά Όνομα Χρήστη </a> ή <a href='show_learner_list.php?sort=level'> Κατά επίπεδο μαθητή </a> ή κατά ημερομηνία τελευταίας σύνδεσης";
-}
-else {										//αν δεν έχει οριστεί τύπος ταξινόμησης
-	echo "Ταξινόμηση κατά Όνομα Χρήστη ή <a href='show_learner_list.php?sort=level'> Κατά επίπεδο μαθητή </a> ή <a href='show_learner_list.php?sort=date'> Κατά ημερομηνία τελευταίας σύνδεσης </a>";
-}
 ?>
+        <div id="name"> Ταξινόμηση κατά Όνομα Χρήστη ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
+        <div id="level"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά Επίπεδο μαθητή ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
+        <div id="date"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά Ημερομηνία τελευταίας σύνδεσης </div>
 		<div class="list_container"> <br>
 			<div class="list"> <b> Όνομα Χρήστη </b> </div>
 			<div class="list"> <b> Email </b> </div>
 			<div class="list"> <b> Επίπεδο (1-6) </b> </div>
 			<div class="list"> <b> Τελευταία Είσοδος </b> </div>
 		</div>
-<?php
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 		//απόπειρα σύνδεσης στη βάση
-if (!$link) {									//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";
-										//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-if ($sort == "level") {								//αν η ταξινόμηση είναι με βάση το επίπεδο
-	$result = $link->query ("SELECT * FROM user WHERE professor=0 ORDER BY level");										//ανάκτηση στοιχείων μαθητών ταξινομημένα με βάση το επίπεδο από τον πίνακα user
-}
-else if ($sort == "date") {							//αν η ταξινόμηση είναι με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη
-	$result = $link->query ("SELECT * FROM user WHERE professor=0 ORDER BY last_login DESC");
-										//ανάκτηση στοιχείων μαθητών ταξινομημένα με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη από τον πίνακα user
-}
-else {										//αν δεν έχει οριστεί τύπος ταξινόμησης
-	$result = $link->query ("SELECT * FROM user WHERE professor=0");	//ανάκτηση στοιχείων μαθητών από τον πίνακα user
-}
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {			//για κάθε μαθητή
-	echo "<div class='list_container'>";
-	echo "<div class='list'>".$row["username"]."</div>"."<div class='list'> ".$row["email"]."</div>"."<div class='list'>".$row["level"]."</div>"."<div class='list'>".$row["last_login"]."</div>";
-	echo "</div>";								//εμφάνιση στοιχείων χρήστη
-}
-$result->free();
-$link->close();									//κλείσιμο σύνδεσης με βάση
-?>
+            <div id="sorted"></div>
 	</div>
+    <script>
+        sort("name");
+    </script>
 </body>
 </html>
