@@ -13,6 +13,7 @@
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					document.getElementById("show_notification_message").innerHTML = xmlhttp.responseText;
+													//προβολή αριθμού αδιάβαστων ειδοποιήσεων και μηνυμάτων
 				}
 			}
 			xmlhttp.open("GET","show_notification_message.php",true);
