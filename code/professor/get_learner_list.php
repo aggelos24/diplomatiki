@@ -24,6 +24,8 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {			//για κάθε �
     $results[$i] = [ "username" => $row["username"], "email" => $row["email"], "level" => $row["level"], "last_login" => date("d-m-Y", strtotime($row["last_login"]))];
     $i++;
 }
-$myJSON = json_encode($results);
-echo $myJSON;
+$myJSON = json_encode($results);						//κωδικοποίηση των αποτελεσμάτων σε JSON
+echo $myJSON;									//εκτύπωση της μεταβλητής myJSON
+$result->free();
+$link->close();									//κλείσιμο σύνδεσης με βάση
 ?>
