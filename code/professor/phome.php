@@ -16,6 +16,7 @@
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					document.getElementById("hint").innerHTML = xmlhttp.responseText;
+									//προβολή υπόδειξης
 				}
 			}
 			xmlhttp.open("GET","get_hint.php?input="+str, true);
@@ -28,6 +29,7 @@
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					document.getElementById("show_message_live").innerHTML = xmlhttp.responseText;
+									//προβολή αριθμού αδιάβαστων μηνυμάτων
 				}
 			}
 			xmlhttp.open("GET","show_message_live.php",true);
