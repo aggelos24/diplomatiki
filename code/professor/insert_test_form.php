@@ -20,9 +20,10 @@
 			xmlhttp.onreadystatechange=function() {
 				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 					document.getElementById("hint").innerHTML=xmlhttp.responseText;
+												//προβολή υπόδειξης
 				}
 			}
-			xmlhttp.open("GET","get_hint.php?input="+str,true);			//προβολή υπόδειξης
+			xmlhttp.open("GET","get_hint.php?input="+str,true);
 			xmlhttp.send();
 		}
 	</script>
