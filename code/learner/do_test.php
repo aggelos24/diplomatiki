@@ -221,15 +221,13 @@ else {																			//αν το τεστ είναι εφ' όλης της �
 	$array_id = array();
 	$result = $link->query ("SELECT id FROM question_and_answer WHERE difficult=0");								//ανάκτηση id εύκολων ερωτημάτων
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {											//για κάθε εύκολο ερώτημα
-		array_push($array_id, $row["id"]);													//εισαγωγή του id του ερωτήματος στον πίνακα
+		$array_id[] = $row["id"];														//εισαγωγή του id του ερωτήματος στον πίνακα
 	}
 	for ($i = 0; $i < $easy_question_num; $i++) {
 		$selected_position = rand(0, count($array_id)-1);											//τυχαία επιλογή ερωτήματος
-		for ($j = 0 ; $j < $selected_position-1 ; $j++) {											//σκοπός του for να έρθει το ζητούμενο id στην πρώτη θέση
-			$temp = array_shift($array_id);
-			array_push($array_id, $temp);
-		}
-		$selected_id = array_shift($array_id);
+		$selected_id = $array_id[$selected_position];												//ανάθεση id επιλεγμένου ερωτήματος σε μεταβλητή
+        	unset($array_id[$selected_position]);													//διαγραφή id επιλεγμένου ερωτήματος από τον πίνακα
+        	$array_id = array_values($array_id);
 		$result = $link->query ("SELECT * FROM question_and_answer WHERE id=".$selected_id);							//ανάκτηση των στοιχείων του επιλεγμένου ερωτήματος από τον πίνακα question_and_answer
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		echo $row["question_text"]."<br>";													//εμφάνιση κειμένου ερωτήματος
