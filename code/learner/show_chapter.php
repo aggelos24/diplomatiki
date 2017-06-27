@@ -24,6 +24,8 @@
 	<div class="main">
 <?php
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
+include "../connect_to_database.php";
+$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {					//αν υπάρχουν οι μεταβλητές GET
 	$chapter = $_GET["chapter"];								//ανάθεση σε μεταβλητές
 	$section = $_GET["section"];
@@ -31,12 +33,6 @@ if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {					//αν υπά
 else {												//αν όχι
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (!empty($row)) {										//αν υπάρχει
