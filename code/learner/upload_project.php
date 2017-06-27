@@ -10,14 +10,8 @@ else {												//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project.php?id=".$id."'; </script>";
 												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-	$ok = 0;
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project.php?id=".$id."'; </script>";
-												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "../connect_to_database.php";
+$link = connect_to_database("project.php?id=".$id);						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $file_type = pathinfo(basename($_FILES["project_document"]["name"]),PATHINFO_EXTENSION);	//εύρεση επέκτασης αρχείου
 $target_file = "../projects/project_".$id."/project.doc";					//ορισμός διεύθυνσης προορισμού του αρχείου
 if ($file_type != "doc") {									//αν ο τύπος αρχείου δεν είναι doc
