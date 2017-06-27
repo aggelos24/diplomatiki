@@ -29,6 +29,8 @@
 	</div>
 	<div class="main">
 <?php
+include "../connect_to_database.php";
+$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (isset($_GET["id"])) {									//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
 }
@@ -38,12 +40,6 @@ else {												//αν δεν υπάρχει
 if (isset($_GET["fail"])) {									//αν ο σύνδεσμος δεν είναι έγκυρος
 	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";	//εμφάνιση κατάλληλου μηνύματος
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 session_start();										//δημιουργία συνεδρίας
 $pass = 0;
 $result = $link->query ("SELECT groups.user FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
