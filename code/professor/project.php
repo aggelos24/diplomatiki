@@ -30,6 +30,8 @@
 	<div class="main">
 <?php
 include "if_not_logged_p.php";											//έλεγχος αν έχει συνδεθεί ο καθηγητής
+include "../connect_to_database.php";
+$link = connect_to_database("project_list.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (isset($_GET["id"])) {											//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];											//ανάθεσή της σε μεταβλητή
 }
@@ -39,12 +41,6 @@ else {														//αν δεν υπάρχει
 if (isset($_GET["fail"])) {											//αν ο σύνδεσμος δεν είναι έγκυρος
 	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";			//εμφάνιση κατάλληλου μηνύματος
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki");						//απόπειρα σύνδεσης στη βάση
-if (!$link) {													//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project_list.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project_list.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
 														//ανάκτηση στοιχείων εργασιών από τον πίνακα project και groups
 $row_num = mysqli_num_rows($result);										//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
