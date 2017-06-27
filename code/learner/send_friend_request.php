@@ -4,17 +4,12 @@ if ((isset($_GET["username"]))) {									//αν υπάρχει η μεταβλ�
 	$username = $_GET["username"];									//ανάθεσή της σε μεταβλητή
 }
 else {													//αν όχι
-echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'view_profile.php?username=".$username."&friend=0'; </script>";
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'view_profile.php?username=".$username."&friend=0'; </script>";
 													//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα view_profile.php
 }
+include "../connect_to_database.php";
+$link = connect_to_database("view_profile.php?username=".$username."&friend=0");			//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 session_start();											//δημιουργία συνεδρίας
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 					//απόπειρα σύνδεσης στη βάση
-if (!$link) {												//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'view_profile.php?username=".$username."&friend=0'; </script>";
-													//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα view_profile.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $link->query ("INSERT INTO notification (id, to_user, text, seen, display) VALUES (DEFAULT, '".$username."', '', DEFAULT, DEFAULT)");
 													//δημιουργία ειδοποίησης για τον παραλήπτη του μηνύματος
 $notification_id = $link->insert_id;
