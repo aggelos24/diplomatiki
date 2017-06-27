@@ -20,13 +20,8 @@ if (!$file_headers or ($file_headers[0] == "HTTP/1.1 404 Not Found")) {			//αν
 	header("Location:project.php?id=".$id."&fail=1");				//επιστροφή στη σελίδα project.php
 }
 else {
-	$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 		//απόπειρα σύνδεσης στη βάση
-	if (!$link) {									//αν αποτυχία
-		echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project.php?id=".$id."'; </script>";
-											//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
-	}
-	$link->query ("SET CHARACTER SET utf8");
-	$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+	include "../connect_to_database.php";
+	$link = connect_to_database("project.php?id=".$id);				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 	$link->query ("INSERT INTO link (id, project_id, user, url, description) VALUES (DEFAULT, ".$id.", 'aggelos24', '".$page_link."', '".$_POST["description"]."')");
 											//εισαγωγή συνδέσμου στον πίνακα link
 	$link->close();									//κλείσιμο σύνδεσης με βάση
