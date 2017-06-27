@@ -9,12 +9,8 @@ if (isset($_GET["id"])) {											//αν υπάρχει η μεταβλητή 
 else {														//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project.php?id=".$id."'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 						//απόπειρα σύνδεσης στη βάση
-if (!$link) {													//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project.php?id=".$id."'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "../connect_to_database.php";
+$link = connect_to_database("project.php?id=".$id);								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query ("INSERT INTO group_chat (id, project_id, user, text) VALUES (DEFAULT, ".$id.", 'aggelos24', '".$message_text."')");
 														//εισαγωγή μηνύματος στον πίνακα group_chat
 $link->close();													//κλείσιμο σύνδεσης με βάση
