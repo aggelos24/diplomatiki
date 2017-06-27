@@ -30,20 +30,15 @@
 	<div class="main">
 <?php
 include "if_not_logged_p.php";						//έλεγχος αν έχει συνδεθεί ο καθηγητής
+include "../connect_to_database.php";
+$link = connect_to_database("message.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["id"]))) {						//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];						//ανάθεσή της σε μεταβλητή
 }
 else {									//αν όχι
-echo "<script> alert('Κάτι πήγε στραβά.'); window.location = 'message.php'; </script>";
+	echo "<script> alert('Κάτι πήγε στραβά.'); window.location = 'message.php'; </script>";
 									//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 	//απόπειρα σύνδεσης στη βάση
-if (!$link) {								//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); window.location = 'message.php'; </script>";
-									//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT * FROM message WHERE id=".$id);		//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 ?>
