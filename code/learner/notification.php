@@ -38,13 +38,8 @@
 		Λίστα ειδοποιήσεων <span class="red_letters"> (οι καινούργιες ειδοποιήσεις έχουν πιο σκούρο φόντο)</span>:
 <?php
 include "if_not_logged_l.php";								//έλεγχος αν έχει συνδεθεί μαθητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 			//απόπειρα σύνδεσης στη βάση
-if (!$link) {										//αν αποτυχία
-	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";
-											//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "../connect_to_database.php";
+$link = connect_to_database("lhome.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT * FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND display=1 ORDER BY id DESC");
 											//ανάκτηση δεδομένων από τον πίνακα notification		
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {				//για κάθε ενημέρωση που πρέπει να προβληθεί
