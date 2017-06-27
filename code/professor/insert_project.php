@@ -1,5 +1,7 @@
 <meta charset="utf-8" />
 <?php
+include "../connect_to_database.php";
+$link = connect_to_database("group_project.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $search = array("'", '"');
 $replace = array("\'", '\"');
 $description_text = str_replace($search, $replace, $_POST["description_text"]);					//για αποφυγή σφάλματος βάσης
@@ -12,12 +14,6 @@ else if (count($users) == 1) {
     echo "<script> alert('Μια ομάδα θα πρέπει να αποτελείται από τουλάχιστον 2 άτομα.'); location.href = 'group_project.php'; </script>";
 														//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα group_project.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 						//απόπειρα σύνδεσης στη βάση
-if (!$link) {													//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'group_project.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα group_project.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $link->query ("INSERT INTO project (id, title, description, deadline, document, grade) VALUES (DEFAULT, '".$_POST["title"]."', '".$description_text."', '".$_POST["deadline"]."', DEFAULT, DEFAULT)");
 														//εισαγωγή εργασίας στον πίνακα project
 $project_id = $link->insert_id;											//ανάθεση του id της εργασίας σε μεταβλητή
