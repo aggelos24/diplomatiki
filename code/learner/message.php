@@ -23,12 +23,8 @@
 <body>
 <?php
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "../connect_to_database.php";
+$link = connect_to_database("lhome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT user2 FROM friendship WHERE user1='".$_SESSION["session_lusername"]."'");
 												//ανάκτηση username φίλων χρήστη από τον πίνακα user
 ?>
