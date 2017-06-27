@@ -1,14 +1,9 @@
 <?php
+include "../connect_to_database.php";
+$link = connect_to_database("phome.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["sort"]))) {							//αν υπάρχει η μεταβλητή GET
 	$sort = $_GET["sort"];							//ανάθεσή της σε μεταβλητή
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 		//απόπειρα σύνδεσης στη βάση
-if (!$link) {									//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";
-										//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 if ($sort == "name") {								//αν δεν έχει οριστεί τύπος ταξινόμησης
 	$result = $link->query ("SELECT * FROM user WHERE professor=0 ORDER BY username");
 										//ανάκτηση στοιχείων μαθητών από τον πίνακα user
