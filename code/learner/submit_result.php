@@ -1,18 +1,14 @@
 <meta charset="utf-8" />
 <?php
 session_start();										//δημιουργία συνεδρίας
+include "../connect_to_database.php";
+$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (isset($_GET["id"])) {									//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];									//ανάθεση σε μεταβλητή
 }
 else {												//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT section_number FROM test WHERE id=".$id);			//ανάκτηση στοιχείων τεστ από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if ($row["section_number"] != NULL) {								//αν το τεστ είναι σε κάποια συγκεκριμένη ενότητα
