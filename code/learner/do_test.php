@@ -66,19 +66,15 @@
 		Το Τεστ περιλαμβάνει ερωτήσεις πολλαπλής επιλογής, τσέκαρε τη σωστή απάντηση σε κάθε ερώτηση και πάτα το κουμπί υποβολής μόλις τελειώσεις, <br> <br>
 <?php
 include "if_not_logged_l.php";																//έλεγχος αν έχει συνδεθεί μαθητής
+include "../connect_to_database.php";
+$link = connect_to_database("history.php");														//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (isset($_GET["id"])) {																//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];																//ανάθεση της σε μεταβλητή
 }
 else {																			//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 											//απόπειρα σύνδεσης στη βάση
-if (!$link) {																		//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
-}
 $question_number = 1;
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT * FROM test WHERE id=".$id);												//ανάκτηση στοιχείων τεστ από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (empty(($row)) or ($row["user"] != $_SESSION["session_lusername"]) or ($row["status"] != "pending")) {						//αν δεν υπάρχει τεστ με το συγκεκριμένο id, ή υπάρχει αλλά δεν είναι για τον συνδεδεμένο χρήστη ή δεν εκκρεμεί
