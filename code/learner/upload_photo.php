@@ -7,6 +7,8 @@ if (!$link) {												//αν αποτυχία
 	$ok = 0;
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 }
+$link->query ("SET CHARACTER SET utf8");
+$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $file_type = pathinfo(basename($_FILES["photo"]["name"]), PATHINFO_EXTENSION);				//εύρεση επέκτασης αρχείου
 $target_file = "photos/".$_SESSION["session_lusername"].".".$file_type;					//ορισμός διεύθυνσης προορισμού του αρχείου
 $check = getimagesize($_FILES["photo"]["tmp_name"]);							//απόπειρα εύρεσης μεγέθους εικόνας
