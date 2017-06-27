@@ -1,12 +1,8 @@
 <meta charset="utf-8" />
 <?php
+include "../connect_to_database.php";
+$link = connect_to_database("lhome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 session_start();										//δημιουργία συνεδρίας
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 if (empty($_POST["description_text"])){								//αν το πεδίο της φόρμας κενό
 	$_SESSION["session_ldescription"] = NULL;						//ενημέρωση μεταβλητής συνεδρίας
 	$link->query ("UPDATE user SET description=NULL WHERE username='".$_SESSION["session_lusername"]."'");
