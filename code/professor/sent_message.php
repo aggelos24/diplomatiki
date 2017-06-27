@@ -31,12 +31,8 @@
 		</div>
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα login_register_form.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "../connect_to_database.php";
+$link = connect_to_database("phome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT count(*) AS sent FROM message WHERE from_user='aggelos24' GROUP BY from_user");
 												//ανάκτηση αριθμού εξερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
