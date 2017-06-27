@@ -30,15 +30,10 @@
 		<a href="test.php"> Ερωτήσεις και Απαντήσεις </a> | <a href="insert_test_form.php"> Δημιουργία Τεστ </a> | Προβολή Λίστας Τεστ <br> <br>
 		<span class="red_letters"> Αν διαγραφεί κάποιο τεστ, δεν επηρεάζεται το επίπεδο του μαθητή </span> <br> <br>
 <?php
-$to_greek = array("pending" => "Εκκρεμεί", "completed" => "Ολοκληρωμένο", "overdue" => "Εκπρόθεσμο");
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-	echo "<script> alert('Κάτι πήγε στραβά.'); window.location = 'insert_test_form.php'; </script>";
-												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα phome.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "../connect_to_database.php";
+$link = connect_to_database("insert_test_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$to_greek = array("pending" => "Εκκρεμεί", "completed" => "Ολοκληρωμένο", "overdue" => "Εκπρόθεσμο");
 $result = $link->query ("SELECT id FROM test WHERE CURDATE()>test_date AND status='pending'");	//ανάκτηση id από πίνακα test που εκκρεμούν και είναι στο παρελθόν 
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε τεστ
 	$link->query ("UPDATE test SET status='overdue' WHERE id=".$row["id"]);			//ενημέρωση ότι είναι εκπρόθεσμο στον πίνακα test
