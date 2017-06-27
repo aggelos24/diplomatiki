@@ -55,12 +55,8 @@
 		<br> <br>
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki");				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "../connect_to_database.php";
+$link = connect_to_database("content.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["section"]))) {								//αν υπάρχει η μεταβλητή GET
 	$section = $_GET["section"];								//ανάθεσή της σε μεταβλητή
 	$result = $link->query ("SELECT * FROM section WHERE number=".$section);		//έλεγχος αν υπάρχει ενότητα με αυτόν τον αριθμό στον πίνακα section
