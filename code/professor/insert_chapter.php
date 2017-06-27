@@ -1,18 +1,13 @@
 <meta charset="utf-8" />
 <?php
+include "../connect_to_database.php";
+$link = connect_to_database("insert_chapter_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $search = array("'", '"');
 $replace = array("\'", '\"');
 $chapter_text = str_replace($search, $replace, $_POST["chapter_text"]);				//για αποφυγή σφάλματος βάσης
 if (!empty($_POST["youtube"])) {								//αν δεν είναι κενό το πεδίο youtube
 	$youtube = str_replace($search, $replace, $_POST["youtube"]);
 }
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'insert_chapter_form.php'; </script>";
-												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα insert_chapter_form.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $result = $link->query ("SELECT * FROM section WHERE number=".$_POST["section_number"]);	//έλεγχος αν υπάρχει ενότητα με αυτόν τον αριθμό στον πίνακα section
 if (empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {						//αν δεν υπάρχει
 	$result->free();
