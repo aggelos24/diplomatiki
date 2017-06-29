@@ -1,11 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?php
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 					//απόπειρα σύνδεσης στη βάση
-if (!$link) {												//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'login_register_form.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα login_register_form.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "connect_to_database.php";
+$link = connect_to_database("'login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT username FROM user where username='".$_POST["username"]."'");		//έλεγχος αν το όνομα χρήστη υπάρχει ήδη στη βάση
 if (!empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {						//αν υπάρχει
 	$result->free();
