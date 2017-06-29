@@ -1,12 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?php
 session_start();												//δημιουργία συνεδρίας
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 						//απόπειρα σύνδεσης στη βάση
-if (!$link) {													//αν αποτυχία
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'login_register_form.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα login_register_form.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+include "connect_to_database.php";
+$link = connect_to_database("'login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT * FROM user");									//ανάκτηση των στοιχείων των χρηστών
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε χρήστη
 	if ( ($row["username"] == $_POST["username"]) and ($row["password"] == md5($_POST["password"])) ) {	//αν ταιριάζουν τα στοιχεία της φόρμας με τα στοιχεία της βάσης
