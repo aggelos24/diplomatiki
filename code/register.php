@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?php
 include "connect_to_database.php";
-$link = connect_to_database("'login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("'login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT username FROM user where username='".$_POST["username"]."'");		//έλεγχος αν το όνομα χρήστη υπάρχει ήδη στη βάση
 if (!empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {						//αν υπάρχει
 	$result->free();
