@@ -2,7 +2,7 @@
 <?php
 session_start();												//δημιουργία συνεδρίας
 include "connect_to_database.php";
-$link = connect_to_database("'login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("login_register_form.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT * FROM user");									//ανάκτηση των στοιχείων των χρηστών
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε χρήστη
 	if ( ($row["username"] == $_POST["username"]) and ($row["password"] == md5($_POST["password"])) ) {	//αν ταιριάζουν τα στοιχεία της φόρμας με τα στοιχεία της βάσης
