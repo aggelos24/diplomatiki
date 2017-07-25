@@ -4,6 +4,7 @@ function connect_to_database($destination) {                                //σ
     if (!$link) {                                                           //αν αποτυχία
         echo "<script> alert('Κάτι πήγε στραβά.'); location.href = '".$destination."'; </script>";
                                                                             //εμφάνιση κατάλληλου μηνύματος και ανακατεύθυνση στην κατάλληλη σελίδα
+	exit();											                        //τερματισμός script
     }
     $link->query ("SET CHARACTER SET utf8");
     $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
