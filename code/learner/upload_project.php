@@ -1,7 +1,6 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$link = connect_to_database("lhome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 session_start();										//δημιουργία συνεδρίας
 if (isset($_GET["id"])) {									//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
@@ -11,6 +10,7 @@ else {												//αν δεν υπάρχει
 												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
 	exit();											//τερματισμός script
 }
+$link = connect_to_database("project.php?id=".$id);						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $file_type = pathinfo(basename($_FILES["project_document"]["name"]),PATHINFO_EXTENSION);	//εύρεση επέκτασης αρχείου
