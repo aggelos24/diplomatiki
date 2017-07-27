@@ -30,19 +30,20 @@
 	<div class="main">
 <?php
 include "../connect_to_database.php";
-$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (isset($_GET["id"])) {									//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
 }
 else {												//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
+	exit();											//τερματισμός script
 }
 if (isset($_GET["fail"])) {									//αν ο σύνδεσμος δεν είναι έγκυρος
 	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";	//εμφάνιση κατάλληλου μηνύματος
 }
 session_start();										//δημιουργία συνεδρίας
 $pass = 0;
-$result = $link->query ("SELECT groups.user FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
+$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT groups.user FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
 												//ανάκτηση username των μελών της ομάδας από τον πίνακα groups
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε username
 	if ($row["user"] == $_SESSION["session_lusername"]) {					//αν το username είναι ίδιο με την μεταβλητή session
@@ -50,10 +51,12 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 	}
 }
 if (!$pass) {											//αν ο χρήστης δεν είναι μέλος της ομάδας
+	$link->close();										//κλείσιμο σύνδεσης με βάση
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";
 												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
+	exit();											//τερματισμός script
 }
-$result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
+$result = $link->query("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
 												//ανάκτηση στοιχείων εργασιών από πίνακα project και groups
 $row_num = mysqli_num_rows($result);								//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
 for ($i = 0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {				//για κάθε μέλος της ομάδας
@@ -62,7 +65,7 @@ for ($i = 0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {				//γι
 		echo "<p class='center'> <b> Τίτλος: </b> ".$row["title"].", Διορία μέχρι ".date("d-m-Y", strtotime($row["deadline"]))."</p> <br>";
 		echo "Εκφώνηση:<br>";
 		echo $row["description"]."<br>";
-		$result2 = $link->query ("SELECT * FROM friendship WHERE user1='".$_SESSION["session_lusername"]."' AND user2='".$user."'");
+		$result2 = $link->query("SELECT * FROM friendship WHERE user1='".$_SESSION["session_lusername"]."' AND user2='".$user."'");
 		if (!empty(mysqli_fetch_array($result2, MYSQLI_ASSOC))) {			//αν το μέλος της ομάδας είναι φίλος
 			echo "Μέλη Ομάδας: "."<a href='view_profile.php?username=".$user."&friend=1&id=".$id."'>".$user."</a>, ";
 		}
@@ -75,7 +78,7 @@ for ($i = 0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {				//γι
 	}
 	else if ($i == $row_num-1) {
 		$document = $row["document"];
-		$result2 = $link->query ("SELECT * FROM friendship WHERE user1='".$_SESSION["session_lusername"]."' AND user2='".$user."'");
+		$result2 = $link->query("SELECT * FROM friendship WHERE user1='".$_SESSION["session_lusername"]."' AND user2='".$user."'");
 		if (!empty(mysqli_fetch_array($result2, MYSQLI_ASSOC))) {			//αν το μέλος της ομάδας είναι φίλος
 			echo "<a href='view_profile.php?username=".$user."&friend=1&id=".$id."'>".$user."</a>"."<br>";
 		}
@@ -93,7 +96,7 @@ for ($i = 0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {				//γι
 		}
 	}
 	else {
-		$result2 = $link->query ("SELECT * FROM friendship WHERE user1='".$_SESSION["session_lusername"]."' AND user2='".$user."'");
+		$result2 = $link->query("SELECT * FROM friendship WHERE user1='".$_SESSION["session_lusername"]."' AND user2='".$user."'");
 		if (!empty(mysqli_fetch_array($result2, MYSQLI_ASSOC))) {			//αν το μέλος της ομάδας είναι φίλος
 			echo "<a href='view_profile.php?username=".$user."&friend=1&id=".$id."'>".$user."</a>, ";
 		}
@@ -106,7 +109,7 @@ for ($i = 0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {				//γι
 	}
 }
 if ($document) {										//αν κάποιος έχει ανέβασει την εργασία
-	$result = $link->query ("SELECT * FROM project_change WHERE project_id=".$id." ORDER BY id DESC LIMIT 1");
+	$result = $link->query("SELECT * FROM project_change WHERE project_id=".$id." ORDER BY id DESC LIMIT 1");
 												//ανάκτηση στοιχείων τελευταίας αλλαγής από πίνακα project_change
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 	echo "Τελευταία αλλαγή από ".$row["user"].", στις ".date("d-m-Y", strtotime($row["date"]))." <button id='bchange_description' onclick='show_change_description()'> Εμφάνιση Αλλαγών </button>";
@@ -127,7 +130,7 @@ if ($document) {										//αν κάποιος έχει ανέβασει την
 		</form> <br>
 		<div class="source_container">
 <?php
-$result = $link->query ("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");	//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
+$result = $link->query("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");	//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε σύνδεσμο
 	if ($row["user"] == "aggelos24") {							//εμφάνιση στοιχείων αρχείου
 		echo "Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: Καθηγητής"."<br>";
@@ -146,7 +149,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 		</form>
 		<div class="source_container">
 <?php
-$result = $link->query ("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");	
+$result = $link->query("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");	
 												//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε αρχείο
 	if ($row["user"] == "aggelos24") {							//εμφάνιση στοιχείων αρχείου
@@ -166,7 +169,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 		</form>
 		<div class="group_chat">
 <?php
-$result = $link->query ("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");
+$result = $link->query("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");
 												//ανάκτηση μηνυμάτων από τον πίνακα group_chat
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε μήνυμα
 	if ($row["user"] == "aggelos24") {							//εμφάνιση στοιχείων μηνύματος
