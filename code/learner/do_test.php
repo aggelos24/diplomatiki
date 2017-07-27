@@ -67,18 +67,20 @@
 <?php
 include "if_not_logged_l.php";																//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
-$link = connect_to_database("history.php");														//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (isset($_GET["id"])) {																//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];																//ανάθεση της σε μεταβλητή
 }
 else {																			//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
+	exit();																		//τερματισμός script
 }
 $question_number = 1;
+$link = connect_to_database("history.php");														//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT * FROM test WHERE id=".$id);												//ανάκτηση στοιχείων τεστ από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (empty(($row)) or ($row["user"] != $_SESSION["session_lusername"]) or ($row["status"] != "pending")) {						//αν δεν υπάρχει τεστ με το συγκεκριμένο id, ή υπάρχει αλλά δεν είναι για τον συνδεδεμένο χρήστη ή δεν εκκρεμεί
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
+	exit();																		//τερματισμός script
 }
 if ($row["section_number"] != NULL) {															//αν το τεστ είναι σε κάποια συγκεκριμένη ενότητα
 	echo "<form name='submit_result' method='post' action='submit_result.php?id=".$id."' onsubmit='return validate_answer_5()'>";
@@ -222,8 +224,8 @@ else {																			//αν το τεστ είναι εφ' όλης της �
 	for ($i = 0; $i < $easy_question_num; $i++) {
 		$selected_position = rand(0, count($array_id)-1);											//τυχαία επιλογή ερωτήματος
 		$selected_id = $array_id[$selected_position];												//ανάθεση id επιλεγμένου ερωτήματος σε μεταβλητή
-        	unset($array_id[$selected_position]);													//διαγραφή id επιλεγμένου ερωτήματος από τον πίνακα
-        	$array_id = array_values($array_id);
+		unset($array_id[$selected_position]);													//διαγραφή id επιλεγμένου ερωτήματος από τον πίνακα
+		$array_id = array_values($array_id);
 		$result = $link->query ("SELECT * FROM question_and_answer WHERE id=".$selected_id);							//ανάκτηση των στοιχείων του επιλεγμένου ερωτήματος από τον πίνακα question_and_answer
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		echo $row["question_text"]."<br>";													//εμφάνιση κειμένου ερωτήματος
@@ -263,11 +265,9 @@ else {																			//αν το τεστ είναι εφ' όλης της �
 	}
 	for ($i = 0; $i < $difficult_question_num; $i++) {
 		$selected_position = rand(0, count($array_id)-1);											//τυχαία επιλογή ερωτήματος
-		for ($j = 0 ; $j < $selected_position-1 ; $j++) {											//σκοπός του for να έρθει το ζητούμενο id στην πρώτη θέση
-			$temp = array_shift($array_id);
-			array_push($array_id, $temp);
-		}
-		$selected_id = array_shift($array_id);													//εξαγωγή ζητούμενου id από τον πίνακα
+		$selected_id = $array_id[$selected_position];												//ανάθεση id επιλεγμένου ερωτήματος σε μεταβλητή
+		unset($array_id[$selected_position]);													//διαγραφή id επιλεγμένου ερωτήματος από τον πίνακα
+		$array_id = array_values($array_id);													//εξαγωγή ζητούμενου id από τον πίνακα
 		$result = $link->query ("SELECT * FROM question_and_answer WHERE id=".$selected_id);							//ανάκτηση των στοιχείων του επιλεγμένου ερωτήματος από τον πίνακα question_and_answer
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		echo $row["question_text"]."<br>";													//εμφάνιση κειμένου ερωτήματος
