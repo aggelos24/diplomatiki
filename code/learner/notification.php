@@ -40,7 +40,7 @@
 include "if_not_logged_l.php";								//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
 $link = connect_to_database("lhome.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query ("SELECT * FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND display=1 ORDER BY id DESC");
+$result = $link->query("SELECT * FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND display=1 ORDER BY id DESC");
 											//ανάκτηση δεδομένων από τον πίνακα notification		
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {				//για κάθε ενημέρωση που πρέπει να προβληθεί
 	if ($row["seen"]) {								//αν την έχει δει ο χρήστης
@@ -50,7 +50,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {				//για κάθε 
 		echo "<div class='not_seen_notification'>".$row["text"];
 	}
 echo "<br>"."<button onclick='not_display_notification(".$row["id"].")'> Αγνόησε αυτή την ειδοποίηση </button>"."</div>";
-$link->query ("UPDATE notification SET seen=1 WHERE id=".$row["id"]);			//ενημέρωση του πίνακα notification ότι ο χρήστης είδε τις ενημερώσεις
+$link->query("UPDATE notification SET seen=1 WHERE id=".$row["id"]);			//ενημέρωση του πίνακα notification ότι ο χρήστης είδε τις ενημερώσεις
 }
 $result->free();
 $link->close();										//κλείσιμο σύνδεσης με βάση
