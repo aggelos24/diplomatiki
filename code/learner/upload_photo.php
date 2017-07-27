@@ -3,8 +3,6 @@
 include "../connect_to_database.php";
 $link = connect_to_database("lhome.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 session_start();											//δημιουργία συνεδρίας
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $file_type = pathinfo(basename($_FILES["photo"]["name"]), PATHINFO_EXTENSION);				//εύρεση επέκτασης αρχείου
 $target_file = "photos/".$_SESSION["session_lusername"].".".$file_type;					//ορισμός διεύθυνσης προορισμού του αρχείου
 $check = getimagesize($_FILES["photo"]["tmp_name"]);							//απόπειρα εύρεσης μεγέθους εικόνας
