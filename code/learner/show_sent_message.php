@@ -26,15 +26,16 @@
 <?php
 include "if_not_logged_l.php";							//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
-$link = connect_to_database("sent_message.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["id"]))) {							//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];							//ανάθεσή της σε μεταβλητή
 }
 else {										//αν όχι
-echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'sent_message.php'; </script>";
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'sent_message.php'; </script>";
 										//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα sent_message.php
+	exit();													//τερματισμός script
 }
-$result = $link->query ("SELECT * FROM message WHERE id=".$id);			//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
+$link = connect_to_database("sent_message.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT * FROM message WHERE id=".$id);			//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if ($row["to_user"] == "aggelos24") {						//αν ο παραλήπτης είναι ο καθηγητής
 	$row["to_user"] = "Καθηγητής";
