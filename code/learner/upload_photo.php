@@ -18,7 +18,7 @@ $link = connect_to_database("lhome.php");								//κλήση συνάρτηση
 if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {					//απόπειρα μετακίνησης εικόνας στην διεύθυνση προορισμού
 	chmod($target_file, 0777);
 	$_SESSION["session_lphoto"]=$target_file;							//αν επιτυχία, ενημέρωση της μεταβλητής συνεδρίας
-	$link->query ("UPDATE user SET photo='".$target_file."' WHERE username='".$_SESSION["session_lusername"]."'");
+	$link->query("UPDATE user SET photo='".$target_file."' WHERE username='".$_SESSION["session_lusername"]."'");
 													//ενημέρωση του πίνακα user
 	$link->close();											//κλείσιμο σύνδεσης με βάση
 	echo "<script> alert('Η εικόνα ανέβηκε.'); location.href = 'lhome.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
