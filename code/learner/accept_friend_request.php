@@ -1,7 +1,6 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$link = connect_to_database("notification.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["id"]))) {											//αν υπάρχει η μεταβλητή GET
 	$friendship_id = $_GET["id"];										//ανάθεσή της σε μεταβλητή
 }
@@ -10,6 +9,7 @@ else {														//αν όχι
 	exit();													//τερματισμός script
 }
 session_start();												//δημιουργία συνεδρίας
+$link = connect_to_database("notification.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query("UPDATE friend_request SET status='accepted' WHERE id=".$friendship_id);				//ενημέρωση του πίνακα friend_request
 $result = $link->query("SELECT from_user, notification_id FROM friend_request WHERE id=".$friendship_id);	//ανάκτηση username αυτού που έστειλε το αίτημα, και το id της ειδοποίησης
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
