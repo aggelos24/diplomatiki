@@ -29,7 +29,7 @@
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
 $link = connect_to_database("lhome.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query ("SELECT friendship.user2, user.photo FROM friendship INNER JOIN user ON friendship.user2=user.username WHERE friendship.user1='".$_SESSION["session_lusername"]."'");
+$result = $link->query("SELECT friendship.user2, user.photo FROM friendship INNER JOIN user ON friendship.user2=user.username WHERE friendship.user1='".$_SESSION["session_lusername"]."'");
 													//ανάκτηση πληροφοριών φίλων του χρήστη
 $friends = array();
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε φίλο του χρήστη
@@ -48,7 +48,7 @@ echo "<div class='view_users'>"."<a href='view_profile.php?username=".$row["user
 		Υπόλοιποι Χρήστες
 		<div>
 <?php
-$result = $link->query ("SELECT * FROM user WHERE professor=0");					//ανάκτηση πληροφοριών χρηστών πλην του καθηγητή
+$result = $link->query("SELECT * FROM user WHERE professor=0");					//ανάκτηση πληροφοριών χρηστών πλην του καθηγητή
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε χρήστη πλην του καθηγητή
 	if (!(in_array($row["username"], $friends)) and ($row["username"] != $_SESSION["session_lusername"])) {
 													//αν δεν είναι ο συνδεδεμένος χρήστης ή φίλος του χρήστη
