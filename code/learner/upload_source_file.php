@@ -17,7 +17,7 @@ else {												//αν δεν υπάρχει
 $target_file = "../projects/project_".$id."/".basename($_FILES["file"]["name"]);		//ορισμός διεύθυνσης προορισμού του αρχείου
 $target_file = str_replace($greek_alphabet, $latin_repl, $target_file);				//αντικατάσταση ελληνικών χαρακτήρων με λατινικών
 $link = connect_to_database("project.php?id=".$id);						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query ("SELECT * FROM source_file where path='".$target_file."'");		//έλεγχος αν υπάρχει αρχείο με αυτό το όνομα
+$result = $link->query("SELECT * FROM source_file where path='".$target_file."'");		//έλεγχος αν υπάρχει αρχείο με αυτό το όνομα
 if (!empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {					//αν υπάρχει
 	$result->free();
 	$link->close();										//κλείσιμο σύνδεσης με βάση
@@ -27,7 +27,7 @@ if (!empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {					//αν υπάρχε
 }
 if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {				//απόπειρα μετακίνησης αρχείου στην διεύθυνση προορισμού
 	chmod($target_file, 0777);
-	$link->query ("INSERT INTO source_file (id, project_id, user, path, description) VALUES (DEFAULT, ".$id.", '".$_SESSION["session_lusername"]."', '".$target_file."', '".$_POST["description"]."')");
+	$link->query("INSERT INTO source_file (id, project_id, user, path, description) VALUES (DEFAULT, ".$id.", '".$_SESSION["session_lusername"]."', '".$target_file."', '".$_POST["description"]."')");
 												//αν επιτυχία, εισαγωγή στον πίνακα source_file
 	$result->free();
 	$link->close();										//κλείσιμο σύνδεσης με βάση
