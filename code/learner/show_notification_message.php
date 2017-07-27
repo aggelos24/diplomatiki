@@ -6,7 +6,7 @@ if (!$link) {											//αν αποτυχία
 }
 $link->query ("SET CHARACTER SET utf8");
 $link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result=$link->query ("SELECT count(*) AS unseen FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND seen=0 GROUP BY to_user");
+$result=$link->query("SELECT count(*) AS unseen FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND seen=0 GROUP BY to_user");
 												//ανάκτηση αριθμού αδιάβαστων ειδοποιήσεων από τον πίνακα notification
 $notification=0;
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -18,7 +18,7 @@ else if ($row["unseen"] > 1) {
 	echo ", έχεις <span class='red_letters'>".$row["unseen"]."</span> νέες ειδοποίησεις";
 	$notification = 1;
 }
-$result = $link->query ("SELECT count(*) AS unseen FROM message WHERE to_user='".$_SESSION["session_lusername"]."' AND seen=0 GROUP BY to_user");
+$result = $link->query("SELECT count(*) AS unseen FROM message WHERE to_user='".$_SESSION["session_lusername"]."' AND seen=0 GROUP BY to_user");
 												//ανάκτηση αριθμού αδιάβαστων μηνυμάτων από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if ($notification) {										//αν υπάρχουν ειδοποιήσεις
@@ -37,7 +37,7 @@ else {												//αν δεν υπάρχουν ειδοποιήσεις
 		echo ", έχεις <span class='red_letters'>".$row["unseen"]."</span> νέα μηνύματα";
 	}
 }
-$result = $link->query ("SELECT count(*) AS test_num FROM test WHERE user='".$_SESSION["session_lusername"]."' AND test_date=CURDATE() AND status='pending'");
+$result = $link->query("SELECT count(*) AS test_num FROM test WHERE user='".$_SESSION["session_lusername"]."' AND test_date=CURDATE() AND status='pending'");
 												//ανάκτηση αριθμού εκκρεμών τεστ για το χρήστη με σημερινή ημερομηνία από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if ($row["test_num"] != 0) {									//αν υπάρχει εκκρεμές τεστ για το χρήστη με σημερινή ημερομηνία
