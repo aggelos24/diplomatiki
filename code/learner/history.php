@@ -33,7 +33,7 @@
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
 $link = connect_to_database("lhome.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query ("SELECT * FROM section");							//ανάκτηση ενοτήτων από τον πίνακα section
+$result = $link->query("SELECT * FROM section");							//ανάκτηση ενοτήτων από τον πίνακα section
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε ενότητα
 	echo "<b>".$row["number"].". ".$row["title"]."</b> <br>";					//εμφάνιση τίτλου ενότητας
 	$result2 = $link->query ("SELECT * FROM chapter WHERE section_number=".$row["number"]);		//ανάκτηση κεφαλαίων για την δεδομένη ενότητα από τον πίνακα chapter
@@ -46,15 +46,15 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθ�
 ?>
 		<br> Tεστ <br> <br>
 <?php
-$result = $link->query ("SELECT id FROM test WHERE CURDATE()>test_date AND status='pending'");		//ανάκτηση id από πίνακα test που εκκρεμούν και είναι στο παρελθόν 
+$result = $link->query("SELECT id FROM test WHERE CURDATE()>test_date AND status='pending'");		//ανάκτηση id από πίνακα test που εκκρεμούν και είναι στο παρελθόν 
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε τεστ
-	$link->query ("UPDATE test SET status='overdue' WHERE id=".$row["id"]);				//ενημέρωση ότι είναι εκπρόθεσμο στον πίνακα test
+	$link->query("UPDATE test SET status='overdue' WHERE id=".$row["id"]);				//ενημέρωση ότι είναι εκπρόθεσμο στον πίνακα test
 }
-$result = $link->query ("SELECT id FROM test WHERE user='".$_SESSION["session_lusername"]."' AND test_date=CURDATE() AND status='pending'");
+$result = $link->query("SELECT id FROM test WHERE user='".$_SESSION["session_lusername"]."' AND test_date=CURDATE() AND status='pending'");
 													//ανάκτηση id εκκρεμών τεστ για το χρήστη με σημερινή ημερομηνία από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (empty($row)) {											//αν δεν υπάρχει εκκρεμές τεστ για το χρήστη με σημερινή ημερομηνία
-	$result = $link->query ("SELECT test_date FROM test WHERE user='".$_SESSION["session_lusername"]."' AND status='pending' ORDER BY test_date");
+	$result = $link->query("SELECT test_date FROM test WHERE user='".$_SESSION["session_lusername"]."' AND status='pending' ORDER BY test_date");
 													//ανάκτηση ημερομηνίας επόμενου εκκρεμούς για το χρήστη από τον πίνακα test
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 	if (empty($row)) {										//αν δεν υπάρχει
@@ -71,7 +71,7 @@ else {													//αν υπάρχει εκκρεμές τεστ για το �
 ?>
 		<br> <br> Εργασία <br> <br>
 <?php
-$result = $link->query ("SELECT id FROM project INNER JOIN groups ON project.id=groups.project_id WHERE user='".$_SESSION["session_lusername"]."' AND deadline>CURDATE()");
+$result = $link->query("SELECT id FROM project INNER JOIN groups ON project.id=groups.project_id WHERE user='".$_SESSION["session_lusername"]."' AND deadline>CURDATE()");
 													//ανάκτηση id εργασιών για το χρήστη που να μην έχει λήξει το deadline από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (!empty($row)) {											//αν υπάρχει εκκρεμής εργασία
