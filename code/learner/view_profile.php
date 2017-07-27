@@ -19,7 +19,6 @@
 <?php
 include "if_not_logged_l.php";								//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
-$link = connect_to_database("find_friend.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["username"])) and (isset($_GET["friend"]))) {				//αν υπάρχουν οι μεταβλητές GET
 	$username = $_GET["username"];							//ανάθεση σε μεταβλητές
 	$friend = $_GET["friend"];
@@ -28,6 +27,7 @@ if ((isset($_GET["username"])) and (isset($_GET["friend"]))) {				//αν υπά�
 else {											//αν όχι
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'find_friend.php'; </script>";
 											//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα find_friend.php
+	exit();										//τερματισμός script
 }
 if (isset($_GET["id"])) {
 	$go_to = "project.php?id=".$_GET["id"];
@@ -35,7 +35,8 @@ if (isset($_GET["id"])) {
 else {
 	$go_to = "lhome.php";
 }
-$result = $link->query ("SELECT * FROM user WHERE username='".$username."'");		//ανάκτηση στοιχείων χρήστη
+$link = connect_to_database("find_friend.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT * FROM user WHERE username='".$username."'");		//ανάκτηση στοιχείων χρήστη
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (empty($row)) {									//αν δεν υπάρχει ο χρήστης
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'find_friend.php'; </script>";
