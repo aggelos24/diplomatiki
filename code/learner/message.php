@@ -25,7 +25,7 @@
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
 $link = connect_to_database("lhome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query ("SELECT user2 FROM friendship WHERE user1='".$_SESSION["session_lusername"]."'");
+$result = $link->query("SELECT user2 FROM friendship WHERE user1='".$_SESSION["session_lusername"]."'");
 												//ανάκτηση username φίλων χρήστη από τον πίνακα user
 ?>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
@@ -61,7 +61,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 			<div class="message_header"> Ημερομηνία που στάλθηκε </div>
 		</div>
 <?php
-$result = $link->query ("SELECT count(*) AS inbox FROM message WHERE to_user='".$_SESSION["session_lusername"]."' GROUP BY to_user");
+$result = $link->query("SELECT count(*) AS inbox FROM message WHERE to_user='".$_SESSION["session_lusername"]."' GROUP BY to_user");
 												//ανάκτηση αριθμού εισερχόμενων μηνυμάτων χρήστη από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $count = $row["inbox"];
@@ -72,7 +72,7 @@ else{												//αλλιώς
 	$pagenum = 1;										//θέσε τη μεταβλητή σε 1
 }
 $limit = ($pagenum - 1) * 10;
-$result = $link->query ("SELECT * FROM message WHERE to_user='".$_SESSION["session_lusername"]."' ORDER BY id DESC LIMIT ".$limit.",10");
+$result = $link->query("SELECT * FROM message WHERE to_user='".$_SESSION["session_lusername"]."' ORDER BY id DESC LIMIT ".$limit.",10");
 												//ανάκτηση 10 το πολύ εισερχόμενων μηνυμάτων χρήστη από τον πίνακα message
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εισερχόμενο μήνυμα
 	if ($row["from_user"] == "aggelos24") {							//αν ο αποστολέας είναι ο καθηγητής
