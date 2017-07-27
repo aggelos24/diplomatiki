@@ -11,8 +11,6 @@ else {												//αν δεν υπάρχει
 	exit();											//τερματισμός script
 }
 $link = connect_to_database("project.php?id=".$id);						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
 $file_type = pathinfo(basename($_FILES["project_document"]["name"]),PATHINFO_EXTENSION);	//εύρεση επέκτασης αρχείου
 $target_file = "../projects/project_".$id."/project.doc";					//ορισμός διεύθυνσης προορισμού του αρχείου
 if ($file_type != "doc") {									//αν ο τύπος αρχείου δεν είναι doc
