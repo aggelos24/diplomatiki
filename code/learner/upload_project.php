@@ -23,8 +23,8 @@ if (file_exists($target_file)) {								//αν έχει ανεβεί ήδη η �
 $link = connect_to_database("project.php?id=".$id);						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (move_uploaded_file($_FILES["project_document"]["tmp_name"], $target_file)) {		//απόπειρα μετακίνησης εικόνας στην διεύθυνση προορισμού
 	chmod($target_file, 0777);
-	$link->query ("UPDATE project SET document=1 WHERE id=".$id);				//αν επιτυχία, ενημέρωση του πίνακα project
-	$link->query ("INSERT INTO project_change (id, project_id, user, change_description, date) VALUES (DEFAULT, ".$id.", '".$_SESSION["session_lusername"]."', '".$_POST["changelog_text"]."', NOW())");
+	$link->query("UPDATE project SET document=1 WHERE id=".$id);				//αν επιτυχία, ενημέρωση του πίνακα project
+	$link->query("INSERT INTO project_change (id, project_id, user, change_description, date) VALUES (DEFAULT, ".$id.", '".$_SESSION["session_lusername"]."', '".$_POST["changelog_text"]."', NOW())");
 	$link->close();										//κλείσιμο σύνδεσης με βάση
 	echo "<script> alert('Η εργασία ανέβηκε.'); location.href = 'project.php?id=".$id."'; </script>";
 												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
