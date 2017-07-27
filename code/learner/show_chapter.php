@@ -25,15 +25,16 @@
 <?php
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {					//αν υπάρχουν οι μεταβλητές GET
 	$chapter = $_GET["chapter"];								//ανάθεση σε μεταβλητές
 	$section = $_GET["section"];
 }
 else {												//αν όχι
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
+	exit();											//τερματισμός script
 }
-$result = $link->query ("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
+$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (!empty($row)) {										//αν υπάρχει
 	echo "<title>".$row["title"]."</title>";						//εμφάνιση του κεφαλαίου
@@ -49,7 +50,7 @@ if (!empty($row)) {										//αν υπάρχει
 		echo $row["youtube"];
 	}
 	else {
-		$result = $link->query ("SELECT * FROM chapter INNER JOIN material ON chapter.image=material.path WHERE section_number=".$section." AND number=".$chapter);
+		$result = $link->query("SELECT * FROM chapter INNER JOIN material ON chapter.image=material.path WHERE section_number=".$section." AND number=".$chapter);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		$output = "<div class='container'> <div class='chapter_image_left'> <img src='".$row["image"]."' class='chapter_image'>".
 				"<p class='center'>".$row["description"]."</p> </div> <div class='chapter_text'>".
@@ -59,14 +60,12 @@ if (!empty($row)) {										//αν υπάρχει
 			echo $row["youtube"]."<br>";
 		}
 	}
-	$result->free();
-	$link->close();										//κλείσιμο σύνδεσης με βάση
 }
 else {												//αν δεν υπάρχει
-	$result->free();
-	$link->close();										//κλείσιμο σύνδεσης με βάση
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
+$result->free();
+$link->close();										//κλείσιμο σύνδεσης με βάση
 ?>
 		<br> <br> <a href="history.php"> Επιστροφή </a>
 	</div>
