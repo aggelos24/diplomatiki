@@ -84,12 +84,8 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 <?php
 $result = $link->query ("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");			//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε σύνδεσμο
-	if ($row["user"] == "aggelos24") {									//εμφάνιση στοιχείων αρχείου
-		echo "Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: Καθηγητής"."<br>";
-	}
-	else {
-		echo "Χρήστης: ".$row["user"].", Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a> <br>";
-	}
+	echo "Χρήστης: ".$row["user"].", Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a> <br>";
+														//εμφάνιση στοιχείων συνδέσμου
 }
 ?>
 		</div>
@@ -103,12 +99,8 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 <?php
 $result = $link->query ("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");			//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε αρχείο
-	if ($row["user"] == "aggelos24") {									//εμφάνιση στοιχείων αρχείου
-		echo "Αρχείο: <a href='".$row["path"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: Καθηγητής"."<br>";
-	}
-	else {
-		echo "Αρχείο: <a href='".$row["path"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: ".$row["user"]."<br>";
-	}
+	echo "Αρχείο: <a href='".$row["path"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: ".$row["user"]."<br>";
+														//εμφάνιση στοιχείων αρχείου
 }
 ?>
 		</div>
@@ -122,12 +114,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 <?php
 $result = $link->query ("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");	//ανάκτηση μηνυμάτων από τον πίνακα group_chat
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε μήνυμα
-	if ($row["user"] == "aggelos24") {									//εμφάνιση στοιχείων μηνύματος
-		echo "<b> Καθηγητής </b>: ".str_replace("\n", "\n<br>", $row["text"])."<br>";
-	}
-	else {
-		echo "<b>".$row["user"]."</b>: ".str_replace("\n", "\n<br>", $row["text"])."<br>";
-	}
+	echo "<b>".$row["user"]."</b>: ".str_replace("\n", "\n<br>", $row["text"])."<br>";			//εμφάνιση στοιχείων μηνύματος
 }
 $result->free();
 $link->close();													//κλείσιμο σύνδεσης με βάση
