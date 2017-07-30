@@ -30,7 +30,7 @@
 	<div class="main">
 <?php
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση σε μεταβλητή του username του καθηγητή
+$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 session_start();										//δημιουργία συνεδρίας
 if (isset($_GET["id"])) {									//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
