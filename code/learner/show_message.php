@@ -34,6 +34,7 @@
 <?php
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
+$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 if ((isset($_GET["id"]))) {									//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
 }
@@ -45,8 +46,11 @@ else {												//αν όχι
 $link = connect_to_database("message.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM message WHERE id=".$id);					//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if ($row["from_user"] == "aggelos24") {								//αν ο αποστολέας είναι ο καθηγητής
-	$row["from_user"] = "Καθηγητής";
+if ($row["from_user"] == $professor_username) {							//αν ο αποστολέας είναι ο καθηγητής
+	 $from_user = "Καθηγητής";
+}
+else {												//αν όχι
+	$from_user = $row["from_user"]
 }
 ?>
 		<b> Από το χρήστη: </b> <?php echo $row["from_user"]; ?> <br>
