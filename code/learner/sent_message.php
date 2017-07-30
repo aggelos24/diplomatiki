@@ -32,7 +32,7 @@
 <?php
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση σε μεταβλητή του username του καθηγητή
+$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 $link = connect_to_database("message.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT count(*) AS sent FROM message WHERE from_user='".$_SESSION["session_lusername"]."' GROUP BY from_user");
 												//ανάκτηση αριθμού εξερχόμενων μηνυμάτων χρήστη
