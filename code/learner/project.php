@@ -30,6 +30,8 @@
 	<div class="main">
 <?php
 include "../connect_to_database.php";
+$professor_username = "aggelos24";								//ανάθεση σε μεταβλητή του username του καθηγητή
+session_start();										//δημιουργία συνεδρίας
 if (isset($_GET["id"])) {									//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
 }
@@ -40,7 +42,6 @@ else {												//αν δεν υπάρχει
 if (isset($_GET["fail"])) {									//αν ο σύνδεσμος δεν είναι έγκυρος
 	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";	//εμφάνιση κατάλληλου μηνύματος
 }
-session_start();										//δημιουργία συνεδρίας
 $pass = 0;
 $link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT groups.user FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
@@ -130,14 +131,16 @@ if ($document) {										//αν κάποιος έχει ανέβασει την
 		</form> <br>
 		<div class="source_container">
 <?php
-$result = $link->query("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");	//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
+$result = $link->query("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");		//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε σύνδεσμο
-	if ($row["user"] == "aggelos24") {							//εμφάνιση στοιχείων αρχείου
-		echo "Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: Καθηγητής"."<br>";
+	if ($row["user"] == $professor_username) {						//αν αυτός που προσέθεσε τον σύνδεσμο είναι ο καθηγητής
+		$user = "Καθηγητής";
 	}
-	else {
-		echo "Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: ".$row["user"]."<br>";
+	else {											//αν όχι
+		$user = $row["user"];
 	}
+	echo "Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: ".$user."<br>";
+												//εμφάνιση στοιχείων συνδέσμου
 }
 ?>
 		</div>
@@ -152,12 +155,14 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 $result = $link->query("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");	
 												//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε αρχείο
-	if ($row["user"] == "aggelos24") {							//εμφάνιση στοιχείων αρχείου
-		echo "Αρχείο: <a href='".$row["path"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: Καθηγητής"."<br>";
+	if ($row["user"] == $professor_username) {						//αν αυτός που ανέβασε το αρχείο είναι ο καθηγητής
+		$user = "Καθηγητής";
 	}
-	else {
-		echo "Αρχείο: <a href='".$row["path"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: ".$row["user"]."<br>";
+	else {											//αν όχι
+		$user = $row["user"];
 	}
+	echo "Αρχείο: <a href='".$row["path"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: ".$user."<br>";
+												//εμφάνιση στοιχείων αρχείου
 }
 ?>
 		</div>
@@ -172,12 +177,13 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 $result = $link->query("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");
 												//ανάκτηση μηνυμάτων από τον πίνακα group_chat
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε μήνυμα
-	if ($row["user"] == "aggelos24") {							//εμφάνιση στοιχείων μηνύματος
-		echo "<b>Καθηγητής</b>: ".str_replace("\n", "\n<br>", $row["text"])."<br>";
+	if ($row["user"] == $professor_username) {						//αν ο αποστολέας είναι ο καθηγητής
+		$user = "Καθηγητής";
 	}
-	else {
-		echo "<b>".$row["user"]."</b>: ".str_replace("\n", "\n<br>", $row["text"])."<br>";
+	else {											//αν όχι
+		$user = $row["user"];
 	}
+	echo "<b>".$user."</b>: ".str_replace("\n", "\n<br>", $row["text"])."<br>";		//εμφάνιση στοιχείων μηνύματος
 }
 $result->free();
 $result2->free();
