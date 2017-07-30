@@ -1,12 +1,13 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
+$professor_username = "aggelos24";								//ανάθεση σε μεταβλητή του username του καθηγητή
 session_start();										//δημιουργία συνεδρίας
 $search = array("'", '"');
 $replace = array("\'", '\"');
 $message_text = str_replace($search, $replace, $_POST["message_text"]);				//για αποφυγή σφάλματος βάσης
 if ($_POST["to_user"] == "Καθηγητής") {								//αν ο παραλήπτης είναι ο καθηγητής
-	$to_user = "aggelos24";
+	$to_user = $professor_username;
 }
 else {
 	$to_user = $_POST["to_user"];
