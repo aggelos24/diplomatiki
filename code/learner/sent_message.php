@@ -32,6 +32,7 @@
 <?php
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
+$professor_username = "aggelos24";								//ανάθεση σε μεταβλητή του username του καθηγητή
 $link = connect_to_database("message.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT count(*) AS sent FROM message WHERE from_user='".$_SESSION["session_lusername"]."' GROUP BY from_user");
 												//ανάκτηση αριθμού εξερχόμενων μηνυμάτων χρήστη
@@ -47,11 +48,14 @@ $limit = ($pagenum - 1) * 10;
 $result = $link->query("SELECT * FROM message WHERE from_user='".$_SESSION["session_lusername"]."' ORDER BY id DESC LIMIT ".$limit.",10");
 												//ανάκτηση 10 το πολύ εξερχόμενων μηνυμάτων χρήστη
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εξερχόμενο μήνυμα
-	if ($row["to_user"] == "aggelos24") {							//αν ο παραλήπτης είναι ο καθηγητής
-		$row["to_user"] = "Καθηγητής";
+	if ($row["to_user"] == $professor_username) {						//αν ο παραλήπτης είναι ο καθηγητής
+		$to_user = "Καθηγητής";
+	}
+	else {
+		$to_user = $row["to_user"];
 	}
 	echo "<a href='show_sent_message.php?id=".$row["id"]."' class='link_to_page'> <div class='message_box'> <div class='container'>";
-	echo "<div class='message_info'>".$row["to_user"]."</div>"."<div class='message_info'>".$row["subject"]."</div>"."<div class='message_info'>".date("H:i:s | d-m-Y", strtotime($row["date"]))."</div>";
+	echo "<div class='message_info'>".$to_user."</div>"."<div class='message_info'>".$row["subject"]."</div>"."<div class='message_info'>".date("H:i:s | d-m-Y", strtotime($row["date"]))."</div>";
 	echo "</div> </div> </a>";								//εμφάνιση πληροφοριών μηνύματος
 }
 if ($pagenum < ceil($count/10)) {								//αν υπάρχουν μηνύματα σε άλλη σελίδα
