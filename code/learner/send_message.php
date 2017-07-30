@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση σε μεταβλητή του username του καθηγητή
+$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 session_start();										//δημιουργία συνεδρίας
 $search = array("'", '"');
 $replace = array("\'", '\"');
