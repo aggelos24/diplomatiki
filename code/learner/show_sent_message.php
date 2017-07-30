@@ -26,6 +26,7 @@
 <?php
 include "if_not_logged_l.php";							//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
+$professor_username = "aggelos24";
 if ((isset($_GET["id"]))) {							//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];							//ανάθεσή της σε μεταβλητή
 }
@@ -37,13 +38,16 @@ else {										//αν όχι
 $link = connect_to_database("sent_message.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM message WHERE id=".$id);			//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if ($row["to_user"] == "aggelos24") {						//αν ο παραλήπτης είναι ο καθηγητής
-	$row["to_user"] = "Καθηγητής";
+if ($row["to_user"] == $professor_username) {					//αν ο παραλήπτης είναι ο καθηγητής
+	$to_user = "Καθηγητής";
+}
+else {										//αν όχι
+	$to_user = $row["to_user"];
 }
 $result->free();
 $link->close();									//κλείσιμο σύνδεσης με βάση
 ?>
-		<b> Στο χρήστη: </b> <?php echo $row["to_user"]; ?> <br>
+		<b> Στο χρήστη: </b> <?php echo $to_user; ?> <br>
 		<b> Θέμα: </b> <?php echo $row["subject"]; ?> <br>
 		<b> Ημερομηνία που στάλθηκε: </b> <?php echo date("H:i:s | d-m-Y", strtotime($row["date"])); ?> <br>
 		<b> Κείμενο: </b> <br>
