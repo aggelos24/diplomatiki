@@ -40,14 +40,14 @@
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("content.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $id_array = array();
-$result = $link->query ("SELECT id FROM project");						//ανάκτηση id εργασιών από τον πίνακα project
+$link = connect_to_database("content.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT id FROM project");						//ανάκτηση id εργασιών από τον πίνακα project
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εργασία
 	array_push($id_array, $row["id"]);							//ανάθεση id σε πίνακα
 }
 for ($i = 0; $i < count($id_array); $i++) {
-	$result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id_array[$i]);
+	$result = $link->query("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id_array[$i]);
 												//ανάκτηση στοιχείων εργασιών από πίνακα project και group
 	$row_num = mysqli_num_rows($result);							//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
 	for ($j = 0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $j++) {			//για κάθε μέλος ομάδας
