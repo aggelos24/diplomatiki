@@ -4,9 +4,9 @@ if (!$link) {									//αν αποτυχία
     echo "Κάτι πήγε στραβά";							//εμφάνιση κατάλληλου μηνύματος
 }
 $username = array();
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
-$result=$link->query ("SELECT username FROM user WHERE professor=0");		//ανάκτηση username των μαθητών από τον πίνακα user
+$link->query("SET CHARACTER SET utf8");
+$link->query("SET COLLATION_CONNECTION=utf8_general_ci");
+$result=$link->query("SELECT username FROM user WHERE professor=0");		//ανάκτηση username των μαθητών από τον πίνακα user
 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {			//για κάθε μαθητή
 	array_push($username, $row["username"]);				//προσθήκη του username του στον πίνακα username
 }
