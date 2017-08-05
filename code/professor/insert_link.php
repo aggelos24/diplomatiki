@@ -7,6 +7,7 @@ if (isset($_GET["id"])) {								//αν υπάρχει η μεταβλητή GET
 else {											//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project.php?id=".$id."'; </script>";
 											//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
+	exit();										//τερματισμός script
 }
 $search_1 = strpos($_POST["link"], "http://");
 $search_2 = strpos($_POST["link"], "https://");
@@ -18,12 +19,12 @@ else {											//αλλιώς
 }
 $file_headers = get_headers($page_link);						//καταχώριση επικεφαλίδων που επιστρέφει ο server σε μεταβλητή
 if (!$file_headers or ($file_headers[0] == "HTTP/1.1 404 Not Found")) {			//αν επέστρεψε σφάλμα ότι δεν βρέθηκε
-	header("Location:project.php?id=".$id."&fail=1");				//επιστροφή στη σελίδα project.php
+	header("Location: project.php?id=".$id."&fail=1");				//επιστροφή στη σελίδα project.php
 }
 else {
 	include "../connect_to_database.php";
 	$link = connect_to_database("project.php?id=".$id);				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-	$link->query ("INSERT INTO link (id, project_id, user, url, description) VALUES (DEFAULT, ".$id.", '".$professor_username."', '".$page_link."', '".$_POST["description"]."')");
+	$link->query("INSERT INTO link (id, project_id, user, url, description) VALUES (DEFAULT, ".$id.", '".$professor_username."', '".$page_link."', '".$_POST["description"]."')");
 											//εισαγωγή συνδέσμου στον πίνακα link
 	$link->close();									//κλείσιμο σύνδεσης με βάση
 	echo "<script> alert('Ο σύνδεσμος προστέθηκε.'); location.href = 'project.php?id=".$id."'; </script>";
