@@ -26,7 +26,6 @@
 <?php
 include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("content.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {						//αν υπάρχουν οι μεταβλητές GET
 	$chapter = $_GET["chapter"];									//ανάθεσή σε μεταβλητές
 	$section = $_GET["section"];
@@ -36,13 +35,15 @@ else {													//αν όχι
 }
 echo "<a href='show_chapter.php?section=".$section."&chapter=".$chapter."'> Προβολή </a> | Επεξεργασία <br> <br>";
 $i = 0;
-$result = $link->query ("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
+$link = connect_to_database("content.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
 													//ανάκτηση στοιχείων κεφαλαίου από τον πίνακα chapter
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (empty($row)) {											//αν δεν υπάρχει το κεφάλαιο
 	$result->free();
 	$link->close();											//κλείσιμο σύνδεσης με βάση
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+	exit();												//τερματισμός script
 }
 else {
 	$title = $row["title"];
@@ -61,7 +62,7 @@ else {
 			Αριθμός Κεφαλαίου <input type="number" name="chapter_number" value="<?php echo $chapter; ?>" readonly /> <br>
 			Τίτλος Κεφαλαίου <input type="text" name="title" value="<?php echo $title; ?>" required /> <br>
 <?php
-$result = $link->query ("SELECT path FROM material");							//ανάκτηση διεύθυνσης αρχείων από τον πίνακα material 
+$result = $link->query("SELECT path FROM material");							//ανάκτηση διεύθυνσης αρχείων από τον πίνακα material 
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε αρχείο
 	if ($i == 0) {											//εμφάνισή του αρχείου ως επιλογή
 		echo "Εικόνα που θα προβάλλεται στο κεφάλαιο <select name='image'>";
