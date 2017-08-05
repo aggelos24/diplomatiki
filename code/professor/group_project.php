@@ -35,7 +35,7 @@
 include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
 $link = connect_to_database("content.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query ("SELECT * FROM user WHERE professor=0");					//ανάκτηση στοιχείων μαθητών από τον πίνακα user
+$result = $link->query("SELECT * FROM user WHERE professor=0");						//ανάκτηση στοιχείων μαθητών από τον πίνακα user
 while ($row = $result->fetch_array()) {									//για κάθε μαθητή
 	echo "<input type='checkbox' name='users[]' value='".$row["username"]."' />".$row["username"]."(".$row["level"].") ";
 													//εμφάνιση μαθητών ως επιλογών
