@@ -37,7 +37,7 @@
 include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
 $link = connect_to_database("content.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query ("SELECT * FROM material");							//ανάκτηση πληροφοριών αρχείου από τον πίνακα material
+$result = $link->query("SELECT * FROM material");							//ανάκτηση πληροφοριών αρχείου από τον πίνακα material
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε αρχείο
 	echo $row["path"]." \"".$row["description"]."\"<br>";						//εμφάνιση πληροφοριών αρχείου και κουμπί για διαγραφή
 	echo "<button onclick='delete_material_file(\"".$row["path"]."\")'> Διαγραφή </button>";
