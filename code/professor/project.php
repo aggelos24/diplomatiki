@@ -31,16 +31,17 @@
 <?php
 include "if_not_logged_p.php";											//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("project_list.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (isset($_GET["id"])) {											//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];											//ανάθεσή της σε μεταβλητή
 }
 else {														//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project_list.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project_list.php
+	exit();													//τερματισμός script
 }
 if (isset($_GET["fail"])) {											//αν ο σύνδεσμος δεν είναι έγκυρος
 	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";			//εμφάνιση κατάλληλου μηνύματος
 }
+$link = connect_to_database("project_list.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
 														//ανάκτηση στοιχείων εργασιών από τον πίνακα project και groups
 $row_num = mysqli_num_rows($result);										//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
@@ -68,7 +69,7 @@ for ($i=0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {						//γι
 		<br> <button id="bchangelog" onclick="show_changelog()"> Εμφάνιση Ιστορικού Αλλαγών της Εργασίας </button>
 		<div id="changelog" class="not_displayed">
 <?php
-$result = $link->query ("SELECT * FROM project_change WHERE project_id=".$id." ORDER BY date DESC");		//ανάκτηση στοιχείων αλλαγών από τον πίνακα project_change
+$result = $link->query("SELECT * FROM project_change WHERE project_id=".$id." ORDER BY date DESC");		//ανάκτηση στοιχείων αλλαγών από τον πίνακα project_change
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε αλλαγή
 	echo "Χρήστης: ".$row["user"].", Ημερομηνία: ".date("d-m-Y", strtotime($row["date"]))."<br>Περιγραφή αλλαγής: ".$row["change_description"]."<br>";
 }
@@ -82,7 +83,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 		</form> <br>
 		<div class="source_container">
 <?php
-$result = $link->query ("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");			//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
+$result = $link->query("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");				//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε σύνδεσμο
 	echo "Χρήστης: ".$row["user"].", Σύνδεσμος: <a href='".$row["url"]."' target='_blank'>".$row["description"]."</a> <br>";
 														//εμφάνιση στοιχείων συνδέσμου
@@ -97,7 +98,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 		</form>
 		<div class="source_container">
 <?php
-$result = $link->query ("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");			//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
+$result = $link->query("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");			//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε αρχείο
 	echo "Αρχείο: <a href='".$row["path"]."' target='_blank'>".$row["description"]."</a>, "."Χρήστης: ".$row["user"]."<br>";
 														//εμφάνιση στοιχείων αρχείου
@@ -112,7 +113,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 		</form>
 		<div class="group_chat">
 <?php
-$result = $link->query ("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");	//ανάκτηση μηνυμάτων από τον πίνακα group_chat
+$result = $link->query("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");	//ανάκτηση μηνυμάτων από τον πίνακα group_chat
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε μήνυμα
 	echo "<b>".$row["user"]."</b>: ".str_replace("\n", "\n<br>", $row["text"])."<br>";			//εμφάνιση στοιχείων μηνύματος
 }
