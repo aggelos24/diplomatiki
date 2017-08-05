@@ -56,12 +56,12 @@
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("content.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["section"]))) {								//αν υπάρχει η μεταβλητή GET
 	$section = $_GET["section"];								//ανάθεσή της σε μεταβλητή
-	$result = $link->query ("SELECT * FROM section WHERE number=".$section);		//έλεγχος αν υπάρχει ενότητα με αυτόν τον αριθμό στον πίνακα section
+	$link = connect_to_database("content.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+	$result = $link->query("SELECT * FROM section WHERE number=".$section);			//έλεγχος αν υπάρχει ενότητα με αυτόν τον αριθμό στον πίνακα section
 	if ($result->fetch_array() != "") {							//αν υπάρχει
-		$result = $link->query ("SELECT * FROM question_and_answer WHERE section_number=".$section);
+		$result = $link->query("SELECT * FROM question_and_answer WHERE section_number=".$section);
 												//ανάκτηση ερωτημάτων και απαντήσεων από τον πίνακα question_and_answer
 		while ($row = $result->fetch_array()) {						//για κάθε ερώτημα
 			if ($row["difficult"] == 1) {						//αν το ερώτημα είναι δύσκολο
@@ -80,8 +80,8 @@ if ((isset($_GET["section"]))) {								//αν υπάρχει η μεταβλη�
 		}
 	}
 	$result->free();
+	$link->close();										//κλείσιμο σύνδεσης με βάση
 }
-$link->close();											//κλείσιμο σύνδεσης με βάση
 ?>
 	</div>
 </body>
