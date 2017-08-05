@@ -9,10 +9,11 @@ if (isset($_GET["id"])) {											//αν υπάρχει η μεταβλητή 
 }
 else {														//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project.php?id=".$id."'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
+	exit();													//τερματισμός script
 }
 include "../connect_to_database.php";
 $link = connect_to_database("project.php?id=".$id);								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$link->query ("INSERT INTO group_chat (id, project_id, user, text) VALUES (DEFAULT, ".$id.", '".$professor_username."', '".$message_text."')");
+$link->query("INSERT INTO group_chat (id, project_id, user, text) VALUES (DEFAULT, ".$id.", '".$professor_username."', '".$message_text."')");
 														//εισαγωγή μηνύματος στον πίνακα group_chat
 $link->close();													//κλείσιμο σύνδεσης με βάση
 echo "<script> alert('Το μήνυμα στάλθηκε.'); location.href = 'project.php?id=".$id."'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
