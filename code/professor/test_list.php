@@ -32,13 +32,13 @@
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("insert_test_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $to_greek = array("pending" => "Εκκρεμεί", "completed" => "Ολοκληρωμένο", "overdue" => "Εκπρόθεσμο");
-$result = $link->query ("SELECT id FROM test WHERE CURDATE()>test_date AND status='pending'");	//ανάκτηση id από πίνακα test που εκκρεμούν και είναι στο παρελθόν 
+$link = connect_to_database("insert_test_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT id FROM test WHERE CURDATE()>test_date AND status='pending'");	//ανάκτηση id από πίνακα test που εκκρεμούν και είναι στο παρελθόν 
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε τεστ
-	$link->query ("UPDATE test SET status='overdue' WHERE id=".$row["id"]);			//ενημέρωση ότι είναι εκπρόθεσμο στον πίνακα test
+	$link->query("UPDATE test SET status='overdue' WHERE id=".$row["id"]);			//ενημέρωση ότι είναι εκπρόθεσμο στον πίνακα test
 }
-$result = $link->query ("SELECT * FROM test ORDER BY test_date DESC");
+$result = $link->query("SELECT * FROM test ORDER BY test_date DESC");
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε τεστ
 	$status = $row["status"];
 	echo "<b>".$to_greek["$status"]."</b> <br>";						//εμφάνιση πληροφοριών
