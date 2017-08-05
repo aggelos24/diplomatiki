@@ -45,11 +45,11 @@
 include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
 $link = connect_to_database("phome.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query ("SELECT * FROM section");							//ανάκτηση ενοτήτων από τον πίνακα section
+$result = $link->query("SELECT * FROM section");							//ανάκτηση ενοτήτων από τον πίνακα section
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε ενότητα
 	echo "<b>".$row["number"].". ".$row["title"]."</b> <br>";			 		//εμφάνιση τίτλου ενότητας
-	$result2 = $link->query ("SELECT * FROM chapter WHERE section_number=".$row["number"]);		//ανάκτηση κεφαλαίων για την δεδομένη ενότητα από τον πίνακα chapter
-	while ($row2 = $result2->fetch_array()) {							//για κάθε κεφάλαιο
+	$result2 = $link->query("SELECT * FROM chapter WHERE section_number=".$row["number"]);		//ανάκτηση κεφαλαίων για την δεδομένη ενότητα από τον πίνακα chapter
+	while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {					//για κάθε κεφάλαιο
 		echo $row2["section_number"].".".$row2["number"]." <a href='show_chapter.php?section=".$row2["section_number"]."&chapter=".$row2["number"]."'>".$row2["title"]."</a> <br>";
 													//εμφάνιση τίτλου κεφαλαίου με σύνδεσμο για το κεφάλαιο
 	}
