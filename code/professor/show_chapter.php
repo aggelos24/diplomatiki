@@ -26,16 +26,17 @@
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("content.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {					//αν υπάρχουν οι μεταβλητές GET
 	$chapter = $_GET["chapter"];								//ανάθεση σε μεταβλητές
 	$section = $_GET["section"];
 }
 else {												//αν δεν υπάρχουν
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+	exit();											//τερματισμός script
 }
 echo "Προβολή | <a href='modify_chapter_form.php?section=".$section."&chapter=".$chapter."'> Επεξεργασία </a> <br> <br>";
-$result = $link->query ("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
+$link = connect_to_database("content.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
 												//ανάκτηση στοιχείων κεφαλαίου από τον πίνακα chapter
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (!empty($row)) {										//αν υπάρχει το κεφάλαιο
@@ -51,7 +52,7 @@ if (!empty($row)) {										//αν υπάρχει το κεφάλαιο
 		echo $row["youtube"];
 	}
 	else {
-		$result = $link->query ("SELECT * FROM chapter INNER JOIN material ON chapter.image=material.path WHERE section_number=".$section." AND number=".$chapter);
+		$result = $link->query("SELECT * FROM chapter INNER JOIN material ON chapter.image=material.path WHERE section_number=".$section." AND number=".$chapter);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		$output = "<div class='container'> <div class='chapter_image_left'> <img src='".$row["image"]."' class='chapter_image'>".
 				"<p class='center'>".$row["description"]."</p> </div> <div class='chapter_text'>".
@@ -67,7 +68,7 @@ if (!empty($row)) {										//αν υπάρχει το κεφάλαιο
 else {												//αν δεν υπάρχει το κεφάλαιο
 	$result->free();
 	$link->close();										//κλείσιμο σύνδεσης με βάση
-    echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
+	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
 ?>
 		<br> <br> <a href="content.php"> Επιστροφή </a>
