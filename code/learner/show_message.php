@@ -50,7 +50,7 @@ if ($row["from_user"] == $professor_username) {							//αν ο αποστολέ
 	 $from_user = "Καθηγητής";
 }
 else {												//αν όχι
-	$from_user = $row["from_user"]
+	$from_user = $row["from_user"];
 }
 ?>
 		<b> Από το χρήστη: </b> <?php echo $row["from_user"]; ?> <br>
