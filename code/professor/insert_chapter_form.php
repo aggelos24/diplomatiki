@@ -33,6 +33,7 @@ include "if_not_logged_p.php";									//έλεγχος αν έχει συνδε
 include "../connect_to_database.php";
 $link = connect_to_database("phome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT path FROM material");						//ανάκτηση διεύθυνσης αρχείου από τον πίνακα material
+$i = 0;
 while ($row = $result->fetch_array()) {								//για κάθε αρχείο
 	if ($i == 0) {										//εμφάνιση αρχείων ως επιλογών
 		echo "Εικόνα που θα προβάλλεται στο κεφάλαιο <select name='image'>";
