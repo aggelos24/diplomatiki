@@ -41,7 +41,7 @@ $result = $link->query("SELECT user2 FROM friendship WHERE user1='".$_SESSION["s
 	<div class="main">
 		Αν θες να στείλεις μήνυμα σε κάποιο φίλο σου: <button onclick="send_message()" id="bsend_message"> Πάτησε εδώ </button> <br>
 		<div id="send_message" class="not_displayed">
-			<form method="post" action="send_message.php"> <br>
+			<form method="post" action="send_message.php?from=message"> <br>
 				Προς: <select name="to_user">
 <?php
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε φίλο
