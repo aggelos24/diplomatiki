@@ -60,7 +60,7 @@ else {												//αν όχι
 		<?php echo str_replace("\n", "\n<br>", $row["text"]); ?> <br>
 		<button onclick="reply_message()" id="breply_message"> Για απάντηση πάτησε εδώ </button>
 		<div id="reply_message" class="not_displayed">
-			<form method="post" action="send_message.php">
+			<form method="post" action="send_message.php?from=message">
 				Προς: <input type="text" name="to_user" value="<?php echo $row["from_user"]; ?>" readonly /> <br>
 				Θέμα: <input type="text" name="subject" value="<?php echo $row["subject"]; ?>" required /> <br>
 				Κείμενο: <br>
