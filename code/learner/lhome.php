@@ -94,7 +94,7 @@ if (!(isset($_SESSION["session_ldescription"]))) {							//αν δεν έχει 
 		</div>
 		Αν θες να στείλεις μήνυμα στον καθηγητή: <button onclick="send_message_to_professor()" id="bsend_message_to_professor"> Πάτησε εδώ </button> <br>
 		<div id="send_message_to_professor" class="not_displayed">
-			<form method="post" action="send_message.php">
+			<form method="post" action="send_message.php?from=lhome">
 				Προς: <input type="text" name="to_user" value="Καθηγητής" readonly /> <br>
 				Θέμα: <input type="text" name="subject" required /> <br>
 				Κείμενο: <br>
