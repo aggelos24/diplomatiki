@@ -101,6 +101,10 @@ div.not_seen_notification {
 	margin-bottom: 1%;
 	background-color: #ffffcc;
 }
+div.view_users_container {
+	display: flex;
+	flex-wrap: wrap;
+}
 div.view_users {
 	width: 22%;
 	margin-bottom: 5%;
