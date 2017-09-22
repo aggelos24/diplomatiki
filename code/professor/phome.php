@@ -72,7 +72,7 @@ include "if_not_logged_p.php";						//έλεγχος αν έχει συνδεθ�
 		Αν θες να δεις λίστα με τους μαθητές <button onclick="show_learner_list()" id="bphoto"> Πάτησε εδώ </button> <br>
 		Αν θες να στείλεις μήνυμα σε κάποιο μαθητή <button onclick="send_message()" id="bsend_message"> Πάτησε εδώ </button> <br>
 		<div id="send_message" class="not_displayed">
-			<form method="post" action="send_message.php"> <br>
+			<form method="post" action="send_message.php?from=phome"> <br>
 				Προς μαθητή <input type="text" name="to_user" onkeyup="show_hint(this.value)" required /> Μαθητές: <span id="hint" > </span> <br>
 				Θέμα <input type="text" name="subject" required /> <br>
 				Κείμενο: <br>
