@@ -24,7 +24,7 @@
 	</div>
 	<div class="main">
 		Φίλοι
-		<div>
+		<div class="view_users_container">
 <?php
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
@@ -46,7 +46,7 @@ echo "<div class='view_users'>"."<a href='view_profile.php?username=".$row["user
 ?>
 		</div>
 		Υπόλοιποι Χρήστες
-		<div>
+		<div class="view_users_container">
 <?php
 $result = $link->query("SELECT * FROM user WHERE professor=0");					//ανάκτηση πληροφοριών χρηστών πλην του καθηγητή
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε χρήστη πλην του καθηγητή
