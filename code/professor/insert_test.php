@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$link = connect_to_database("insert_test_form.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT username FROM user where username='".$_POST["user"]."'");			//έλεγχος αν το όνομα χρήστη υπάρχει στη βάση
 if (empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {								//αν δεν υπάρχει
 	$result->free();
