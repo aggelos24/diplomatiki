@@ -20,7 +20,7 @@ if ($file_type != "doc") {									//αν ο τύπος αρχείου δεν ε
 if (file_exists($target_file)) {								//αν έχει ανεβεί ήδη η εργασία
 	unlink($target_file);									//διαγραφή προηγούμενης εργασίας
 }
-$link = connect_to_database("project.php?id=".$id);						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (move_uploaded_file($_FILES["project_document"]["tmp_name"], $target_file)) {		//απόπειρα μετακίνησης εικόνας στην διεύθυνση προορισμού
 	chmod($target_file, 0777);
 	$link->query("UPDATE project SET document=1 WHERE id=".$id);				//αν επιτυχία, ενημέρωση του πίνακα project
