@@ -31,7 +31,7 @@
 
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("phome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT path FROM material");						//ανάκτηση διεύθυνσης αρχείου από τον πίνακα material
 $i = 0;
 while ($row = $result->fetch_array()) {								//για κάθε αρχείο
