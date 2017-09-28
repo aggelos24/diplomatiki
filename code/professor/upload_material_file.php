@@ -7,7 +7,7 @@ $latin_repl = array ("a", "a", "b", "g", "d", "e", "e", "z", "i", "i", "th", "i"
 "A", "A", "B", "G", "D", "E", "E", "Z", "I", "I", "Th", "I", "I", "K", "L", "M", "N", "X", "O", "O", "P", "R", "S", "T", "Y", "Y", "F", "X", "Y", "O", "O");
 $target_file = "../material/".basename($_FILES["file"]["name"]);			//ορισμός διεύθυνσης προορισμού του αρχείου
 $target_file = str_replace($greek_alphabet, $latin_repl, $target_file);			//αντικατάσταση ελληνικών χαρακτήρων με λατινικών
-$link = connect_to_database("material.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM material where path='".$target_file."'");		//έλεγχος αν υπάρχει αρχείο με αυτό το όνομα
 if (!empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {				//αν υπάρχει
 	$result->free();
