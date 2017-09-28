@@ -28,7 +28,7 @@
 <?php
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
-$link = connect_to_database("lhome.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT friendship.user2, user.photo FROM friendship INNER JOIN user ON friendship.user2=user.username WHERE friendship.user1='".$_SESSION["session_lusername"]."'");
 													//ανάκτηση πληροφοριών φίλων του χρήστη
 $friends = array();
