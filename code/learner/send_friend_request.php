@@ -10,7 +10,7 @@ else {													//αν όχι
 													//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα view_profile.php
 	exit();												//τερματισμός script
 }
-$link = connect_to_database("view_profile.php?username=".$username."&friend=0");			//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query("INSERT INTO notification (id, to_user, text, seen, display) VALUES (DEFAULT, '".$username."', '', DEFAULT, DEFAULT)");
 													//δημιουργία ειδοποίησης για τον παραλήπτη του μηνύματος
 $notification_id = $link->insert_id;
