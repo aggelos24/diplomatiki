@@ -75,7 +75,7 @@ else {																			//αν δεν υπάρχει
 	exit();																		//τερματισμός script
 }
 $question_number = 1;
-$link = connect_to_database("history.php");														//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");												//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT * FROM test WHERE id=".$id);												//ανάκτηση στοιχείων τεστ από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (empty(($row)) or ($row["user"] != $_SESSION["session_lusername"]) or ($row["status"] != "pending")) {						//αν δεν υπάρχει τεστ με το συγκεκριμένο id, ή υπάρχει αλλά δεν είναι για τον συνδεδεμένο χρήστη ή δεν εκκρεμεί
