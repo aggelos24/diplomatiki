@@ -9,7 +9,7 @@ else {												//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
 	exit();											//τερματισμός script
 }
-$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT section_number FROM test WHERE id=".$id);			//ανάκτηση στοιχείων τεστ από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if ($row["section_number"] != NULL) {								//αν το τεστ είναι σε κάποια συγκεκριμένη ενότητα
