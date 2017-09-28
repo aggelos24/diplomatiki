@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$link = connect_to_database("content.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM chapter WHERE section_number=".$_POST["section_number"]." AND number=".$_POST["chapter_number"]);
 													//έλεγχος αν υπάρχει το κεφάλαιο προς διαγραφή
 if (empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {							//αν δεν υπάρχει
