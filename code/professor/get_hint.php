@@ -1,11 +1,7 @@
 <?php
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 		//απόπειρα σύνδεσης στη βάση
-if (!$link) {									//αν αποτυχία
-    echo "Κάτι πήγε στραβά";							//εμφάνιση κατάλληλου μηνύματος
-}
+include "../connect_to_database.php";
+$link = connect_to_database("../login_register_form.php");			//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $username = array();
-$link->query("SET CHARACTER SET utf8");
-$link->query("SET COLLATION_CONNECTION=utf8_general_ci");
 $result=$link->query("SELECT username FROM user WHERE professor=0");		//ανάκτηση username των μαθητών από τον πίνακα user
 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {			//για κάθε μαθητή
 	array_push($username, $row["username"]);				//προσθήκη του username του στον πίνακα username
