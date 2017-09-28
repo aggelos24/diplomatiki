@@ -1,7 +1,7 @@
 <?php
 $professor_username = "aggelos24";					//ανάθεση του username του καθηγητή σε μεταβλητή
 include "../connect_to_database.php";
-$link = connect_to_database("../login_register_form.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");		//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT count(*) AS unseen FROM message WHERE to_user='".$professor_username."' AND seen=0 GROUP BY to_user");
 									//ανάκτηση αριθμού αδιάβαστων μηνυμάτων από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
