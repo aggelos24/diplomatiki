@@ -7,7 +7,7 @@ $chapter_text = str_replace($search, $replace, $_POST["chapter_text"]);			//γι
 if (!empty($_POST["youtube"])) {							//αν δεν έχει αφήσει το πεδίο youtube κενό
 	$youtube = str_replace($search, $replace, $_POST["youtube"]);
 }
-$link = connect_to_database("show_chapter.php?section=".$_POST["section_number"]."&chapter=".$_POST["chapter_number"]);
+$link = connect_to_database("../login_register_form.php");
 											//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query("UPDATE chapter SET title='".$_POST["title"]."', text='".$chapter_text."', image=DEFAULT, youtube=DEFAULT WHERE section_number=".$_POST["section_number"]." AND number=".$_POST["chapter_number"]);
 											//ενημέρωση του πίνακα chapter
