@@ -5,7 +5,7 @@ function connect_to_database($destination) {					//συνάρτηση για σ�
 		session_start();						//δημιουργία συνεδρίας
 		session_unset();						//διαγραφή μεταβλητών συνεδρίας
 		session_destroy();						//διαγραφή συνεδρίας
-		echo "<script> alert('Κάτι πήγε στραβά.'); location.href = '".$destination."'; </script>";
+		echo "<script> alert('Σφάλμα βάσης δεδομένων.'); location.href = '".$destination."'; </script>";
 										//εμφάνιση κατάλληλου μηνύματος και ανακατεύθυνση στην κατάλληλη σελίδα
 		exit();								//τερματισμός script
 	}
