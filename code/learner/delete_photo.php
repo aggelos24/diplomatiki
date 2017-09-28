@@ -10,7 +10,7 @@ if (!unlink($_SESSION["session_lphoto"])) {									//απόπειρα διαγ�
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'lhome.php'; </script>";			//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
 	exit();													//τερματισμός script
 }
-$link = connect_to_database("lhome.php");									//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query("UPDATE user SET photo=NULL WHERE username='".$_SESSION["session_lusername"]."'");			//ενημέρωση του πίνακα user
 $_SESSION["session_lphoto"] = NULL;										//ενημέρωση μεταβλητής συνεδρίας
 $link->close();													//κλείσιμο σύνδεσης με βάση
