@@ -5,7 +5,7 @@ if (!isset($_POST["difficult"])) {									//αν είναι κενό το πε�
 	echo "<script> alert('Δεν επέλεξες δυσκολία.'); location.href = 'test.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα test.php
 	exit();												//τερματισμός script
 }
-$link = connect_to_database("test.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM section WHERE number=".$_POST["section_number"]);			//έλεγχος αν υπάρχει ενότητα με αυτό τον αριθμό στον πίνακα section
 if (empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {							//αν υπάρχει
 	$result->free();
