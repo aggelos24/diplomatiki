@@ -38,19 +38,18 @@
 <?php
 $link = mysqli_connect("localhost", "root", "", "diplomatiki"); 			//απόπειρα σύνδεσης στη βάση
 if (!$link) {										//αν αποτυχία
-	echo "<span class='red_letters'> Κάτι πήγε στραβά </span> <br>";		//εμφάνιση κατάλληλου μηνύματος
-	$email = "";
+	echo "<span class='red_letters'> Σφάλμα βάσης δεδομένων </span> <br>";		//εμφάνιση κατάλληλου μηνύματος
 }
-else {
+else {											//αλλιώς
 	$link->query("SET CHARACTER SET utf8");
 	$link->query("SET COLLATION_CONNECTION=utf8_general_ci");
 	$result = $link->query("SELECT email FROM user WHERE professor=1");		//ανάκτηση email του εκπαιδευτικού
 	$row = $result->fetch_array();
-	$email = $row["email"];
+	echo "Για τυχόν προβλήματα ή απορίες για την λειτουργία της ιστοσελίδας επικοινωνήστε στο <a href=".
+		"'mailto:".$row["email"]."' target='_top'>".$row["email"]."</a>";
 	$result->free();
 	$link->close();									//κλείσιμο σύνδεσης με βάση
 }
 ?>
-Για τυχόν προβλήματα ή απορίες για την λειτουργία της ιστοσελίδας επικοινωνήστε στο <a href="mailto:<?php echo $email; ?>" target="_top"> <?php echo $email; ?> </a>
 </body>
 </html>
