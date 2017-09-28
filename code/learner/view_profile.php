@@ -35,7 +35,7 @@ if (isset($_GET["id"])) {
 else {
 	$go_to = "lhome.php";
 }
-$link = connect_to_database("find_friend.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM user WHERE username='".$username."'");		//ανάκτηση στοιχείων χρήστη
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (empty($row)) {									//αν δεν υπάρχει ο χρήστης
