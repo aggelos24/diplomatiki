@@ -41,7 +41,7 @@ else {														//αν δεν υπάρχει
 if (isset($_GET["fail"])) {											//αν ο σύνδεσμος δεν είναι έγκυρος
 	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";			//εμφάνιση κατάλληλου μηνύματος
 }
-$link = connect_to_database("project_list.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
 														//ανάκτηση στοιχείων εργασιών από τον πίνακα project και groups
 $row_num = mysqli_num_rows($result);										//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
