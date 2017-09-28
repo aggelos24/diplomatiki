@@ -41,7 +41,7 @@
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
 $id_array = array();
-$link = connect_to_database("content.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT id FROM project");						//ανάκτηση id εργασιών από τον πίνακα project
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εργασία
 	array_push($id_array, $row["id"]);							//ανάθεση id σε πίνακα
