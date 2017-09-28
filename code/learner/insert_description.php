@@ -2,7 +2,7 @@
 <?php
 include "../connect_to_database.php";
 session_start();										//δημιουργία συνεδρίας
-$link = connect_to_database("lhome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if (empty($_POST["description_text"])){								//αν το πεδίο της φόρμας κενό
 	$_SESSION["session_ldescription"] = NULL;						//ενημέρωση μεταβλητής συνεδρίας
 	$link->query("UPDATE user SET description=NULL WHERE username='".$_SESSION["session_lusername"]."'");
