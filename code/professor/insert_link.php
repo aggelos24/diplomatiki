@@ -21,9 +21,9 @@ $file_headers = get_headers($page_link);						//καταχώριση επικε�
 if (!$file_headers or ($file_headers[0] == "HTTP/1.1 404 Not Found")) {			//αν επέστρεψε σφάλμα ότι δεν βρέθηκε
 	header("Location: project.php?id=".$id."&fail=1");				//επιστροφή στη σελίδα project.php
 }
-else {
+else {											//αλλιώς
 	include "../connect_to_database.php";
-	$link = connect_to_database("project.php?id=".$id);				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+	$link = connect_to_database("../login_register_form.php");			//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 	$link->query("INSERT INTO link (id, project_id, user, url, description) VALUES (DEFAULT, ".$id.", '".$professor_username."', '".$page_link."', '".$_POST["description"]."')");
 											//εισαγωγή συνδέσμου στον πίνακα link
 	$link->close();									//κλείσιμο σύνδεσης με βάση
