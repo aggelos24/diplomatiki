@@ -43,7 +43,7 @@ else {												//αν όχι
 												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
 	exit();											//τερματισμός script
 }
-$link = connect_to_database("message.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM message WHERE id=".$id);					//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if ($row["from_user"] == $professor_username) {							//αν ο αποστολέας είναι ο καθηγητής
