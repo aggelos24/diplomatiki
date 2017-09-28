@@ -8,7 +8,7 @@ else {														//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'project_list.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project_list.php
 	exit();													//τερματισμός script
 }
-$link = connect_to_database("project_list.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT document FROM project WHERE id=".$id);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if ($row["document"]) {												//αν κάποιος έχει ανέβασει την εργασία
