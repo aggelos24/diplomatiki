@@ -12,7 +12,7 @@ else {												//αν όχι
     echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'phome.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
     exit();											//τερματισμός script
 }
-$link = connect_to_database($from);								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query ("SELECT username FROM user where username='".$_POST["to_user"]."'");	//έλεγχος αν το όνομα χρήστη υπάρχει ήδη στη βάση
 if (empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {						//αν υπάρχει
 	$result->free();
