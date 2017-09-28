@@ -1,4 +1,5 @@
 <?php
+include "../connect_to_database.php";
 session_start();										//δημιουργία συνεδρίας
 $link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result=$link->query("SELECT count(*) AS unseen FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND seen=0 GROUP BY to_user");
