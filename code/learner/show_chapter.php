@@ -33,7 +33,7 @@ else {												//αν όχι
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'history.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα history.php
 	exit();											//τερματισμός script
 }
-$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (!empty($row)) {										//αν υπάρχει
