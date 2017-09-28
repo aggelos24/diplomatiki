@@ -35,7 +35,7 @@ else {													//αν όχι
 }
 echo "<a href='show_chapter.php?section=".$section."&chapter=".$chapter."'> Προβολή </a> | Επεξεργασία <br> <br>";
 $i = 0;
-$link = connect_to_database("content.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
 													//ανάκτηση στοιχείων κεφαλαίου από τον πίνακα chapter
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
