@@ -1,11 +1,6 @@
 <?php
 session_start();										//δημιουργία συνεδρίας
-$link = mysqli_connect ("localhost", "root", "", "diplomatiki"); 				//απόπειρα σύνδεσης στη βάση
-if (!$link) {											//αν αποτυχία
-	echo "Κάτι πήγε στραβά";								//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα lhome.php
-}
-$link->query ("SET CHARACTER SET utf8");
-$link->query ("SET COLLATION_CONNECTION=utf8_general_ci");
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result=$link->query("SELECT count(*) AS unseen FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND seen=0 GROUP BY to_user");
 												//ανάκτηση αριθμού αδιάβαστων ειδοποιήσεων από τον πίνακα notification
 $notification=0;
