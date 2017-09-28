@@ -13,7 +13,7 @@ else {											//αν δεν υπάρχει
 											//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα project.php
 	exit();										//τερματισμός script
 }
-$link = connect_to_database("project.php?id=".$id);					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query("INSERT INTO group_chat (id, project_id, user, text) VALUES (DEFAULT, ".$id.", '".$_SESSION["session_lusername"]."', '".$message_text."')");
 											//εισαγωγή μηνύματος στον πίνακα group_chat
 $link->close();										//κλείσιμο σύνδεσης με βάση
