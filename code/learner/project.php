@@ -43,7 +43,7 @@ if (isset($_GET["fail"])) {									//αν ο σύνδεσμος δεν είνα
 	echo "<script> alert('Ο σύνδεσμος που εισήγαγες δεν είναι έγκυρος.'); </script>";	//εμφάνιση κατάλληλου μηνύματος
 }
 $pass = 0;
-$link = connect_to_database("history.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT groups.user FROM project INNER JOIN groups ON project.id=groups.project_id WHERE project.id=".$id);
 												//ανάκτηση username των μελών της ομάδας από τον πίνακα groups
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε username
