@@ -7,7 +7,7 @@ $chapter_text = str_replace($search, $replace, $_POST["chapter_text"]);				//γ�
 if (!empty($_POST["youtube"])) {								//αν δεν είναι κενό το πεδίο youtube
 	$youtube = str_replace($search, $replace, $_POST["youtube"]);
 }
-$link = connect_to_database("insert_chapter_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM section WHERE number=".$_POST["section_number"]);		//έλεγχος αν υπάρχει ενότητα με αυτόν τον αριθμό στον πίνακα section
 if (empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {						//αν δεν υπάρχει
 	$result->free();
