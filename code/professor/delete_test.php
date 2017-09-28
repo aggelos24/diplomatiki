@@ -8,7 +8,7 @@ else {													//αν δεν υπάρχει
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'test_list.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα test_list.php
 	exit();												//τερματισμός script
 }
-$link = connect_to_database("test_list.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT notification_id FROM test WHERE id=".$id);				//ανάκτηση notification_id από τον πίνακα test
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $notification_id = $row["notification_id"];								//ανάθεσή της σε μεταβλητή
