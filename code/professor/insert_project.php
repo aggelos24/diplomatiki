@@ -15,7 +15,7 @@ else if (count($users) == 1) {
 														//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα group_project.php
 	exit();													//τερματισμός script
 }
-$link = connect_to_database("group_project.php");								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query("INSERT INTO project (id, title, description, deadline, document, grade) VALUES (DEFAULT, '".$_POST["title"]."', '".$description_text."', '".$_POST["deadline"]."', DEFAULT, DEFAULT)");
 														//εισαγωγή εργασίας στον πίνακα project
 $project_id = $link->insert_id;											//ανάθεση του id της εργασίας σε μεταβλητή
