@@ -34,7 +34,7 @@ else {										//αν όχι
 										//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα sent_message.php
 	exit();									//τερματισμός script
 }
-$link = connect_to_database("sent_message.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");			//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM message WHERE id=".$id);			//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $result->free();
