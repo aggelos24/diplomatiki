@@ -58,7 +58,7 @@ include "if_not_logged_p.php";									//έλεγχος αν έχει συνδε
 include "../connect_to_database.php";
 if ((isset($_GET["section"]))) {								//αν υπάρχει η μεταβλητή GET
 	$section = $_GET["section"];								//ανάθεσή της σε μεταβλητή
-	$link = connect_to_database("content.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+	$link = connect_to_database("../login_register_form.php");				//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 	$result = $link->query("SELECT * FROM section WHERE number=".$section);			//έλεγχος αν υπάρχει ενότητα με αυτόν τον αριθμό στον πίνακα section
 	if ($result->fetch_array() != "") {							//αν υπάρχει
 		$result = $link->query("SELECT * FROM question_and_answer WHERE section_number=".$section);
