@@ -19,7 +19,7 @@ if ($_POST["to_user"] == "Καθηγητής") {								//αν ο παραλήπ
 else {												//αν όχι
 	$to_user = $_POST["to_user"];
 }
-$link = connect_to_database($from);								//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $link->query("INSERT INTO message (id, from_user, to_user, subject, text, seen, date) VALUES (DEFAULT, '".$_SESSION["session_lusername"]."', '".$to_user."', '".$_POST["subject"]."', '".$message_text."', DEFAULT, NOW())");
 												//δημιουργία μηνύματος στη βάση
 $link->close();											//κλείσιμο σύνδεσης με βάση
