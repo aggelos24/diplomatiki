@@ -16,7 +16,7 @@ else {												//αν δεν υπάρχει
 }
 $target_file = "../projects/project_".$id."/".basename($_FILES["file"]["name"]);		//ορισμός διεύθυνσης προορισμού του αρχείου
 $target_file = str_replace($greek_alphabet, $latin_repl, $target_file);				//αντικατάσταση ελληνικών χαρακτήρων με λατινικών
-$link = connect_to_database("project.php?id=".$id);						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM source_file where path='".$target_file."'");		//έλεγχος αν υπάρχει αρχείο με αυτό το όνομα
 if (!empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {					//αν υπάρχει
 	$result->free();
