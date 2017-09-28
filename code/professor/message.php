@@ -32,7 +32,7 @@
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
-$link = connect_to_database("phome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT count(*) AS inbox FROM message WHERE to_user='aggelos24' GROUP BY to_user");
 												//ανάκτηση αριθμού εισερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
