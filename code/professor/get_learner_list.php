@@ -1,6 +1,6 @@
 <?php
 include "../connect_to_database.php";
-$link = connect_to_database("phome.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");			//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 if ((isset($_GET["sort"]))) {							//αν υπάρχει η μεταβλητή GET
 	$sort = $_GET["sort"];							//ανάθεσή της σε μεταβλητή
 }
