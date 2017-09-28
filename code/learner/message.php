@@ -25,7 +25,7 @@
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
 $professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
-$link = connect_to_database("lhome.php");							//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT user2 FROM friendship WHERE user1='".$_SESSION["session_lusername"]."'");
 												//ανάκτηση username φίλων χρήστη από τον πίνακα user
 ?>
