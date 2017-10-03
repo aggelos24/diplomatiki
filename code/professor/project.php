@@ -20,7 +20,7 @@
 <body>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menup"> <a href="phome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menup"> <a href="message.php" class="link_to_page"> Μηνύματα </a> </span>
 		<span class="menup"> <a href="content.php" class="link_to_page"> Διδακτικό περιεχόμενο </a> </span>
@@ -47,8 +47,8 @@ $result = $link->query ("SELECT * FROM project INNER JOIN groups ON project.id=g
 $row_num = mysqli_num_rows($result);										//ανάθεση του αριθμού των επιστρεφόμενων εγγραφών σε μεταβλητή
 for ($i=0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {						//για κάθε μέλος ομάδας
 	if ($i == 0) {												//εμφάνιση πληροφοριών εργασίας και φορμών για διαγραφή και βαθμολόγησή της
-		echo "<p class='center'> <b> Τίτλος: </b> ".$row["title"].", Διορία μέχρι ".date("d-m-Y", strtotime($row["deadline"]))."</p> <br>";
-		echo "Εκφώνηση:<br>";
+		echo "<p class='big center'> <b> Τίτλος: </b> ".$row["title"].", Διορία μέχρι ".date("d-m-Y", strtotime($row["deadline"]))."</p> <br>";
+		echo "Εκφώνηση: <br>";
 		echo $row["description"]."<br>";
 		echo "Μέλη Ομάδας: ".$row["user"].", ";
 	}
@@ -71,7 +71,7 @@ for ($i=0; $row = mysqli_fetch_array($result, MYSQLI_ASSOC); $i++) {						//γι
 <?php
 $result = $link->query("SELECT * FROM project_change WHERE project_id=".$id." ORDER BY date DESC");		//ανάκτηση στοιχείων αλλαγών από τον πίνακα project_change
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε αλλαγή
-	echo "Χρήστης: ".$row["user"].", Ημερομηνία: ".date("d-m-Y", strtotime($row["date"]))."<br>Περιγραφή αλλαγής: ".$row["change_description"]."<br>";
+	echo "<b> Χρήστης: </b> ".$row["user"].", <b> Ημερομηνία: </b> ".date("d-m-Y", strtotime($row["date"]))."<br> <b> Περιγραφή αλλαγής: </b> ".$row["change_description"]."<br> <br>";
 }
 ?>
 		</div>
