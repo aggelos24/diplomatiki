@@ -33,7 +33,7 @@ if ((isset($_GET["chapter"])) and (isset($_GET["section"]))) {						//αν υπ�
 else {													//αν όχι
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";		//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
-echo "<a href='show_chapter.php?section=".$section."&chapter=".$chapter."'> Προβολή </a> | Επεξεργασία <br> <br>";
+echo "<span class='big'> <a href='show_chapter.php?section=".$section."&chapter=".$chapter."'> Προβολή </a> | Επεξεργασία </span> <br> <br>";
 $i = 0;
 $link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT * FROM chapter WHERE section_number=".$section." AND number=".$chapter);
