@@ -15,7 +15,7 @@
 <body>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menul"> <a href="lhome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menul"> <a href="find_friend.php" class="link_to_page"> Βρες φίλους </a> </span>
 		<span class="menul"> <a href="history.php" class="link_to_page"> Ιστορία </a> </span>
@@ -24,10 +24,10 @@
 	</div>
 	<div class="main">
 		<a href="message.php"> Εισερχόμενα Μηνύματα </a> | Εξερχόμενα Μηνύματα <br> <br>
-		<div class="container">
-			<div class="message_header"> <b>Στον χρήστη</b> </div>
-			<div class="message_header"> <b>Θέμα</b> </div>
-			<div class="message_header"> <b>Ημερομηνία που στάλθηκε</b> </div>
+		<div class="big container">
+			<div class="message_header"> <b> Στον χρήστη </b> </div>
+			<div class="message_header"> <b> Θέμα </b> </div>
+			<div class="message_header"> <b> Ημερομηνία που στάλθηκε </b> </div>
 		</div>
 <?php
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
