@@ -31,7 +31,7 @@ $result = $link->query("SELECT user2 FROM friendship WHERE user1='".$_SESSION["s
 ?>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menul"> <a href="lhome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menul"> <a href="find_friend.php" class="link_to_page"> Βρες φίλους </a> </span>
 		<span class="menul"> <a href="history.php" class="link_to_page"> Ιστορία </a> </span>
@@ -55,11 +55,11 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 				<button type="submit"> Αποστολή </button>
 			</form>
 		</div> <br>
-		Εισερχόμενα Μηνύματα <span class="red_letters"> (τα αδιάβαστα μηνύματα έχουν πιο σκούρο φόντο)</span> 	| <a href="sent_message.php"> Εξερχόμενα Μηνύματα </a> <br> <br>
-		<div class="container">
-			<div class="message_header"> Από τον χρήστη </div>
-			<div class="message_header"> Θέμα </div>
-			<div class="message_header"> Ημερομηνία που στάλθηκε </div>
+		<span class="big"> Εισερχόμενα Μηνύματα <span class="red_letters"> (τα αδιάβαστα μηνύματα έχουν πιο σκούρο φόντο)</span> | <a href="sent_message.php"> Εξερχόμενα Μηνύματα </a> </span> <br> <br>
+		<div class="big container">
+			<div class="message_header"> <b> Από τον χρήστη </b> </div>
+			<div class="message_header"> <b> Θέμα </b> </div>
+			<div class="message_header"> <b> Ημερομηνία που στάλθηκε </b> </div>
 		</div>
 <?php
 $result = $link->query("SELECT count(*) AS inbox FROM message WHERE to_user='".$_SESSION["session_lusername"]."' GROUP BY to_user");
