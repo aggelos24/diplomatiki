@@ -37,7 +37,7 @@ else {										//αν όχι
 		<div class="profile_chapter_container">
 			<img src="<?php echo $path; ?>" alt="Φωτογραφία Προφίλ" class="<?php echo $style; ?>">
 			<div class="profile_details">	
-				<p class="center"> <?php echo $_SESSION["session_lusername"]; ?> </p><br>
+				<p class="center"> <?php echo "<span class='big'>".$_SESSION["session_lusername"]."</span>"; ?> </p><br>
 <?php
 if (isset($_SESSION["session_ldescription"])) {
 	 echo $_SESSION["session_ldescription"]."<br>";
