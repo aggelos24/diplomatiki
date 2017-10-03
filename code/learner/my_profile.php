@@ -34,7 +34,7 @@ else {										//αν όχι
 		<span class="menul"> <a href="notification.php" class="link_to_page"> Δες τις ειδοποιήσεις σου </a> </span>
 	</div>
 	<div class="main">
-		<div class="profile_chapter_container">
+		<div class="container">
 			<img src="<?php echo $path; ?>" alt="Φωτογραφία Προφίλ" class="<?php echo $style; ?>">
 			<div class="profile_details">	
 				<p class="center"> <?php echo "<span class='big'>".$_SESSION["session_lusername"]."</span>"; ?> </p><br>
