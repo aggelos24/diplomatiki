@@ -45,7 +45,7 @@ div.main {
 .big {
 	font-size: 107%;
 }
-div.profile_chapter_container {
+div.container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
