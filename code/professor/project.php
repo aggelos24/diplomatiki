@@ -75,13 +75,13 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 }
 ?>
 		</div>
-		<br> <br> <p class="center"> Σύνδεσμοι σχετικοί με την εργασία </p> <br>
+		<br> <br> <p class="big center"> Σύνδεσμοι σχετικοί με την εργασία </p> <br>
 		<form method="post" action="insert_link.php?id=<?php echo $id; ?>">
 			Διεύθυνση URL <input type="text" name="link" required />
 			Περιγραφή <input type="text" name="description" required />
 			<button type="submit"> Εισαγωγή Συνδέσμου </button>
 		</form> <br>
-		<div class="source_container">
+		<div class="source">
 <?php
 $result = $link->query("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");				//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε σύνδεσμο
@@ -90,13 +90,13 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 }
 ?>
 		</div>
-		<br> <br> <p class="center"> Αρχεία σχετικά με την εργασία </p> <br> <br>
+		<br> <br> <p class="big center"> Αρχεία σχετικά με την εργασία </p> <br> <br>
 		<form method="post" action="upload_source_file.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
 			<input type="file" name="file" required />
 			Περιγραφή <input type="text" name="description" required />
 			<button type="submit"> Ανέβασμα Αρχείου </button>
 		</form>
-		<div class="source_container">
+		<div class="source">
 <?php
 $result = $link->query("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");			//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε αρχείο
@@ -105,7 +105,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 }
 ?>
 		</div>
-		<br> <br> <p class="center"> Chat Ομάδας </p> <br> <br>
+		<br> <br> <p class="big center"> Chat Ομάδας </p> <br> <br>
 		<form method="post" action="send_group_message.php?id=<?php echo $id; ?>">
 		Κείμενο: <br>
 		<textarea name="message_text" rows="3" cols="55" required ></textarea> <br>
