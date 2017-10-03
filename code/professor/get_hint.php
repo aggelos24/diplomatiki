@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR);
 $link = $link = mysqli_connect("localhost", "root", "", "diplomatiki");		//απόπειρα σύνδεσης στη βάση
 if (!$link) {									//αν αποτυχία
     echo "<br> <span class='red_letters'> Σφάλμα βάσης δεδομένων </span>";	//εμφάνιση κατάλληλου μηνυματος
