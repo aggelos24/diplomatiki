@@ -57,7 +57,7 @@ else {											//αλλιώς
 ?>
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menul"> <a href="lhome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menul"> <a href="find_friend.php" class="link_to_page"> Βρες φίλους </a> </span>
 		<span class="menul"> <a href="history.php" class="link_to_page"> Ιστορία </a> </span>
@@ -70,7 +70,7 @@ else {											//αλλιώς
 			<div class="profile_details">	
 				<p class="center">
 <?php
-echo $username;
+echo "<span class='big'>".$username."</span>";
 $result2 = $link->query ("SELECT * FROM friend_request WHERE from_user='".$_SESSION["session_lusername"]."' AND to_user='".$username."'");
 											//ανάκτηση στοιχείων χρήστη
 $i = 1;
