@@ -43,6 +43,9 @@ div.main {
 	margin-left: 10%;
 	margin-right: 10%;
 }
+.big {
+	font-size: 107%;
+}
 p.center {
 	text-align: center;
 }
