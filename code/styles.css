@@ -20,6 +20,9 @@ div.main {
 	margin-left: 10%;
 	margin-right: 10%;
 }
+.big {
+	font-size: 107%;
+}
 a {
 	text-decoration: none;
 }
