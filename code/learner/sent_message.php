@@ -23,7 +23,7 @@
 		<span class="menul"> <a href="notification.php" class="link_to_page"> Ειδοποιήσεις </a> </span>
 	</div>
 	<div class="main">
-		<a href="message.php"> Εισερχόμενα Μηνύματα </a> | Εξερχόμενα Μηνύματα <br> <br>
+		<span class="big"> <a href="message.php"> Εισερχόμενα Μηνύματα </a> | Εξερχόμενα Μηνύματα </span> <br> <br>
 		<div class="big container">
 			<div class="message_header"> <b> Στον χρήστη </b> </div>
 			<div class="message_header"> <b> Θέμα </b> </div>
