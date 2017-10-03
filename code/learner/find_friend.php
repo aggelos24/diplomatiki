@@ -15,15 +15,15 @@
 <body>																									
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menul"> <a href="lhome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="active"> Βρες φίλους </span>
 		<span class="menul"> <a href="history.php" class="link_to_page"> Ιστορία </a> </span>
 		<span class="menul"> <a href="message.php" class="link_to_page"> Μηνύματα </a> </span>
 		<span class="menul"> <a href="notification.php" class="link_to_page"> Ειδοποιήσεις </a> </span>
 	</div>
-	<div class="main">
-		Φίλοι
+	<div class="big main">
+		<b> Φίλοι </b>
 		<div class="view_users_container">
 <?php
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
@@ -45,7 +45,7 @@ echo "<div class='view_users'>"."<a href='view_profile.php?username=".$row["user
 }
 ?>
 		</div>
-		Υπόλοιποι Χρήστες
+		<b> Υπόλοιποι Χρήστες </b>
 		<div class="view_users_container">
 <?php
 $result = $link->query("SELECT * FROM user WHERE professor=0");					//ανάκτηση πληροφοριών χρηστών πλην του καθηγητή
