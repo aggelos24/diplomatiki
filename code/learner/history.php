@@ -20,7 +20,7 @@
 																								
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menul"> <a href="lhome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menul"> <a href="find_friend.php" class="link_to_page"> Βρες φίλους </a> </span>
 		<span class="active"> Ιστορία </span>
@@ -28,7 +28,7 @@
 		<span class="menul"> <a href="notification.php" class="link_to_page"> Ειδοποιήσεις </a> </span>
 	</div>
 	<div class="main">
-		Διάβασμα <br> <br>
+		<span class="big"> Διάβασμα </span> <br> <br>
 <?php
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
@@ -44,7 +44,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθ�
 	$result2->free();
 }
 ?>
-		<br> Tεστ <br> <br>
+		<br> <span class="big"> Tεστ </span> <br> <br>
 <?php
 $result = $link->query("SELECT id FROM test WHERE CURDATE()>test_date AND status='pending'");		//ανάκτηση id από πίνακα test που εκκρεμούν και είναι στο παρελθόν 
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε τεστ
@@ -69,7 +69,7 @@ else {													//αν υπάρχει εκκρεμές τεστ για το �
 	echo "Αν θες να κάνεις το τεστ τώρα <button onclick='do_test(".$row["id"].")'> Πάτησε εδώ </button>";
 }
 ?>
-		<br> <br> Εργασία <br> <br>
+		<br> <br> <span class="big"> Εργασία </span> <br> <br>
 <?php
 $result = $link->query("SELECT id FROM project INNER JOIN groups ON project.id=groups.project_id WHERE user='".$_SESSION["session_lusername"]."' AND deadline>CURDATE()");
 													//ανάκτηση id εργασιών για το χρήστη που να μην έχει λήξει το deadline από τον πίνακα test
