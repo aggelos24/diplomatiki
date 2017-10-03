@@ -23,11 +23,11 @@
 		<span class="menup"> <a href="test.php" class="link_to_page"> Τεστ </a> </span>
 	</div>
 	<div class="main">
-		<a href="message.php"> Εισερχόμενα Μηνύματα </a> | Εξερχόμενα Μηνύματα <br> <br>
-		<div class="container">
-			<div class="message_header"> Στον χρήστη </div>
-			<div class="message_header"> Θέμα </div>
-			<div class="message_header"> Ημερομηνία που στάλθηκε </div>
+		<span class="big"> <a href="message.php"> Εισερχόμενα Μηνύματα </a> | Εξερχόμενα Μηνύματα </span> <br> <br>
+		<div class="big container">
+			<div class="message_header"> <b> Στον χρήστη </b> </div>
+			<div class="message_header"> <b> Θέμα </b> </div>
+			<div class="message_header"> <b> Ημερομηνία που στάλθηκε </b> </div>
 		</div>
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
