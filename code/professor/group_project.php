@@ -23,7 +23,7 @@
 		<span class="menup"> <a href="test.php" class="link_to_page"> Τεστ </a> </span>
 	</div>
 	<div class="main">
-		Δημιουργία εργασίας | <a href="project_list.php"> Προβολή λίστας εργασιών </a> <br> <br>
+		<span class="big"> Δημιουργία εργασίας | <a href="project_list.php"> Προβολή λίστας εργασιών </a> </span> <br> <br>
 		Προτείνεται να μπαίνουν στην ίδια ομάδα "καλοί" με "κακούς" μαθητές σύμφωνα με τις αρχές της συνεργατικής μάθησης
 		<form method="post" action="insert_project.php">
 			Τίτλος Εργασίας <input type="text" name="title" /> <br>
