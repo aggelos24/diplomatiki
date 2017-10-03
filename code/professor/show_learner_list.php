@@ -49,7 +49,7 @@
 <body>
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menup"> <a href="phome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menup"> <a href="message.php" class="link_to_page"> Μηνύματα </a> </span>
 		<span class="menup"> <a href="content.php" class="link_to_page"> Διδακτικό περιεχόμενο </a> </span>
@@ -63,7 +63,7 @@ include "if_not_logged_p.php";										//έλεγχος αν έχει συνδ�
 		<div id="name"> Ταξινόμηση κατά <b>Όνομα Χρήστη</b> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
 		<div id="level"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <b>Επίπεδο μαθητή</b> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
 		<div id="date"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <b>Ημερομηνία τελευταίας σύνδεσης</b> </div>
-		<div class="list_container">
+		<div class="big list_container">
 			<div class="list"> <b> Όνομα Χρήστη </b> </div>
 			<div class="list"> <b> Email </b> </div>
 			<div class="list"> <b> Επίπεδο (1-6) </b> </div>
