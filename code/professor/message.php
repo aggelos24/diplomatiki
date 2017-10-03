@@ -23,8 +23,8 @@
 		<span class="menup"> <a href="test.php" class="link_to_page"> Τεστ </a> </span>
 	</div>
 	<div class="main">
-		Εισερχόμενα Μηνύματα <span class="red_letters"> (τα αδιάβαστα μηνύματα έχουν πιο σκούρο φόντο)</span> 	| <a href="sent_message.php"> Εξερχόμενα Μηνύματα </a> <br> <br>
-		<div class="container">
+		<span class="big"> Εισερχόμενα Μηνύματα <span class="red_letters"> (τα αδιάβαστα μηνύματα έχουν πιο σκούρο φόντο)</span> | <a href="sent_message.php"> Εξερχόμενα Μηνύματα </a> </span> <br> <br>
+		<div class="big container">
 			<div class="message_header"> Από τον χρήστη </div>
 			<div class="message_header"> Θέμα </div>
 			<div class="message_header"> Ημερομηνία που στάλθηκε </div>
