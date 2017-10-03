@@ -15,7 +15,7 @@
 <body>
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menup"> <a href="phome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menup"> <a href="message.php" class="link_to_page"> Μηνύματα </a> </span>
 		<span class="menup"> <a href="content.php" class="link_to_page"> Διδακτικό περιεχόμενο </a> </span>
