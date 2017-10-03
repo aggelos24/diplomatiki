@@ -14,7 +14,7 @@
 <body>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menul"> <a href="lhome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menul"> <a href="find_friend.php" class="link_to_page"> Βρες φίλους </a> </span>
 		<span class="menul"> <a href="history.php" class="link_to_page"> Ιστορία </a> </span>
@@ -38,7 +38,7 @@ $result = $link->query("SELECT * FROM chapter WHERE section_number=".$section." 
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if (!empty($row)) {										//αν υπάρχει
 	echo "<title>".$row["title"]."</title>";						//εμφάνιση του κεφαλαίου
-	echo $row["section_number"].".".$row["number"]." ".$row["title"];
+	echo "<span class='big'>".$row["section_number"].".".$row["number"]." ".$row["title"]."</span>";
 	echo "<hr> <br>";
 	$text = "<p class='text'>".$row["text"]."</p>";						//προσθήκη html tags για να φαίνεται όπως πρέπει στην σελίδα
 	$text = str_replace("\n", "\n</p> <p class='text'>", $text);
