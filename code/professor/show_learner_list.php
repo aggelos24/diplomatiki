@@ -60,9 +60,10 @@
 <?php
 include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
 ?>
-		<div id="name"> Ταξινόμηση κατά <b>Όνομα Χρήστη</b> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
-		<div id="level"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <b>Επίπεδο μαθητή</b> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
-		<div id="date"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <b>Ημερομηνία τελευταίας σύνδεσης</b> </div>
+		<div id="name"> Ταξινόμηση κατά <b> Όνομα Χρήστη </b> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
+		<div id="level"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <b> Επίπεδο μαθητή </b> ή κατά <button onclick="sort('date')"> Ημερομηνία τελευταίας σύνδεσης </button> </div>
+		<div id="date"> Ταξινόμηση κατά <button onclick="sort('name')"> Όνομα Χρήστη </button> ή κατά <button onclick="sort('level')"> Επίπεδο μαθητή </button> ή κατά <b> Ημερομηνία τελευταίας σύνδεσης </b> </div>
+		<br>
 		<div class="big list_container">
 			<div class="list"> <b> Όνομα Χρήστη </b> </div>
 			<div class="list"> <b> Email </b> </div>
