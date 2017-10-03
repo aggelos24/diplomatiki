@@ -3,7 +3,7 @@ error_reporting(E_ERROR);
 session_start();										//δημιουργία συνεδρίας
 $link = $link = mysqli_connect("localhost", "root", "", "diplomatiki");				//απόπειρα σύνδεσης στη βάση
 if (!$link) {											//αν αποτυχία
-    echo "<br> <span class='red_letters'> Σφάλμα βάσης δεδομένων </span>";
+    echo "<br> <span class='red_letters'> Σφάλμα βάσης δεδομένων </span>";			//εμφάνιση κατάλληλου μηνυματος
     exit();											//τερματισμός script
 }
 $result=$link->query("SELECT count(*) AS unseen FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND seen=0 GROUP BY to_user");
