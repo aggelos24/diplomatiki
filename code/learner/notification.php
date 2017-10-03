@@ -35,7 +35,7 @@
 		<span class="active"> Ειδοποιήσεις </span>
 	</div>
 	<div class="main">
-		<span class="big"> Λίστα ειδοποιήσεων <span class="red_letters"> (οι καινούργιες ειδοποιήσεις έχουν πιο σκούρο φόντο)</span>: </span> <br>
+		<span class="big"> Λίστα ειδοποιήσεων <span class="red_letters"> (οι καινούργιες ειδοποιήσεις έχουν πιο σκούρο φόντο)</span>: </span>
 <?php
 include "if_not_logged_l.php";								//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
