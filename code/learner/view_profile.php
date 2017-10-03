@@ -65,7 +65,7 @@ else {											//αλλιώς
 		<span class="menul"> <a href="notification.php" class="link_to_page"> Ειδοποιήσεις </a> </span>
 	</div>
 	<div class="main">
-		<div class="container">
+		<div class="profile_chapter_container">
 			<img src="<?php echo $path; ?>" alt="Φωτογραφία Προφίλ" class="<?php echo $style; ?>">
 			<div class="profile_details">	
 				<p class="center">
