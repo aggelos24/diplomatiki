@@ -19,7 +19,7 @@
 <body>
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menup"> <a href="phome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menup"> <a href="message.php" class="link_to_page"> Μηνύματα </a> </span>
 		<span class="menup"> <a href="content.php" class="link_to_page"> Διδακτικό περιεχόμενο </a> </span>
@@ -32,7 +32,7 @@
 			Περιγραφή <input type="text" name="description" /> <br>
 			<button type="submit"> Πάτησε εδώ για να το ανεβάσεις </button> <br>
 		</form> <br> <br>
-		Λίστα ανεβασμένων αρχείων <br>
+		<span class="big"> Λίστα ανεβασμένων αρχείων: </span> <br> <br>
 <?php
 include "if_not_logged_p.php";										//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
