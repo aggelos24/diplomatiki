@@ -59,7 +59,7 @@ include "if_not_logged_p.php";						//έλεγχος αν έχει συνδεθ�
 ?>
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="active"> Αρχική </span>
 		<span class="menup"> <a href="message.php" class="link_to_page"> Μηνύματα </a> </span>
 		<span class="menup"> <a href="content.php" class="link_to_page"> Διδακτικό περιεχόμενο </a> </span>
@@ -67,7 +67,7 @@ include "if_not_logged_p.php";						//έλεγχος αν έχει συνδεθ�
 		<span class="menup"> <a href="test.php" class="link_to_page"> Τεστ </a> </span>
 	</div>
 	<div class="main">
-		Καλως όρισες <br>
+		<span class="big"> Καλως όρισες </span> <br>
 		<div id="show_message_live"> </div>
 		Αν θες να δεις λίστα με τους μαθητές <button onclick="show_learner_list()" id="bphoto"> Πάτησε εδώ </button> <br>
 		Αν θες να στείλεις μήνυμα σε κάποιο μαθητή <button onclick="send_message()" id="bsend_message"> Πάτησε εδώ </button> <br>
