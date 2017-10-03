@@ -20,7 +20,7 @@
 <body>
 	<img src="banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
 	<div class="main">
-		Καλώς ήρθατε στην ιστοσελίδα η οποία είναι αφιερωμένη στην διδασκαλία του μαθήματος Ιστορία Δ' Δημοτικού. <br> <br>
+		<span class="big"> Καλώς ήρθατε στην ιστοσελίδα η οποία είναι αφιερωμένη στην διδασκαλία του μαθήματος Ιστορία Δ' Δημοτικού. </span> <br> <br>
 		<form method="post" action="login.php">
 			<span class="red_letters"> Αν έχεις ήδη λογαριασμό: </span> <br>
 			Όνομα Χρήστη: <input type="text" name="username"> <br>
