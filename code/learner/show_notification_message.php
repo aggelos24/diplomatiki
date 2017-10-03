@@ -1,6 +1,5 @@
 <?php
 error_reporting(E_ERROR);
-include "../connect_to_database.php";
 session_start();										//δημιουργία συνεδρίας
 $link = $link = mysqli_connect("localhost", "root", "", "diplomatiki");				//απόπειρα σύνδεσης στη βάση
 if (!$link) {											//αν αποτυχία
