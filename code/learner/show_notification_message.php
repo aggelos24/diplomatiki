@@ -1,7 +1,12 @@
 <?php
+error_reporting(E_ERROR);
 include "../connect_to_database.php";
 session_start();										//δημιουργία συνεδρίας
-$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$link = $link = mysqli_connect("localhost", "root", "", "diplomatiki");		//απόπειρα σύνδεσης στη βάση
+if (!$link) {								//αν αποτυχία
+    echo "<br> <span class='red_letters'> Σφάλμα βάσης δεδομένων </span>";
+    exit();								//τερματισμός script
+}
 $result=$link->query("SELECT count(*) AS unseen FROM notification WHERE to_user='".$_SESSION["session_lusername"]."' AND seen=0 GROUP BY to_user");
 												//ανάκτηση αριθμού αδιάβαστων ειδοποιήσεων από τον πίνακα notification
 $notification=0;
