@@ -26,7 +26,7 @@ else {										//αν όχι
 ?>
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menul"> <a href="lhome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menul"> <a href="find_friend.php" class="link_to_page"> Βρες φίλους </a> </span>
 		<span class="menul"> <a href="history.php" class="link_to_page"> Ιστορία </a> </span>
@@ -34,7 +34,7 @@ else {										//αν όχι
 		<span class="menul"> <a href="notification.php" class="link_to_page"> Δες τις ειδοποιήσεις σου </a> </span>
 	</div>
 	<div class="main">
-		<div class="container">
+		<div class="profile_chapter_container">
 			<img src="<?php echo $path; ?>" alt="Φωτογραφία Προφίλ" class="<?php echo $style; ?>">
 			<div class="profile_details">	
 				<p class="center"> <?php echo $_SESSION["session_lusername"]; ?> </p><br>
