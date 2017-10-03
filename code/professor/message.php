@@ -25,9 +25,9 @@
 	<div class="main">
 		<span class="big"> Εισερχόμενα Μηνύματα <span class="red_letters"> (τα αδιάβαστα μηνύματα έχουν πιο σκούρο φόντο)</span> | <a href="sent_message.php"> Εξερχόμενα Μηνύματα </a> </span> <br> <br>
 		<div class="big container">
-			<div class="message_header"> Από τον χρήστη </div>
-			<div class="message_header"> Θέμα </div>
-			<div class="message_header"> Ημερομηνία που στάλθηκε </div>
+			<div class="message_header"> <b> Από τον χρήστη </b> </div>
+			<div class="message_header"> <b> Θέμα </b> </div>
+			<div class="message_header"> <b> Ημερομηνία που στάλθηκε </b> </div>
 		</div>
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
