@@ -55,7 +55,7 @@
 <body>																									
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="active"> Αρχική </span>
 		<span class="menul"> <a href="find_friend.php" class="link_to_page"> Βρες φίλους </a> </span>
 		<span class="menul"> <a href="history.php" class="link_to_page"> Ιστορία </a> </span>
@@ -66,7 +66,7 @@
 <?php
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
 ?>
-		Καλώς όρισες χρήστη <?php echo $_SESSION["session_lusername"]; ?> <span id="show_notification_message"> </span> <br> <br>
+		<span class="big"> Καλώς όρισες χρήστη <?php echo $_SESSION["session_lusername"]; ?> <span id="show_notification_message"> </span> </span> <br> <br>
 		Το email σου είναι <?php echo $_SESSION["session_lemail"]; ?> <span class="red_letters">(θα φαίνεται μόνο στους φίλους σου)</span> <br>
 <?php
 if (!(isset($_SESSION["session_lphoto"]))) {								//αν δεν έχει καταχωρήσει ακόμα κάποια φωτογραφία
