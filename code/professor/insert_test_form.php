@@ -34,7 +34,7 @@ include "if_not_logged_p.php";									//έλεγχος αν έχει συνδε
 ?>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menup"> <a href="phome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menup"> <a href="message.php" class="link_to_page"> Μηνύματα </a> </span>
 		<span class="menup"> <a href="content.php" class="link_to_page"> Διδακτικό περιεχόμενο </a> </span>
@@ -42,7 +42,7 @@ include "if_not_logged_p.php";									//έλεγχος αν έχει συνδε
 		<span class="menup"> <a href="test.php" class="link_to_page"> Τεστ </a> </span>
 	</div>
 	<div class="main">
-		<a href="test.php"> Ερωτήσεις και Απαντήσεις </a> | Δημιουργία Τεστ | <a href="test_list.php"> Προβολή Λίστας Τεστ </a> <br> <br>
+		<span class="big"> <a href="test.php"> Ερωτήσεις και Απαντήσεις </a> | Δημιουργία Τεστ | <a href="test_list.php"> Προβολή Λίστας Τεστ </a> </span> <br> <br>
 		<form method="post" action="insert_test.php"> <br>
 			Εξεταζόμενη Ενότητα <span class="red_letters"> (για εξέταση εφ' όλης ύλης πάτησε 0) </span> <input type="number" name="section_number" required /> <br>
 			Mαθητής <input type="text" name="user" onkeyup="show_hint(this.value)" /> Μαθητές: <span id="hint"></span> <br>
