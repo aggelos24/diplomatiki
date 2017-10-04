@@ -36,6 +36,7 @@
 			<button type="submit"> Εγγραφή </button>
 		</form> <br>
 <?php
+error_reporting(E_ERROR);
 $link = mysqli_connect("localhost", "root", "", "diplomatiki"); 			//απόπειρα σύνδεσης στη βάση
 if (!$link) {										//αν αποτυχία
 	echo "<span class='red_letters'> Σφάλμα βάσης δεδομένων </span> <br>";		//εμφάνιση κατάλληλου μηνύματος
