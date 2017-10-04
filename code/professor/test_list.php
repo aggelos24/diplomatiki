@@ -19,7 +19,7 @@
 <body>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
-	<div class="menu">
+	<div class="big menu">
 		<span class="menup"> <a href="phome.php" class="link_to_page"> Αρχική </a> </span>
 		<span class="menup"> <a href="message.php" class="link_to_page"> Μηνύματα </a> </span>
 		<span class="menup"> <a href="content.php" class="link_to_page"> Διδακτικό περιεχόμενο </a> </span>
@@ -27,7 +27,7 @@
 		<span class="menup"> <a href="test.php" class="link_to_page"> Τεστ </a> </span>
 	</div>
 	<div class="main">
-		<a href="test.php"> Ερωτήσεις και Απαντήσεις </a> | <a href="insert_test_form.php"> Δημιουργία Τεστ </a> | Προβολή Λίστας Τεστ <br> <br>
+		<span class="big"> <a href="test.php"> Ερωτήσεις και Απαντήσεις </a> | <a href="insert_test_form.php"> Δημιουργία Τεστ </a> | Προβολή Λίστας Τεστ </span> <br> <br>
 		<span class="red_letters"> Αν διαγραφεί κάποιο τεστ, δεν επηρεάζεται το επίπεδο του μαθητή </span> <br> <br>
 <?php
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
