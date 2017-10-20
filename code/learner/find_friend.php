@@ -48,7 +48,7 @@ echo "<div class='view_users'>"."<a href='view_profile.php?username=".$row["user
 		<b> Υπόλοιποι Χρήστες </b>
 		<div class="view_users_container">
 <?php
-$result = $link->query("SELECT * FROM user WHERE professor=0");					//ανάκτηση πληροφοριών χρηστών πλην του καθηγητή
+$result = $link->query("SELECT * FROM user WHERE professor=0");						//ανάκτηση πληροφοριών χρηστών πλην του καθηγητή
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε χρήστη πλην του καθηγητή
 	if (!(in_array($row["username"], $friends)) and ($row["username"] != $_SESSION["session_lusername"])) {
 													//αν δεν είναι ο συνδεδεμένος χρήστης ή φίλος του χρήστη
