@@ -13,19 +13,19 @@
 		
 		function sort(SortBy) {									//συνάρτηση για την εμφάνιση της λίστας μαθητών
 			if (SortBy == "name") {								//αν ταξινόμηση κατά όνομα χρήστη
-				document.getElementById("name").style.display = "inline";
-				document.getElementById("level").style.display = "none";
-				document.getElementById("date").style.display = "none";
+				document.getElementById("name").classList.remove("not_displayed");
+				document.getElementById("level").classList.add("not_displayed");
+				document.getElementById("date").classList.add("not_displayed");
 			}
 			else if (SortBy == "level") {							//αν ταξινόμηση κατά επίπεδο μαθητή
-				document.getElementById("name").style.display = "none";
-				document.getElementById("level").style.display = "inline";
-				document.getElementById("date").style.display = "none";
+				document.getElementById("name").classList.add("not_displayed");
+				document.getElementById("level").classList.remove("not_displayed");
+				document.getElementById("date").classList.add("not_displayed");
 			}
 			else {										//αν ταξινόμηση κατά ημερομηνία τελευταίας σύνδεσης
-				document.getElementById("name").style.display = "none";
-				document.getElementById("level").style.display = "none";
-				document.getElementById("date").style.display = "inline";
+				document.getElementById("name").classList.add("not_displayed");
+				document.getElementById("level").classList.add("not_displayed");
+				document.getElementById("date").classList.remove("not_displayed");
 			}
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
