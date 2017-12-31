@@ -25,13 +25,13 @@
 		}
 		
 		function upload_photo() {								//με το πάτημα του κουμπιού εμφάνιση φόρμας φωτογραφίας
-			document.getElementById("bupload_photo").style.display = "none";
-			document.getElementById("upload_photo").style.display = "inline";
+			document.getElementById("bupload_photo").classList.add("not_displayed");
+			document.getElementById("upload_photo").classList.remove("not_displayed");
 		}
 		
 		function insert_description() {								//με το πάτημα του κουμπιού εμφάνιση φόρμας περιγραφής
-			document.getElementById("binsert_description").style.display = "none";
-			document.getElementById("insert_description").style.display = "inline";
+			document.getElementById("binsert_description").classList.add("not_displayed");
+			document.getElementById("insert_description").classList.remove("not_displayed");
 			if (window.innerWidth < 1100){							//προσαρμογή αριθμού στηλών ανάλογα με το μέγεθος οθόνης
 				document.getElementById("description").setAttribute("cols", "40");
 			}
@@ -42,8 +42,8 @@
 		}
 		
 		function send_message_to_professor() {							//με το πάτημα του κουμπιού αποστολή μηνύματος στον καθηγητή
-			document.getElementById("bsend_message_to_professor").style.display = "none";
-			document.getElementById("send_message_to_professor").style.display = "inline";
+			document.getElementById("bsend_message_to_professor").classList.add("not_displayed");
+			document.getElementById("send_message_to_professor").classList.remove("not_displayed");
 			if (window.innerWidth < 1100){							//προσαρμογή αριθμού στηλών ανάλογα με μέγεθος οθόνης
 				document.getElementById("message_text").setAttribute("cols", "40");
 			}
