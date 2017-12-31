@@ -12,13 +12,13 @@
 		}
 		
 		function section() {									//με το πάτημα του κουμπιού εμφάνιση φόρμας
-			document.getElementById("bsection").style.display = "none";
-			document.getElementById("section").style.display = "inline";
+			document.getElementById("bsection").classList.add("not_displayed");
+			document.getElementById("section").classList.remove("not_displayed");
 		}
 		
 		function chapter() {									//με το πάτημα του κουμπιού εμφάνιση φόρμας
-			document.getElementById("bchapter").style.display = "none";
-			document.getElementById("chapter").style.display = "inline";
+			document.getElementById("bchapter").classList.add("not_displayed");
+			document.getElementById("chapter").classList.remove("not_displayed");
 		}
 		
 		function insert_chapter_form() {							//με το πάτημα του κουμπιού εμφάνιση φόρμας εισαγωγής κεφαλαίου
