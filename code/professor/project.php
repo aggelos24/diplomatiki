@@ -12,8 +12,8 @@
 		}
 		
 		function show_changelog() {									//με το πάτημα του κουμπιού εμφάνιση περιγραφών αλλαγών
-			document.getElementById("changelog").style.display = "inline";
-			document.getElementById("bchangelog").style.display = "none";
+			document.getElementById("changelog").classList.remove("not_displayed");
+			document.getElementById("bchangelog").classList.add("not_displayed");
 		}
 	</script>
 </head>
