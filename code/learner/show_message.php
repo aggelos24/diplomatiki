@@ -12,8 +12,8 @@
 		}
 		
 		function reply_message() {							//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
-			document.getElementById("breply_message").style.display = "none";
-			document.getElementById("reply_message").style.display = "inline";
+			document.getElementById("breply_message").classList.add("not_displayed");
+			document.getElementById("reply_message").classList.remove("not_displayed");
 			if (window.innerWidth < 1100){						//προσαρμογή αριθμού στηλών ανάλογα με μέγεθος οθόνης
 				document.getElementById("message_text").setAttribute("cols", "40");
 			}
