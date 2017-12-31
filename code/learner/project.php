@@ -12,8 +12,8 @@
 		}
 		
 		function show_change_description() {						//με το πάτημα του κουμπιού εμφάνιση περιγραφής τελευταίας αλλαγής
-			document.getElementById("change_description").style.display = "inline";
-			document.getElementById("bchange_description").style.display = "none";
+			document.getElementById("change_description").classList.remove("not_displayed");
+			document.getElementById("bchange_description").classList.add("not_displayed");
 		}
 	</script>
 </head>
@@ -193,7 +193,7 @@ $link->close();											//κλείσιμο σύνδεσης με βάση
 	</div>
 <script>
 	if (window.innerWidth < 1100){								//προσαρμογή αριθμού στηλών ανάλογα με το μέγεθος οθόνης
-			document.getElementById("group_message").setAttribute("cols", "35");
+		document.getElementById("group_message").setAttribute("cols", "35");
 	}
 </script>
 </body>
