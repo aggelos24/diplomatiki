@@ -12,8 +12,8 @@
 		}
 		
 		function reply_message() {				//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
-			document.getElementById("breply_message").style.display = "none";
-			document.getElementById("reply_message").style.display = "inline";
+			document.getElementById("breply_message").classList.add("not_displayed");
+			document.getElementById("reply_message").classList.remove("not_displayed");
 		}
 	</script>
 </head>
