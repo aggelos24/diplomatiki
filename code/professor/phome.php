@@ -45,8 +45,8 @@
 		}
 		
 		function send_message() {				//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
-			document.getElementById("bsend_message").style.display = "none";
-			document.getElementById("send_message").style.display = "inline";
+			document.getElementById("bsend_message").classList.add("not_displayed");
+			document.getElementById("send_message").classList.remove("not_displayed");
 		}
 		
 		show_message_live();
