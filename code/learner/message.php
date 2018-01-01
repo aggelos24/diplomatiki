@@ -28,7 +28,7 @@
 			}
 		}
 	</script>
-</head>
+</head  onresize="adjust_textarea()">
 <body>
 <?php
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
