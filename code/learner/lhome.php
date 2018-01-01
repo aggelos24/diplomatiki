@@ -32,9 +32,7 @@
 		function insert_description() {								//με το πάτημα του κουμπιού εμφάνιση φόρμας περιγραφής
 			document.getElementById("binsert_description").classList.add("not_displayed");
 			document.getElementById("insert_description").classList.remove("not_displayed");
-			if (window.innerWidth < 1100){							//προσαρμογή αριθμού στηλών ανάλογα με το μέγεθος οθόνης
-				document.getElementById("description").setAttribute("cols", "40");
-			}
+			adjust_textarea();
 		}
 		
 		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
@@ -44,15 +42,25 @@
 		function send_message_to_professor() {							//με το πάτημα του κουμπιού αποστολή μηνύματος στον καθηγητή
 			document.getElementById("bsend_message_to_professor").classList.add("not_displayed");
 			document.getElementById("send_message_to_professor").classList.remove("not_displayed");
-			if (window.innerWidth < 1100){							//προσαρμογή αριθμού στηλών ανάλογα με μέγεθος οθόνης
+			adjust_textarea();
+		}
+		
+		function adjust_textarea() {								//προσαρμογή αριθμού στηλών ανάλογα με μέγεθος οθόνης
+			if (window.innerWidth < 1100) {							//αν το πλάτος του παραθύρου είναι κάτω απο 1100 pixels
 				document.getElementById("message_text").setAttribute("cols", "40");
+				document.getElementById("description").setAttribute("cols", "40");
+			}
+			else {										//αλλιώς
+				document.getElementById("message_text").setAttribute("cols", "55");
+				document.getElementById("description").setAttribute("cols", "55");  
 			}
 		}
+		
 		show_notification_message();
 		setInterval("show_notification_message()", 1000);					//κάθε 1 δευτερόλεπτο έλεγχος αν υπάρχουν νέες ειδοποιήσεις και μηνύματα
 	</script>
 </head>
-<body>																									
+<body onresize="adjust_textarea()">																									
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
 	<div class="big menu">
