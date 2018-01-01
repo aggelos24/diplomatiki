@@ -7,20 +7,29 @@
 	<meta charset="utf-8" />
 	<title> Μηνύματα </title>
 	<script>
-		function logout() {								//με το πάτημα του κουμπιού αποσύνδεση χρήστη
+		function logout() {									//με το πάτημα του κουμπιού αποσύνδεση χρήστη
 			location.href = "logout.php";
 		}
 		
-		function reply_message() {							//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
+		function reply_message() {								//με το πάτημα του κουμπιού εμφάνιση φόρμας αποστολής μηνύματος
 			document.getElementById("breply_message").classList.add("not_displayed");
 			document.getElementById("reply_message").classList.remove("not_displayed");
-			if (window.innerWidth < 1100){						//προσαρμογή αριθμού στηλών ανάλογα με μέγεθος οθόνης
+			adjust_textarea();
+		}
+				
+		function adjust_textarea() {								//προσαρμογή αριθμού στηλών ανάλογα με μέγεθος οθόνης
+			if (window.innerWidth < 1100) {							//αν το πλάτος του παραθύρου είναι κάτω απο 1100 pixels
 				document.getElementById("message_text").setAttribute("cols", "40");
+				document.getElementById("description").setAttribute("cols", "40");
+			}
+			else {										//αλλιώς
+				document.getElementById("message_text").setAttribute("cols", "55");
+				document.getElementById("description").setAttribute("cols", "55");  
 			}
 		}
 	</script>
 </head>
-<body>
+<body  onresize="adjust_textarea()">
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
 	<div class="big menu">
@@ -32,24 +41,24 @@
 	</div>
 	<div class="main">
 <?php
-include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
+include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
-if ((isset($_GET["id"]))) {									//αν υπάρχει η μεταβλητή GET
-	$id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
+$professor_username = "aggelos24";									//ανάθεση του username του καθηγητή σε μεταβλητή
+if ((isset($_GET["id"]))) {										//αν υπάρχει η μεταβλητή GET
+	$id = $_GET["id"];										//ανάθεσή της σε μεταβλητή
 }
-else {												//αν όχι
+else {													//αν όχι
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'message.php'; </script>";	
-												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
-	exit();											//τερματισμός script
+													//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα message.php
+	exit();												//τερματισμός script
 }
-$link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query("SELECT * FROM message WHERE id=".$id);					//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
+$link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
+$result = $link->query("SELECT * FROM message WHERE id=".$id);						//ανάκτηση στοιχείων μηνύματος από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-if ($row["from_user"] == $professor_username) {							//αν ο αποστολέας είναι ο καθηγητής
+if ($row["from_user"] == $professor_username) {								//αν ο αποστολέας είναι ο καθηγητής
 	 $from_user = "Καθηγητής";
 }
-else {												//αν όχι
+else {													//αν όχι
 	$from_user = $row["from_user"];
 }
 ?>
@@ -71,9 +80,9 @@ else {												//αν όχι
 		<a href="message.php"> Επιστροφή στα Εισερχόμενα Μηνύματα </a>
 		</div>
 <?php
-$link->query("UPDATE message SET seen=1 WHERE id=".$id);					//ενημέρωση πίνακα message ότι ο χρήστης διάβασε το μήνυμα
+$link->query("UPDATE message SET seen=1 WHERE id=".$id);						//ενημέρωση πίνακα message ότι ο χρήστης διάβασε το μήνυμα
 $result->free();
-$link->close();											//κλείσιμο σύνδεσης με βάση
+$link->close();												//κλείσιμο σύνδεσης με βάση
 ?>
 </body>
 </html>
