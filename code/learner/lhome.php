@@ -58,9 +58,13 @@
 		
 		show_notification_message();
 		setInterval("show_notification_message()", 1000);					//κάθε 1 δευτερόλεπτο έλεγχος αν υπάρχουν νέες ειδοποιήσεις και μηνύματα
+						
+		window.onresize = function() {								//όταν μεταβάλλεται το μέγεθος του παραθύρου
+			adjust_textarea();
+		}
 	</script>
 </head>
-<body onresize="adjust_textarea()">																									
+<body>																									
 	<button class="logout" onclick="logout()"> Αποσύνδεση </button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
 	<div class="big menu">
