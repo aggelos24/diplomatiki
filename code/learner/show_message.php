@@ -27,9 +27,13 @@
 				document.getElementById("description").setAttribute("cols", "55");  
 			}
 		}
+		
+		window.onresize = function() {								//όταν μεταβάλλεται το μέγεθος του παραθύρου
+			adjust_textarea();
+		}
 	</script>
 </head>
-<body  onresize="adjust_textarea()">
+<body>
 	<button class="logout" onclick="logout()"> Αποσύνδεση</button>
 	<img src="../banner.png" alt="Ιστορία Δ' Δημοτικού Στα Αρχαία Χρόνια" class="banner">
 	<div class="big menu">
