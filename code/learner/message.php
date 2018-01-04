@@ -27,8 +27,12 @@
 				document.getElementById("description").setAttribute("cols", "55");  
 			}
 		}
+				
+		window.onresize = function() {								//όταν μεταβάλλεται το μέγεθος του παραθύρου
+			adjust_textarea();
+		}
 	</script>
-</head  onresize="adjust_textarea()">
+</head>
 <body>
 <?php
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
