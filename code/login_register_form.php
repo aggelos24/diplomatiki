@@ -44,7 +44,7 @@ if (!$link) {										//αν αποτυχία
 else {											//αλλιώς
 	$link->query("SET CHARACTER SET utf8");
 	$link->query("SET COLLATION_CONNECTION=utf8_general_ci");
-	$result = $link->query("SELECT email FROM user WHERE professor=1");		//ανάκτηση email του εκπαιδευτικού
+	$result = $link->query("SELECT email FROM user WHERE professor=1");		//ανάκτηση email του καθηγητή
 	$row = $result->fetch_array();
 	echo "Για τυχόν προβλήματα ή απορίες για την λειτουργία της ιστοσελίδας επικοινωνήστε στο <a href=".
 		"'mailto:".$row["email"]."' target='_top'>".$row["email"]."</a>";
