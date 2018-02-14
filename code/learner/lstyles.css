@@ -21,19 +21,19 @@ div.menu {
 	margin-left: 10%;
 }
 span.active {
-	padding: 0% 3%;
+	padding: 0 3%;
 	display: inline;
 	background-color: #FFFFFF;
 }
 span.menul {
 	border: 1px solid #000000;
-	padding: 0% 3%;
+	padding: 0 3%;
 	background-color: #ff6666;
 	transition: padding 0.5s;
 }
 span.menul:hover {
 	cursor: pointer;
-	padding: 0% 5%;
+	padding: 0 5%;
 }
 div.main {
 	background-color: #ffffff;
@@ -184,11 +184,11 @@ select {
 }
 @media only screen and (max-width: 1100px) {
 	div.main {
-		margin-left: 0%;
-		margin-right: 0%;
+		margin-left: 0;
+		margin-right: 0;
 	}
 	div.menu {
-		margin-right: 0%;
-		margin-left: 0%;
+		margin-right: 0;
+		margin-left: 0;
 	}
 }
