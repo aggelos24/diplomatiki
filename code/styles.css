@@ -1,21 +1,26 @@
 * {
 	box-sizing: border-box;
 }
+
 body {
 	background-color: #3399ff;
 	font-family: "Verdana";
 	font-size: 140%;
 	margin: 0;
 }
+
 a {
 	text-decoration: none;
 }
+
 a:visited {
 	color:  #0000FF;
 }
+
 a:hover {
 	color: #ff0000;
 }
+
 button {
 	background-color: #99ff33;
 	border: 1px solid #000000;
@@ -25,31 +30,39 @@ button {
 	border-radius: 15px;
 	cursor: pointer;
 }
+
 button:hover {
 	font-weight: bold;
 }
+
 input {
 	font-size: 90%;
 	margin-top: 10px;
 }
+
 img.banner {
 	display: table-cell;
 	margin-left: 32.5%;
 	margin-right: 32.5%;
 	width: 35%;
 }
+
 div.main {
 	background-color: #ffffff;
 	padding: 2%;
 	margin-left: 10%;
 	margin-right: 10%;
 }
+
 .big {
 	font-size: 107%;
 }
+
 span.red_letters {
 	color: #cc0000;
 }
+
+
 @media only screen and (max-width: 1100px) {
 	div.main {
 		margin-left: 0;
