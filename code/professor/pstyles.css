@@ -7,6 +7,32 @@ body {
 	font-size: 140%;
 	margin: 0;
 }
+input {
+	font-size: 90%;
+	margin-top: 10px;
+}
+button {
+	font-size: 90%;
+	padding: 7px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+textarea {
+	font-size: 140%;
+}
+p {
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color:  #0000FF;
+}
+a:visited {
+	color:  #0000FF;
+}
+a:hover {
+	color: #ff0000;
+}
 button.logout {
 	float: right;
 }
@@ -105,38 +131,12 @@ div.chapter_text {
 img.chapter_image {
 	width: 100%;
 }
-input {
-	font-size: 90%;
-	margin-top: 10px;
-}
-button {
-	font-size: 90%;
-	padding: 7px;
-	margin-top: 10px;
-	cursor: pointer;
-}
-textarea {
-	font-size: 140%;
-}
-p {
-	margin: 0;
-}
 p.text {
 	line-height: 1.5;
 	text-indent: 50px;
 }
 textarea.form_chapter_text {
 	font-size: 100%;
-}
-a {
-	text-decoration: none;
-	color:  #0000FF;
-}
-a:visited {
-	color:  #0000FF;
-}
-a:hover {
-	color: #ff0000;
 }
 a.link_to_page {
 	color: #000000;
