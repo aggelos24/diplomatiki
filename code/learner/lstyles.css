@@ -7,6 +7,33 @@ body {
 	font-size: 140%;
 	margin: 0;
 }
+p {
+	margin:0;
+}
+a {
+	text-decoration: none;
+}
+a:visited {
+	color:  #0000FF;
+}
+a:hover {
+	color: #ff0000;
+}
+button {
+	background-color: #99ff33;
+	border: 1px solid #000000;
+	font-size: 90%;
+	padding: 7px;
+	margin-top: 10px;
+	border-radius: 15px;
+	cursor: pointer;
+}
+button:hover {
+	font-weight: bold;
+}
+textarea {
+	font-size: 140%;
+}
 button.logout {
 	float: right;
 }
@@ -15,6 +42,13 @@ img.banner {
 	margin-left: 32.5%;
 	margin-right: 32.5%;
 	width: 35%;
+}
+input {
+	font-size: 90%;
+	margin-top: 10px;
+}
+select {
+	font-size: 90%;
 }
 div.menu {
 	margin-right: 10%;
@@ -132,12 +166,6 @@ div.group_chat {
 img.chapter_image {
 	width: 100%;
 }
-textarea {
-	font-size: 140%;
-}
-p {
-	margin:0;
-}
 p.text {
 	line-height: 1.5;
 	text-indent: 50px;
@@ -145,39 +173,11 @@ p.text {
 span.red_letters {
 	color: #cc0000;
 }
-a {
-	text-decoration: none;
-}
-a:visited {
-	color:  #0000FF;
-}
-a:hover {
-	color: #ff0000;
-}
 a.link_to_page {
 	color: #000000;
 }
 a.link_to_page:hover {
 	color: #000000;
-}
-button {
-	background-color: #99ff33;
-	border: 1px solid #000000;
-	font-size: 90%;
-	padding: 7px;
-	margin-top: 10px;
-	border-radius: 15px;
-	cursor: pointer;
-}
-button:hover {
-	font-weight: bold;
-}
-input {
-	font-size: 90%;
-	margin-top: 10px;
-}
-select {
-	font-size: 90%;
 }
 .not_displayed {
 	display: none;
