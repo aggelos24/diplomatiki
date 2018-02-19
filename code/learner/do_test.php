@@ -8,53 +8,35 @@
 	<title> Τεστ </title>
 </head>
 	<script>
-		function validate_answer_5() {														//με το πάτημα του κουμπιού έλεγχος απαντήσεων
+		function validate_answer(question_num) {														//με το πάτημα του κουμπιού έλεγχος απαντήσεων
 			var question_1 = document.getElementsByName("question_1");									//ανάθεση τιμών φόρμας σε μεταβλητές
 			var question_2 = document.getElementsByName("question_2");
 			var question_3 = document.getElementsByName("question_3");
 			var question_4 = document.getElementsByName("question_4");
 			var question_5 = document.getElementsByName("question_5");
-			var i;
+			if (question_num == 10) {
+				var question_6 = document.getElementsByName("question_6");
+				var question_7 = document.getElementsByName("question_7");
+				var question_8 = document.getElementsByName("question_8");
+				var question_9 = document.getElementsByName("question_9");
+				var question_10 = document.getElementsByName("question_10");
+			}
 			var check_counter = 0;
-			for (i = 0; i < 4; i++) {													//επανάληψη for για μέτρηση τσεκαρισμένων κουμπιών
+			for (var i = 0; i < 4; i++) {													//επανάληψη for για μέτρηση τσεκαρισμένων κουμπιών
 				if (question_1[i].checked) { check_counter++; }
 				if (question_2[i].checked) { check_counter++; }
 				if (question_3[i].checked) { check_counter++; }
 				if (question_4[i].checked) { check_counter++; }
 				if (question_5[i].checked) { check_counter++; }
+				if (question_num == 10) {
+					if (question_6[i].checked) { check_counter++; }
+					if (question_7[i].checked) { check_counter++; }
+					if (question_8[i].checked) { check_counter++; }
+					if (question_9[i].checked) { check_counter++; }
+					if (question_10[i].checked) { check_counter++; }
+				}
 			}
-			if (check_counter < 5) {													//αν τα τσεκαρισμένα κουμπιά είναι μικρότερα από 5
-				alert("Συμπλήρωσε όλες τις ερωτήσεις");											//εμφάνιση κατάλληλου μηνύματος
-				return false;
-			}
-		}
-		
-		function validate_answer_10() {														//με το πάτημα του κουμπιού έλεγχος απαντήσεων
-			var question_1 = document.getElementsByName("question_1");									//ανάθεση τιμών φόρμας σε μεταβλητές
-			var question_2 = document.getElementsByName("question_2");
-			var question_3 = document.getElementsByName("question_3");
-			var question_4 = document.getElementsByName("question_4");
-			var question_5 = document.getElementsByName("question_5");
-			var question_6 = document.getElementsByName("question_6");
-			var question_7 = document.getElementsByName("question_7");
-			var question_8 = document.getElementsByName("question_8");
-			var question_9 = document.getElementsByName("question_9");
-			var question_10 = document.getElementsByName("question_10");
-			var i;
-			var check_counter = 0;
-			for (i = 0; i < 4; i++) {													//επανάληψη for για μέτρηση τσεκαρισμένων κουμπιών
-				if (question_1[i].checked) { check_counter++; }
-				if (question_2[i].checked) { check_counter++; }
-				if (question_3[i].checked) { check_counter++; }
-				if (question_4[i].checked) { check_counter++; }
-				if (question_5[i].checked) { check_counter++; }
-				if (question_6[i].checked) { check_counter++; }
-				if (question_7[i].checked) { check_counter++; }
-				if (question_8[i].checked) { check_counter++; }
-				if (question_9[i].checked) { check_counter++; }
-				if (question_10[i].checked) { check_counter++; }
-			}
-			if (check_counter < 10) {													//αν τα τσεκαρισμένα κουμπιά είναι μικρότερα από 10
+			if (check_counter != question_num) {													//αν τα τσεκαρισμένα κουμπιά είναι μικρότερα από 10
 				alert("Συμπλήρωσε όλες τις ερωτήσεις");											//εμφάνιση κατάλληλου μηνύματος
 				return false;
 			}
@@ -83,7 +65,7 @@ if (empty(($row)) or ($row["user"] != $_SESSION["session_lusername"]) or ($row["
 	exit();																		//τερματισμός script
 }
 if ($row["section_number"] != NULL) {															//αν το τεστ είναι σε κάποια συγκεκριμένη ενότητα
-	echo "<form name='submit_result' method='post' action='submit_result.php?id=".$id."' onsubmit='return validate_answer_5()'>";
+	echo "<form name='submit_result' method='post' action='submit_result.php?id=".$id."' onsubmit='return validate_answer(5)'>";
 	$section_number = $row["section_number"];													//ανάθεση αριθμού ενότητας σε μεταβλητή
 	if ($_SESSION["session_llevel"] == 1) {														//αν το επίπεδο χρήστη είναι 1
 		$difficult_question_num = 1;														//1 δύσκολο ερώτημα
@@ -191,7 +173,7 @@ if ($row["section_number"] != NULL) {															//αν το τεστ είν�
 	
 }
 else {																			//αν το τεστ είναι εφ' όλης της ύλης
-	echo "<form name='submit_result' method='post' action='submit_result.php?id=".$id."' onsubmit='return validate_answer_10()'>";
+	echo "<form name='submit_result' method='post' action='submit_result.php?id=".$id."' onsubmit='return validate_answer(10)'>";
 	if ($_SESSION["session_llevel"] == 1) {														//αν το επίπεδο χρήστη είναι 1
 		$difficult_question_num = 1;														//1 δύσκολο ερώτημα
 		$easy_question_num = 9;															//9 εύκολα ερωτήματα
@@ -304,7 +286,7 @@ else {																			//αν το τεστ είναι εφ' όλης της �
 $result->free();
 $link->close();																		//κλείσιμο σύνδεσης με βάση
 ?>
-		<button type="submit"> Υποβολή </button>
+			<button type="submit"> Υποβολή </button>
 		</form>
 	</div>
 </body>
