@@ -48,7 +48,7 @@ $result = $link->query("SELECT * FROM message WHERE to_user='aggelos24' ORDER BY
 												//ανάκτηση 10 το πολύ εισερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εισερχόμενο μήνυμα
 	if ($row["seen"] == 0) {								//αν δεν έχει διαβαστεί
-		echo "<a href='show_message.php?id=".$row["id"]."' class='link_to_page'> <div class='not_seen_message_box'> <div class='container'>".
+		echo "<a href='show_message.php?id=".$row["id"]."' class='link_to_page'> <div class='message_box not_seen_message_box'> <div class='container'>".
 		"<div class='message_info'>".$row["from_user"]."</div>"."<div class='message_info'>".$row["subject"]."</div>"."<div class='message_info'>".date("H:i:s | d-m-Y", strtotime($row["date"]))."</div>";
 		echo "</div> </div> </a>";							//εμφάνιση πληροφοριών μηνύματος
 	}
