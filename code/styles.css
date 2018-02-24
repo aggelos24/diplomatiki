@@ -3,7 +3,7 @@
 }
 
 body {
-	background-color: #3399ff;
+	background-color: royalblue;
 	font-family: "Verdana";
 	font-size: 140%;
 	margin: 0;
@@ -14,16 +14,16 @@ a {
 }
 
 a:visited {
-	color:  #0000FF;
+	color: blue;
 }
 
 a:hover {
-	color: #ff0000;
+	color: red;
 }
 
 button {
-	background-color: #99ff33;
-	border: 1px solid #000000;
+	background-color: greenyellow;
+	border: 1px solid black;
 	font-size: 90%;
 	padding: 7px;
 	margin-top: 10px;
@@ -38,6 +38,8 @@ button:hover {
 input {
 	font-size: 90%;
 	margin-top: 10px;
+	background-color: whitesmoke;
+	border: 1px solid darkgray;
 }
 
 img.banner {
@@ -48,7 +50,7 @@ img.banner {
 }
 
 div.main {
-	background-color: #ffffff;
+	background-color: white;
 	padding: 2%;
 	margin-left: 10%;
 	margin-right: 10%;
@@ -59,7 +61,7 @@ div.main {
 }
 
 span.red_letters {
-	color: #cc0000;
+	color: red;
 }
 
 
