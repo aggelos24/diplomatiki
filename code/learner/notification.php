@@ -44,10 +44,10 @@ $result = $link->query("SELECT * FROM notification WHERE to_user='".$_SESSION["s
 											//ανάκτηση δεδομένων από τον πίνακα notification		
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {				//για κάθε ενημέρωση που πρέπει να προβληθεί
 	if ($row["seen"]) {								//αν την έχει δει ο χρήστης
-		echo "<div class='seen_notification'>".$row["text"];
+		echo "<div class='notification'>".$row["text"];
 	}
 	else {										//αν δεν την έχει δει ο χρήστης
-		echo "<div class='not_seen_notification'>".$row["text"];
+		echo "<div class='notification not_seen_notification'>".$row["text"];
 	}
 echo "<br>"."<button onclick='not_display_notification(".$row["id"].")'> Αγνόησε αυτή την ειδοποίηση </button>"."</div>";
 $link->query("UPDATE notification SET seen=1 WHERE id=".$row["id"]);			//ενημέρωση του πίνακα notification ότι ο χρήστης είδε τις ενημερώσεις
