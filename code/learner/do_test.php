@@ -90,11 +90,9 @@ if ($row["section_number"] != NULL) {															//αν το τεστ είν�
 	}
 	for ($i = 0; $i < $easy_question_num; $i++) {
 		$selected_position = rand(0, count($array_id)-1);											//τυχαία επιλογή ερωτήματος
-		for ($j = 0 ; $j < $selected_position-1 ; $j++) {											//σκοπός του for να έρθει το ζητούμενο id στην πρώτη θέση
-			$temp = array_shift($array_id);
-			array_push($array_id, $temp);
-		}
-		$selected_id = array_shift($array_id);													//εξαγωγή ζητούμενου id από τον πίνακα
+		$selected_id = $array_id[$selected_position];												//ανάθεση id επιλεγμένου ερωτήματος σε μεταβλητή
+		unset($array_id[$selected_position]);													//διαγραφή id επιλεγμένου ερωτήματος από τον πίνακα
+		$array_id = array_values($array_id);													//εξαγωγή ζητούμενου id από τον πίνακα
 		$result = $link->query ("SELECT * FROM question_and_answer WHERE id=".$selected_id);							//ανάκτηση των στοιχείων του επιλεγμένου ερωτήματος από τον πίνακα question_and_answer
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		echo $row["question_text"]."<br>";													//εμφάνιση κειμένου ερωτήματος
@@ -105,19 +103,19 @@ if ($row["section_number"] != NULL) {															//αν το τεστ είν�
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_2"]."<br>";
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_3"]."<br>";
 		}
-		if ($correct_answer_position == 2) {													//αν η θέση της σωστής απάντησης στο 2
+		else if ($correct_answer_position == 2) {												//αν η θέση της σωστής απάντησης στο 2
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_1"]."<br>";			//εμφάνιση απαντήσεων με ανάλογη σειρά
 			echo "<input type='radio' name='question_".$question_number."' value='1' /> ".$row["correct_answer"]."<br>";
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_2"]."<br>";
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_3"]."<br>";
 		}
-		if ($correct_answer_position == 3) {													//αν η θέση της σωστής απάντησης στο 3
+		else if ($correct_answer_position == 3) {												//αν η θέση της σωστής απάντησης στο 3
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_1"]."<br>";			//εμφάνιση απαντήσεων με ανάλογη σειρά
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_2"]."<br>";
 			echo "<input type='radio' name='question_".$question_number."' value='1' /> ".$row["correct_answer"]."<br>";
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_3"]."<br>";
 		}
-		if ($correct_answer_position == 4) {													//αν η θέση της σωστής απάντησης στο 1
+		else if ($correct_answer_position == 4) {												//αν η θέση της σωστής απάντησης στο 1
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_1"]."<br>";			//εμφάνιση απαντήσεων με ανάλογη σειρά
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_2"]."<br>";
 			echo "<input type='radio' name='question_".$question_number."' value='0' /> ".$row["wrong_answer_3"]."<br>";
@@ -134,11 +132,9 @@ if ($row["section_number"] != NULL) {															//αν το τεστ είν�
 	}
 	for ($i = 0; $i < $difficult_question_num; $i++) {
 		$selected_position = rand(0, count($array_id)-1);											//τυχαία επιλογή ερωτήματος
-		for ($j = 0 ; $j < $selected_position-1 ; $j++) {											//σκοπός του for να έρθει το ζητούμενο id στην πρώτη θέση
-			$temp = array_shift($array_id);
-			array_push($array_id, $temp);
-		}
-		$selected_id = array_shift($array_id);													//εξαγωγή ζητούμενου id από τον πίνακα
+		$selected_id = $array_id[$selected_position];												//ανάθεση id επιλεγμένου ερωτήματος σε μεταβλητή
+		unset($array_id[$selected_position]);													//διαγραφή id επιλεγμένου ερωτήματος από τον πίνακα
+		$array_id = array_values($array_id);													//εξαγωγή ζητούμενου id από τον πίνακα
 		$result = $link->query ("SELECT * FROM question_and_answer WHERE id=".$selected_id);							//ανάκτηση των στοιχείων του επιλεγμένου ερωτήματος από τον πίνακα question_and_answer
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		echo $row["question_text"]."<br>";													//εμφάνιση κειμένου ερωτήματος
