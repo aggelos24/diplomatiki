@@ -31,11 +31,10 @@
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					var obj= JSON.parse(this.responseText);				//κάνε parse την απάντηση, η οποία είναι σε JSON κωδικοποίηση, από τη σελίδα get_learner_list.php
-					var count = Object.keys(obj).length;
 					var text = "";
-					for (var i = 0; i < count; i++) {
+					for (var row of obj) {
 						text+="<div class='list_container'>";
-						text+="<div class='list'>"+obj[i].username+"</div>"+"<div class='list'> "+obj[i].email+"</div>"+"<div class='list'>"+obj[i].level+"</div>"+"<div class='list'>"+obj[i].last_login+"</div>";
+						text+="<div class='list'>"+row.username+"</div>"+"<div class='list'> "+row.email+"</div>"+"<div class='list'>"+row.level+"</div>"+"<div class='list'>"+row.last_login+"</div>";
 						text+="</div>";
 					}
 					document.getElementById("sorted").innerHTML = text;		//προβολή δεδομένων
