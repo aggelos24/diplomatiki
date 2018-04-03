@@ -125,7 +125,7 @@ if ($document) {										//αν κάποιος έχει ανέβασει την
 		</form>
 		<br> <br> <p class="big center"> Σύνδεσμοι σχετικοί με την εργασία </p> <br>
 		<form method="post" action="insert_link.php?id=<?php echo $id; ?>">
-			Διεύθυνση URL <input type="text" name="link" required />
+			Διεύθυνση URL <input type="url" name="link" required />
 			Περιγραφή <input type="text" name="description" required />
 			<button type="submit"> Εισαγωγή Συνδέσμου </button>
 		</form> <br>
