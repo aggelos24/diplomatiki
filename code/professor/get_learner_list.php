@@ -8,7 +8,7 @@ if ($sort == "name") {								//αν δεν έχει οριστεί τύπος �
 	$result = $link->query("SELECT * FROM user WHERE professor=0 ORDER BY username");
 										//ανάκτηση στοιχείων μαθητών από τον πίνακα user
 }
-else if ($sort == "level") {								//αν η ταξινόμηση είναι με βάση το επίπεδο
+else if ($sort == "level") {							//αν η ταξινόμηση είναι με βάση το επίπεδο
 	$result = $link->query("SELECT * FROM user WHERE professor=0 ORDER BY level");										//ανάκτηση στοιχείων μαθητών ταξινομημένα με βάση το επίπεδο από τον πίνακα user
 }
 else {										//αν η ταξινόμηση είναι με βάση την ημερομηνία τελευταίας σύνδεσης χρήστη
@@ -17,8 +17,8 @@ else {										//αν η ταξινόμηση είναι με βάση την �
 }
 $i=0;
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {			//για κάθε μαθητή
-    $results[$i] = [ "username" => $row["username"], "email" => $row["email"], "level" => $row["level"], "last_login" => date("d-m-Y", strtotime($row["last_login"]))];
-    $i++;
+	$results[$i] = [ "username" => $row["username"], "email" => $row["email"], "level" => $row["level"], "last_login" => date("d-m-Y", strtotime($row["last_login"]))];
+	$i++;
 }
 $myJSON = json_encode($results);						//κωδικοποίηση των αποτελεσμάτων σε JSON
 echo $myJSON;									//εκτύπωση της μεταβλητής myJSON
