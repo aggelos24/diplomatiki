@@ -7,7 +7,7 @@ $result = $link->query("SELECT * FROM user");									//ανάκτηση των 
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθε χρήστη
 	if ( ($row["username"] == $_POST["username"]) and ($row["password"] == md5($_POST["password"])) ) {	//αν ταιριάζουν τα στοιχεία της φόρμας με τα στοιχεία της βάσης
 		if ($row["professor"] == 1) {									//αν είναι ο καθηγητής
-			$_SESSION["session_pusername"] = "aggelos24";						//ορισμός μεταβλητών συνεδρίας
+			$_SESSION["session_pusername"] = PROFESSOR_USERNAME;					//ορισμός μεταβλητών συνεδρίας
 			$result->free();
 			$link->close();										//κλείσιμο σύνδεσης με βάση
 			header("Location: professor/phome.php");						//ανακατεύθυνση στο phome.php
