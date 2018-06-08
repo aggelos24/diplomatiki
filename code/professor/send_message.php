@@ -1,7 +1,6 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 $search = array("'", '"');
 $replace = array("\'", '\"');
 $message_text = str_replace($search, $replace, $_POST["message_text"]);				//για αποφυγή σφάλματος βάσης
@@ -21,7 +20,7 @@ if (empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {						//αν υπάρχε
 												//εμφάνιση κατάλληλου μηνύματος και επιστροφή στην προηγούμενη σελίδα
 }
 else {
-	$link->query ("INSERT INTO message (id, from_user, to_user, subject, text, seen, date) VALUES (DEFAULT, '".$professor_username."', '".$_POST["to_user"]."', '".$_POST["subject"]."', '".$message_text."', DEFAULT, NOW())");
+	$link->query ("INSERT INTO message (id, from_user, to_user, subject, text, seen, date) VALUES (DEFAULT, '".PROFESSOR_USERNAME."', '".$_POST["to_user"]."', '".$_POST["subject"]."', '".$message_text."', DEFAULT, NOW())");
 												//δημιουργία μηνύματος στη βάση
 	$result->free();
 	$link->close();										//κλείσιμο σύνδεσης με βάση
