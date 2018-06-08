@@ -37,7 +37,6 @@
 <?php
 include "if_not_logged_l.php";										//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
-$professor_username = PROFESSOR_USERNAME;								//ανάθεση του username του καθηγητή σε μεταβλητή
 $link = connect_to_database("../login_register_form.php");						//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT user2 FROM friendship WHERE user1='".$_SESSION["session_lusername"]."'");
 													//ανάκτηση username φίλων χρήστη από τον πίνακα user
@@ -89,7 +88,7 @@ $limit = ($pagenum - 1) * 10;
 $result = $link->query("SELECT * FROM message WHERE to_user='".$_SESSION["session_lusername"]."' ORDER BY id DESC LIMIT ".$limit.",10");
 													//ανάκτηση 10 το πολύ εισερχόμενων μηνυμάτων χρήστη από τον πίνακα message
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {						//για κάθε εισερχόμενο μήνυμα
-	if ($row["from_user"] == $professor_username) {							//αν ο αποστολέας είναι ο καθηγητής
+	if ($row["from_user"] == PROFESSOR_USERNAME) {							//αν ο αποστολέας είναι ο καθηγητής
 		$from_user = "<b> Καθηγητής </b>";
 	}
 	else {												//αν ο αποστολέας δεν είναι ο καθηγητής
