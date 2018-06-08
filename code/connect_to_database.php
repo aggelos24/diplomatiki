@@ -1,6 +1,8 @@
 <?php
+include "constants.php";
 function connect_to_database($destination) {					//συνάρτηση για σύνδεση στη βάση
-	$link = mysqli_connect("localhost", "root", "", "diplomatiki");		//απόπειρα σύνδεσης στη βάση
+	$link = mysqli_connect(DATABASE_HOST_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_NAME);
+										//απόπειρα σύνδεσης στη βάση
 	if (!$link) {								//αν αποτυχία
 		session_start();						//δημιουργία συνεδρίας
 		session_unset();						//διαγραφή μεταβλητών συνεδρίας
