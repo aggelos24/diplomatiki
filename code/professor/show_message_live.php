@@ -1,12 +1,11 @@
 <?php
 error_reporting(E_ERROR);
-$professor_username = "aggelos24";						//ανάθεση του username του καθηγητή σε μεταβλητή
 $link = $link = mysqli_connect("localhost", "root", "", "diplomatiki");		//απόπειρα σύνδεσης στη βάση
 if (!$link) {									//αν αποτυχία
     echo "<br> <span class='red_letters'> Σφάλμα βάσης δεδομένων </span>";	//εμφάνιση κατάλληλου μηνυματος
     exit();									//τερματισμός script
 }
-$result = $link->query("SELECT count(*) AS unseen FROM message WHERE to_user='".$professor_username."' AND seen=0 GROUP BY to_user");
+$result = $link->query("SELECT count(*) AS unseen FROM message WHERE to_user='".PROFESSOR_USERNAME."' AND seen=0 GROUP BY to_user");
 										//ανάκτηση αριθμού αδιάβαστων μηνυμάτων από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 if ($row["unseen"] == 1) {							//αν υπάρχουν μηνύματα
