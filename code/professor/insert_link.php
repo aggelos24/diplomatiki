@@ -1,6 +1,5 @@
 <meta charset="utf-8" />
 <?php
-$professor_username = "aggelos24";							//ανάθεση του username του καθηγητή σε μεταβλητή
 if (isset($_GET["id"])) {								//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];								//ανάθεση της σε μεταβλητή
 }
@@ -16,7 +15,7 @@ if (!$file_headers or ($file_headers[0] == "HTTP/1.1 404 Not Found")) {			//αν
 else {											//αλλιώς
 	include "../connect_to_database.php";
 	$link = connect_to_database("../login_register_form.php");			//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-	$link->query("INSERT INTO link (id, project_id, user, url, description) VALUES (DEFAULT, ".$id.", '".$professor_username."', '".$_POST["link"]."', '".$_POST["description"]."')");
+	$link->query("INSERT INTO link (id, project_id, user, url, description) VALUES (DEFAULT, ".$id.", '".PROFESSOR_USERNAME."', '".$_POST["link"]."', '".$_POST["description"]."')");
 											//εισαγωγή συνδέσμου στον πίνακα link
 	$link->close();									//κλείσιμο σύνδεσης με βάση
 	echo "<script> alert('Ο σύνδεσμος προστέθηκε.'); location.href = 'project.php?id=".$id."'; </script>";
