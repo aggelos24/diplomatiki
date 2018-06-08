@@ -32,7 +32,6 @@
 <?php
 include "if_not_logged_l.php";									//έλεγχος αν έχει συνδεθεί μαθητής
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 $link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
 $result = $link->query("SELECT count(*) AS sent FROM message WHERE from_user='".$_SESSION["session_lusername"]."' GROUP BY from_user");
 												//ανάκτηση αριθμού εξερχόμενων μηνυμάτων χρήστη
@@ -48,7 +47,7 @@ $limit = ($pagenum - 1) * 10;
 $result = $link->query("SELECT * FROM message WHERE from_user='".$_SESSION["session_lusername"]."' ORDER BY id DESC LIMIT ".$limit.",10");
 												//ανάκτηση 10 το πολύ εξερχόμενων μηνυμάτων χρήστη
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εξερχόμενο μήνυμα
-	if ($row["to_user"] == $professor_username) {						//αν ο παραλήπτης είναι ο καθηγητής
+	if ($row["to_user"] == PROFESSOR_USERNAME) {						//αν ο παραλήπτης είναι ο καθηγητής
 		$to_user = "Καθηγητής";
 	}
 	else {
