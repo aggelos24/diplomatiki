@@ -30,7 +30,6 @@
 	<div class="main">
 <?php
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 session_start();										//δημιουργία συνεδρίας
 if (isset($_GET["id"])) {									//αν υπάρχει η μεταβλητή GET
 	$id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
@@ -133,7 +132,7 @@ if ($document) {										//αν κάποιος έχει ανέβασει την
 <?php
 $result = $link->query("SELECT * FROM link WHERE project_id=".$id." ORDER BY id DESC");		//ανάκτηση στοιχείων συνδέσμων από τον πίνακα link
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε σύνδεσμο
-	if ($row["user"] == $professor_username) {						//αν αυτός που προσέθεσε τον σύνδεσμο είναι ο καθηγητής
+	if ($row["user"] == PROFESSOR_USERNAME) {						//αν αυτός που προσέθεσε τον σύνδεσμο είναι ο καθηγητής
 		$user = "Καθηγητής";
 	}
 	else {											//αν όχι
@@ -155,7 +154,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 $result = $link->query("SELECT * FROM source_file WHERE project_id=".$id." ORDER BY id DESC");	
 												//ανάκτηση στοιχείων αρχείων από τον πίνακα source_file
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε αρχείο
-	if ($row["user"] == $professor_username) {						//αν αυτός που ανέβασε το αρχείο είναι ο καθηγητής
+	if ($row["user"] == PROFESSOR_USERNAME) {						//αν αυτός που ανέβασε το αρχείο είναι ο καθηγητής
 		$user = "Καθηγητής";
 	}
 	else {											//αν όχι
@@ -177,7 +176,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε
 $result = $link->query("SELECT * FROM group_chat WHERE project_id=".$id." ORDER BY group_chat.id DESC");
 												//ανάκτηση μηνυμάτων από τον πίνακα group_chat
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε μήνυμα
-	if ($row["user"] == $professor_username) {						//αν ο αποστολέας είναι ο καθηγητής
+	if ($row["user"] == PROFESSOR_USERNAME) {						//αν ο αποστολέας είναι ο καθηγητής
 		$user = "Καθηγητής";
 	}
 	else {											//αν όχι
