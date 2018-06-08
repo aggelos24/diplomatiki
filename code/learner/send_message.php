@@ -1,7 +1,6 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 session_start();										//δημιουργία συνεδρίας
 $search = array("'", '"');
 $replace = array("\'", '\"');
@@ -14,7 +13,7 @@ else {												//αν όχι
     exit();											//τερματισμός script
 }
 if ($_POST["to_user"] == "Καθηγητής") {								//αν ο παραλήπτης είναι ο καθηγητής
-	$to_user = $professor_username;
+	$to_user = PROFESSOR_USERNAME;
 }
 else {												//αν όχι
 	$to_user = $_POST["to_user"];
