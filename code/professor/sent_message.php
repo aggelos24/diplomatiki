@@ -33,7 +33,7 @@
 include "if_not_logged_p.php";									//έλεγχος αν έχει συνδεθεί ο καθηγητής
 include "../connect_to_database.php";
 $link = connect_to_database("../login_register_form.php");					//κλήση συνάρτησης για σύνδεση στη βάση δεδομένων
-$result = $link->query("SELECT count(*) AS sent FROM message WHERE from_user='aggelos24' GROUP BY from_user");
+$result = $link->query("SELECT count(*) AS sent FROM message WHERE from_user='".PROFESSOR_USERNAME."' GROUP BY from_user");
 												//ανάκτηση αριθμού εξερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $count = $row["sent"];
@@ -44,7 +44,7 @@ else{												//αλλιώς
 	$pagenum = 1;										//θέσε τη μεταβλητή σε 1
 }
 $limit = ($pagenum - 1) * 10;
-$result = $link->query("SELECT * FROM message WHERE from_user='aggelos24' ORDER BY id DESC LIMIT ".$limit.",10");
+$result = $link->query("SELECT * FROM message WHERE from_user='".PROFESSOR_USERNAME."' ORDER BY id DESC LIMIT ".$limit.",10");
 												//ανάκτηση 10 το πολύ εξερχόμενων μηνυμάτων καθηγητή από τον πίνακα message
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {					//για κάθε εξερχόμενο μήνυμα
 	echo "<a href='show_sent_message.php?id=".$row["id"]."' class='link_to_page'> <div class='message_box'> <div class='container'>";
