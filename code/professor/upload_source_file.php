@@ -1,7 +1,6 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$professor_username = "aggelos24";								//ανάθεση του username του καθηγητή σε μεταβλητή
 $greek_alphabet = array ("α", "ά", "β", "γ", "δ", "ε", "έ", "ζ", "η", "ή", "θ", "ι", "ί", "κ", "λ", "μ", "ν", "ξ", "ο", "ό", "π", "ρ", "σ", "τ", "υ", "ύ", "φ", "χ", "ψ", "ω", "ώ", "ς",
 "Α", "Ά", "Β", "Γ", "Δ", "Ε", "Έ", "Ζ", "Η", "Ή", "Θ", "Ι", "Ί", "Κ", "Λ", "Μ", "Ν", "Ξ", "Ο", "Ό", "Π", "Ρ", "Σ", "Τ", "Υ", "Ύ", "Φ", "Χ", "Ψ", "Ω", "Ώ");
 $latin_repl = array ("a", "a", "b", "g", "d", "e", "e", "z", "i", "i", "th", "i", "i", "k", "l", "m", "n", "x", "o", "o", "p", "r", "s", "t", "u", "u", "f", "x", "ps", "o", "o", "s",
@@ -27,7 +26,7 @@ if (!empty(mysqli_fetch_array($result, MYSQLI_ASSOC))) {					//αν υπάρχε
 }
 if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {				//απόπειρα μετακίνησης αρχείου στην διεύθυνση προορισμού
 	chmod($target_file, 0777);
-	$link->query("INSERT INTO source_file (id, project_id, user, path, description) VALUES (DEFAULT, ".$id.", '".$professor_username."', '".$target_file."', '".$_POST["description"]."')");
+	$link->query("INSERT INTO source_file (id, project_id, user, path, description) VALUES (DEFAULT, ".$id.", '".PROFESSOR_USERNAME."', '".$target_file."', '".$_POST["description"]."')");
 												//αν επιτυχία, εισαγωγή αρχείου στον πίνακα source_file
 	$result->free();
 	$link->close();										//κλείσιμο σύνδεσης με βάση
