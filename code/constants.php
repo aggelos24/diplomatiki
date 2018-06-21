@@ -1,4 +1,4 @@
-<>?php
+<?php
 if (defined("DATABASE_HOST_NAME") == false) {
         define("DATABASE_HOST_NAME", "localhost");
 }
