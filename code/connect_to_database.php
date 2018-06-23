@@ -1,5 +1,5 @@
 <?php
-include "constants.php";
+include_once "constants.php";
 function connect_to_database($destination) {					//συνάρτηση για σύνδεση στη βάση
 	$link = mysqli_connect(DATABASE_HOST_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_NAME);
 										//απόπειρα σύνδεσης στη βάση
