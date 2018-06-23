@@ -47,7 +47,7 @@ if (!empty($row)) {										//αν υπάρχει
 	}
 	else if ($row["image"] == NULL) {
 		echo $text."<br> <br>";
-		echo $row["youtube"];
+		echo "<div class='embedded_container'>".$row["youtube"]."</div>";
 	}
 	else {
 		$result = $link->query("SELECT * FROM chapter INNER JOIN material ON chapter.image=material.path WHERE section_number=".$section." AND number=".$chapter);
@@ -57,7 +57,7 @@ if (!empty($row)) {										//αν υπάρχει
 				$text."</div> </div> <br>";
 		echo $output;
 		if ($row["youtube"] != NULL) {
-			echo $row["youtube"]."<br>";
+			echo "<div class='embedded_container'>".$row["youtube"]."</div> <br>";
 		}
 	}
 }
