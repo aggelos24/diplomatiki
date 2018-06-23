@@ -1,8 +1,8 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-$search = array("'", '"');
-$replace = array("\'", '\"');
+$search = array('width="560" height="315"', "'", '"');
+$replace = array('class="resp_iframe"', "\'", '\"');
 $chapter_text = str_replace($search, $replace, $_POST["chapter_text"]);				//για αποφυγή σφάλματος βάσης
 if (!empty($_POST["youtube"])) {								//αν δεν είναι κενό το πεδίο youtube
 	$youtube = str_replace($search, $replace, $_POST["youtube"]);
