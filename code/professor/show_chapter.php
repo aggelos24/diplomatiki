@@ -50,7 +50,7 @@ if (!empty($row)) {										//αν υπάρχει το κεφάλαιο
 	}
 	else if ($row["image"] == NULL) {
 		echo $text."<br> <br>";
-		echo $row["youtube"];
+		echo "<div class='embedded_container'>".$row["youtube"]."</div>";
 	}
 	else {
 		$result = $link->query("SELECT * FROM chapter INNER JOIN material ON chapter.image=material.path WHERE section_number=".$section." AND number=".$chapter);
@@ -60,17 +60,15 @@ if (!empty($row)) {										//αν υπάρχει το κεφάλαιο
 				$text."</div> </div> <br>";
 		echo $output;
 		if ($row["youtube"] != NULL) {
-			echo $row["youtube"]."<br>";
+			echo "<div class='embedded_container'>".$row["youtube"]."</div> <br>";
 		}
 	}
-	$result->free();
-	$link->close();										//κλείσιμο σύνδεσης με βάση
 }
 else {												//αν δεν υπάρχει το κεφάλαιο
-	$result->free();
-	$link->close();										//κλείσιμο σύνδεσης με βάση
 	echo "<script> alert('Κάτι πήγε στραβά.'); location.href = 'content.php'; </script>";	//εμφάνιση κατάλληλου μηνύματος και επιστροφή στη σελίδα content.php
 }
+$result->free();
+$link->close();											//κλείσιμο σύνδεσης με βάση
 ?>
 		<br> <br> <a href="content.php"> Επιστροφή </a>
 	</div>
