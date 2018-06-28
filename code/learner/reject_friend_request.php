@@ -1,7 +1,6 @@
 <meta charset="utf-8" />
 <?php
 include "../connect_to_database.php";
-session_start();											//δημιουργία συνεδρίας
 if ((isset($_GET["id"]))) {										//αν υπάρχει η μεταβλητή GET
 	$friendship_id = $_GET["id"];									//ανάθεσή της σε μεταβλητή
 }
