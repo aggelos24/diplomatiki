@@ -11,7 +11,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {							//για κάθ
 			$result->free();
 			$link->close();										//κλείσιμο σύνδεσης με βάση
 			header("Location: professor/phome.php");						//ανακατεύθυνση στο phome.php
-			}
+		}
 		else {												//αν είναι ο χρήστης ο μαθητής
 			$_SESSION["session_lusername"] = $row["username"];					//ορισμός μεταβλητών συνεδρίας
 			$_SESSION["session_lphoto"] = $row["photo"];
